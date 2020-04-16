@@ -6,7 +6,7 @@ from feature_calculation import power_spectral_density as power
 
 
 # --------------------TESTING estimate_psd() FUNCTION--------------------
-print("\n----------TESTING estimate_psd()----------\n")
+print("\n----------TESTING estimate_psd() FUNCTION----------\n")
 
 # test sampling frequency:
 sample_freq = 100
