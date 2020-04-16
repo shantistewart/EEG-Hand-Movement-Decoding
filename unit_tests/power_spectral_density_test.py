@@ -20,7 +20,7 @@ for i in range(num_examples):
     for j in range(num_channels):
         for k in range(num_samples):
             X[i, j, k] = (i+1) * (j*num_samples + k + 1)
-print("Test array:\nSize: ", end="")
+print("Test input array:\nSize: ", end="")
 print(X.shape)
 print(X)
 print("")
