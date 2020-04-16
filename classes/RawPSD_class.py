@@ -1,4 +1,4 @@
-# This file contains the definition of the class Raw_power_spectral_density.
+# This file contains the definition of the class RawPSD.
 
 
 import numpy as np
@@ -25,7 +25,7 @@ import matplotlib.pyplot as plotter
 # Methods:
 #   plot_raw_signal(): plots raw signals of selected channels of selected examples.
 #   plot_autocorr(): plots autocorrelation functions of selected channels of selected examples.
-class Raw_power_spectral_density:
+class RawPSD:
     """Class of raw power spectral density values, autocorrelation functions, and raw signals."""
 
     # Constructor:

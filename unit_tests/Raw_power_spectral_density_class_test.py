@@ -1,16 +1,15 @@
-# This file contains unit tests for the Raw_power_spectral_density class in Raw_power_spectral_density_class.py (in
-#   classes folder):
+# This file contains unit tests for the RawPSD class in RawPSD_class.py (in classes folder):
 
 
 import numpy as np
 import matplotlib.pyplot as plotter
 # import function modules:
 from feature_calculation import power_spectral_density as power
-from classes import Raw_power_spectral_density_class
+from classes import RawPSD_class
 
 
-# --------------------TESTING Raw_power_spectral_density CLASS--------------------
-print("\n----------TESTING Raw_power_spectral_density CLASS----------\n")
+# --------------------TESTING RawPSD CLASS--------------------
+print("\n----------TESTING RawPSD CLASS----------\n")
 
 # dimensions of test array:
 num_examples = 3
@@ -33,7 +32,7 @@ for i in range(num_examples):
 # estimate power spectral density:
 Rxx, freq, PSD = power.estimate_psd(X, sample_freq)
 # create Raw_PSD object:
-raw_psd_object = Raw_power_spectral_density_class.Raw_power_spectral_density(num_examples, num_channels, num_samples, sample_freq, X, Rxx, freq, PSD)
+raw_psd_object = RawPSD_class.RawPSD(num_examples, num_channels, num_samples, sample_freq, X, Rxx, freq, PSD)
 
 # examples to plot:
 examples = np.array([0, 2])
