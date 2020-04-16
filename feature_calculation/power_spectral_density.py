@@ -48,11 +48,9 @@ def estimate_psd(X, sample_freq):
 
     # calculate power spectral density =  Fourier transform of autocorrelation function (for each example for each
     #   channel), using Hermitian FFT (since autocorrelation function is symmetric):
-    PSD = np.fft.hfft(Rxx_pos, axis=2)
+    PSD = np.fft.hfft(Rxx_pos, axis=2, norm="ortho")
     # extract non-negative part of PSD:
     PSD_pos = PSD[:, :, :num_samples]
-    # normalize PSD_pos:
-    PSD_pos = PSD_pos / num_samples
     # number of frequencies (positive and negative) of PSD:
     num_freq = PSD.shape[2]
 
