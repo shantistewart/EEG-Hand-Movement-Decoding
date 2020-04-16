@@ -108,15 +108,15 @@ class RawPSD:
                 axes[j, i].set_xlabel('Samples')
                 axes[j, i].set_ylabel('Rxx[k]')
 
-    # Function description: plots power spectral densities of selected channels of selected examples.
-    # Inputs:
-    #   examples = 1D array of example indices to plot:
-    #       size: (num_plot_examples, )
-    #   channels = 1D array of channel indices to plot (for all selected examples):
-    #       size: (num_plot_channels, )
-    #   channel_names = 1D array of all channel names:
-    #       size: (num_channels, )
-    # Outputs: none
+# Function description: plots power spectral densities of selected channels of selected examples.
+# Inputs:
+#   examples = 1D array of example indices to plot:
+#       size: (num_plot_examples, )
+#   channels = 1D array of channel indices to plot (for all selected examples):
+#       size: (num_plot_channels, )
+#   channel_names = 1D array of all channel names:
+#       size: (num_channels, )
+# Outputs: none
     def plot_PSD(self, examples, channels, channel_names):
         # number of examples to plot:
         num_plot_examples = examples.shape[0]

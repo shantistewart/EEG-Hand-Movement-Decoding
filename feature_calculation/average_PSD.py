@@ -4,6 +4,7 @@
 
 
 import numpy as np
+import matplotlib.pyplot as plotter
 
 
 # Function description: calculate average power spectral density values in selected frequency bins.
@@ -55,3 +56,22 @@ def average_PSD(PSD, bins, sample_freq):
 #   bins = frequency bins to calculate average PSD values for
 #       size: (num_bins, 2)
 # Outputs: none
+def plot_average_PSD(PSD_bins, bins):
+    # number of frequency bins:
+    num_bins = bins.shape[0]
+
+    # bar graph to display PSD average bin values:
+    # locations of labels:
+    bin_loc = np.arange(num_bins)
+    # width of bars:
+    width = 2. / num_bins
+    # create figure:
+    fig, ax = plotter.subplots()
+    # create bar chart:
+    ax.bar(bin_loc, PSD_bins, width, label='Average PSD')
+    # add title, labels, and legend:
+    ax.set_title('Average PSD in Frequency Bins')
+    ax.set_ylabel('Average PSD')
+    ax.set_xticks(bin_loc)
+    ax.set_xticklabels(bin_labels)
+    ax.legend()
