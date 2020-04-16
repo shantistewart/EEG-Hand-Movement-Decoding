@@ -68,3 +68,78 @@ def estimate_psd(X, sample_freq):
     freq_pos = np.reshape(freq_pos, (1, 1, freq_pos.shape[0]))
 
     return Rxx_pos, freq_pos, PSD_pos
+
+
+# Function description: calculate average PSD values in specified frequency bins.
+# Inputs:
+#   PSD = 3D array of (non-negative) power spectral density values for multiple channels for multiple examples
+#       size: (num_examples, num_channels, num_samples)
+#   bins = frequency bins to calculate average PSD values for
+#       size: (num_bins, 2)
+#   sample_freq = sampling frequency of original signal
+# Outputs:
+#   PSD_bins = 3D array of average PSD values in selected frequency bins for multiple channels for multiple examples
+#       size: (num_examples, num_channels, num_bins)
+def PSD_average(PSD, bins, sample_freq):
+    # number of examples:
+    num_examples = PSD.shape[0]
+    # number of channels:
+    num_channels = PSD.shape[1]
+    # number of samples:
+    num_samples = PSD.shape[2]
+    # number of frequency bins:
+    num_bins = bins.shape[0]
+
+
+
+# Function description: calculate average PSD values in specified frequency bins.
+# Inputs:
+#   PSD_mag_pos = 1D array of magnitude response of PSD
+#       size: [pos_num_samples]
+#   bins = frequency bins of interest
+#       size: [num_bins, 2]
+#   bin_labels = frequency bin labels
+#       size: [num_bins]
+#   sample_freq = sampling frequency of original signal
+#   disp = bool to select whether to display bar graph
+# Outputs:
+#   PSD_bins = 1D array of average PSD values in frequency bins
+#       size: [num_bins]
+def average_bin(PSD_mag_pos, bins, bin_labels, sample_freq, disp):
+    # number of PSD samples:
+    num_samples = len(PSD_mag_pos)
+    # max sampling frequency (Nyquist rate):
+    max_freq = .5 * sample_freq
+    # number of frequency bins:
+    num_bins = len(bins)
+
+    # calculate average power spectral density values in frequency bins:
+    PSD_bins = np.zeros(num_bins)
+    for i in range(num_bins):
+        # left index:
+        left = int(np.floor(num_samples * (bins[i, 0] / max_freq)))
+        # right index:
+        right = int(np.floor(num_samples * (bins[i, 1] / max_freq)))
+        # number of samples in bin:
+        bin_width = right - left
+        PSD_bins[i] = np.sum(PSD_mag_pos[left:right]) / bin_width
+
+    # bar graph to display PSD average bin values:
+    if disp:
+        # locations of labels:
+        bin_loc = np.arange(num_bins)
+        # width of bars:
+        width = 2. / num_bins
+        # create figure:
+        fig, ax = plotter.subplots()
+        # create bar chart:
+        ax.bar(bin_loc, PSD_bins, width, label='Average PSD')
+        # add title, labels, and legend:
+        ax.set_title('Average PSD in Frequency Bins')
+        ax.set_ylabel('Average PSD')
+        ax.set_xticks(bin_loc)
+        ax.set_xticklabels(bin_labels)
+        ax.legend()
+
+    # return average power spectral density values in frequency bins:
+    return PSD_bins
