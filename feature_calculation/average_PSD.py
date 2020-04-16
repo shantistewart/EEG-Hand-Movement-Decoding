@@ -34,9 +34,11 @@ def average_PSD(PSD, bins, sample_freq):
         # right sample index (round up):
         right = int(np.ceil((bins[i, 1] / max_freq) * num_samples))
 
-        # check that number of samples in bin is non-negative:
-        if right-left < 0:
+        # check that bin is valid:
+        if left<0 or right<0 or left>num_samples or right>num_samples or left>right:
             print("Invalid frequency bin.\n")
+            return
+
         # calculate average:
         PSD_bins[:, :, i] = np.mean(PSD[:, :, left:right], axis=2)
 
