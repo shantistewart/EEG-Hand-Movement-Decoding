@@ -4,7 +4,6 @@
 
 
 import numpy as np
-import matplotlib.pyplot as plotter
 
 
 # Function description: estimates power spectral density.
