@@ -25,7 +25,7 @@ import matplotlib.pyplot as plotter
 # Methods:
 #   plot_raw_signal(): plots raw signals of selected channels of selected examples.
 class Raw_power_spectral_density:
-    """Class of raw power spectral density values."""
+    """Class of raw power spectral density values, autocorrelation functions, and raw signals."""
 
     # Constructor:
     def __init__(self, M, N, L, sampling_frequency, raw_signal, autocorrelation, frequencies, power_spectral_density):
