@@ -4,6 +4,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plotter
+# import function modules:
 from main_project import power_spectral_density as power
 from classes import Raw_power_spectral_density_class
 
@@ -26,9 +27,8 @@ X = np.zeros((num_examples, num_channels, num_samples))
 for i in range(num_examples):
     for j in range(num_channels):
         # frequency of cosine wave (Hz):
-        freq_cosine1 = (i+1)
-        freq_cosine2 = 2 * (i + 1)
-        X[i, j] = np.cos((2 * np.pi * freq_cosine1) * sample_period * time) + np.cos((2 * np.pi * freq_cosine2) * sample_period * time) + np.random.uniform(-.2*j, .2*j, num_samples)
+        freq_cosine = (i+1)
+        X[i, j] = np.cos((2 * np.pi * freq_cosine) * sample_period * time) + np.random.uniform(-.2*(j+1), .2*(j+1), num_samples)
 
 # estimate power spectral density:
 Rxx, freq, PSD = power.estimate_psd(X, sample_freq)
@@ -36,16 +36,16 @@ Rxx, freq, PSD = power.estimate_psd(X, sample_freq)
 raw_psd_object = Raw_power_spectral_density_class.Raw_power_spectral_density(num_examples, num_channels, num_samples, sample_freq, X, Rxx, freq, PSD)
 
 # examples to plot:
-examples = np.array([0, 1])
+examples = np.array([0, 2])
 # channels to plot:
 channels = np.array([0, 3])
-# names of channels to plot:
+# names of all channels:
 channel_names = np.array(['C1', 'C2', 'C3', 'C4'])
-# display raw signals:
+# display selected raw signals:
 raw_psd_object.plot_raw_signal(examples, channels, channel_names)
-# display autocorrelation functions:
+# display selected autocorrelation functions:
 raw_psd_object.plot_autocorr(examples, channels, channel_names)
-# display power spectral densities:
+# display selected power spectral densities:
 raw_psd_object.plot_PSD(examples, channels, channel_names)
 # show plots:
 plotter.show()
