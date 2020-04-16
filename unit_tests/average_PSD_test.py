@@ -2,6 +2,7 @@
 
 
 import numpy as np
+import matplotlib.pyplot as plotter
 from feature_calculation import average_PSD
 
 
@@ -35,3 +36,19 @@ print("Average PSD values:\nSize: ", end="")
 print(PSD_avg.shape)
 print(PSD_avg)
 print("\n")
+
+
+# --------------------TESTING plot_average_PSD() FUNCTION--------------------
+print("\n----------TESTING plot_average_PSD() FUNCTION----------\n")
+
+# examples to plot:
+examples = np.array([0, 1])
+# channels to plot:
+channels = np.array([0, 2])
+# names of all channels:
+channel_names = np.array(['C1', 'C2', 'C3'])
+
+# call function:
+average_PSD.plot_average_PSD(PSD_avg, bins, examples, channels, channel_names)
+# show plots:
+plotter.show()

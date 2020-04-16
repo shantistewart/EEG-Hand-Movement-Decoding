@@ -55,23 +55,43 @@ def average_PSD(PSD, bins, sample_freq):
 #       size: (num_examples, num_channels, num_bins)
 #   bins = frequency bins to calculate average PSD values for
 #       size: (num_bins, 2)
+#   examples = 1D array of example indices to plot:
+#       size: (num_plot_examples, )
+#   channels = 1D array of channel indices to plot (for all selected examples):
+#       size: (num_plot_channels, )
+#   channel_names = 1D array of all channel names:
+#       size: (num_channels, )
 # Outputs: none
-def plot_average_PSD(PSD_bins, bins):
+def plot_average_PSD(PSD_bins, bins, examples, channels, channel_names):
     # number of frequency bins:
     num_bins = bins.shape[0]
+    # number of examples to plot:
+    num_plot_examples = examples.shape[0]
+    # number of channels to plot (for each example):
+    num_plot_channels = channels.shape[0]
 
-    # bar graph to display PSD average bin values:
+    # create bin labels:
+    bin_labels = []
+    for i in range(num_bins):
+        bin_labels.append(str(bins[i, 0]) + "-" + str(bins[i, 1]) + " Hz")
+    print(bin_labels)
+
+    # create and format subplot:
+    fig, axes = plotter.subplots(num_plot_channels, num_plot_examples)
+    # reshape axes to handle shape error if either dimension = 1
+    axes = np.reshape(axes, (num_plot_channels, num_plot_examples))
+    plotter.subplots_adjust(hspace=1)
     # locations of labels:
     bin_loc = np.arange(num_bins)
     # width of bars:
     width = 2. / num_bins
-    # create figure:
-    fig, ax = plotter.subplots()
-    # create bar chart:
-    ax.bar(bin_loc, PSD_bins, width, label='Average PSD')
-    # add title, labels, and legend:
-    ax.set_title('Average PSD in Frequency Bins')
-    ax.set_ylabel('Average PSD')
-    ax.set_xticks(bin_loc)
-    ax.set_xticklabels(bin_labels)
-    ax.legend()
+
+    # plot bar graph of average PSD values in selected frequency bins:
+    for i in range(num_plot_examples):
+        for j in range(num_plot_channels):
+            axes[j, i].bar(bin_loc, PSD_bins[examples[i], channels[j]], width, label='PSD')
+            axes[j, i].set_title('Average PSD of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
+            axes[j, i].set_ylabel('Average PSD')
+            axes[j, i].set_xticks(bin_loc)
+            axes[j, i].set_xticklabels(bin_labels)
+            axes[j, i].legend()
