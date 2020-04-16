@@ -4,9 +4,9 @@
 import numpy as np
 
 
-# Function description: calculate average PSD values in selected frequency bins.
+# Function description: calculate average power spectral density values in selected frequency bins.
 # Inputs:
-#   PSD = 3D array of (non-negative) power spectral density values for multiple channels for multiple examples
+#   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_samples)
 #   bins = frequency bins to calculate average PSD values for
 #       size: (num_bins, 2)
@@ -23,6 +23,11 @@ def average_PSD(PSD, bins, sample_freq):
     num_samples = PSD.shape[2]
     # number of frequency bins:
     num_bins = bins.shape[0]
+    # max frequency (Nyquist frequency):
+    max_freq = .5 * sample_freq
+
+    # calculate average PSD values in frequency bins:
+    PSD_bins = np.zeros(num_bins)
 
 
 
