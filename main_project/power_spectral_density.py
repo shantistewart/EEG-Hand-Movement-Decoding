@@ -57,8 +57,6 @@ def estimate_psd(X, sample_freq):
     PSD_pos = PSD_pos / num_samples
     # number of frequencies (positive and negative) of PSD:
     num_freq = PSD.shape[2]
-    # normalize PSD_pos:
-    # PSD_pos = PSD_pos / num_freq
 
     # frequencies of PSD (same for all examples for all channels):
     freq = np.fft.fftfreq(num_freq, d=sample_period)
@@ -67,6 +65,6 @@ def estimate_psd(X, sample_freq):
     # change negative Nyquist frequency to positive Nyquist frequency:
     freq_pos[num_samples-1] = -1*freq_pos[num_samples-1]
     # reshape freq_pos in order to be broadcastable with PSD_pos:
-    freq_pos = np.reshape(freq_pos,(1, 1, freq_pos.shape[0]))
+    freq_pos = np.reshape(freq_pos, (1, 1, freq_pos.shape[0]))
 
     return Rxx_pos, freq_pos, PSD_pos
