@@ -29,6 +29,9 @@ for i in range(num_examples):
         # frequency of cosine wave (Hz):
         freq_cosine = (i+1)
         X[i, j] = np.cos((2 * np.pi * freq_cosine) * sample_period * time) + np.random.uniform(-.2*(j+1), .2*(j+1), num_samples)
+        # make last example different:
+        if i == num_examples-1:
+            X[i, j] = np.exp(-.05*time) + np.random.uniform(-.2*(j+1), .2*(j+1), num_samples)
 
 # estimate power spectral density:
 Rxx, freq, PSD = power.estimate_psd(X, sample_freq)
@@ -36,7 +39,7 @@ Rxx, freq, PSD = power.estimate_psd(X, sample_freq)
 raw_psd_object = RawPSD_class.RawPSD(num_examples, num_channels, num_samples, sample_freq, X, Rxx, freq, PSD)
 
 # examples to plot:
-examples = np.array([0, 2])
+examples = np.array([0, 1, 2])
 # channels to plot:
 channels = np.array([0, 3])
 # names of all channels:
