@@ -24,6 +24,7 @@ import matplotlib.pyplot as plotter
 # Inputs to constructor: all instance variables except sample_period
 # Methods:
 #   plot_raw_signal(): plots raw signals of selected channels of selected examples.
+#   plot_autocorr(): plots autocorrelation functions of selected channels of selected examples.
 class Raw_power_spectral_density:
     """Class of raw power spectral density values, autocorrelation functions, and raw signals."""
 
@@ -47,7 +48,7 @@ class Raw_power_spectral_density:
     #       size: (num_plot_examples, )
     #   channels = 1D array of channel indices to plot (for all selected examples):
     #       size: (num_plot_channels, )
-    #   channel_names = 1D array of channel names to plot, corresponding to channel indices (for all selected examples):
+    #   channel_names = 1D array of all channel names:
     #       size: (num_channels, )
     # Outputs: none
     def plot_raw_signal(self, examples, channels, channel_names):
@@ -70,7 +71,7 @@ class Raw_power_spectral_density:
         # plot raw signals of selected examples and channels:
         for i in range(num_plot_examples):
             for j in range(num_plot_channels):
-                axes[j, i].set_title('x[n] of Example {0}, {1}'.format(examples[i]+1, channel_names[channels[j]]))
+                axes[j, i].set_title('x[n] of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
                 axes[j, i].plot(time, self.X[examples[i], channels[j]])
                 axes[j, i].set_xlabel('Time (s)')
                 axes[j, i].set_ylabel('x[n]')
@@ -81,7 +82,7 @@ class Raw_power_spectral_density:
     #       size: (num_plot_examples, )
     #   channels = 1D array of channel indices to plot (for all selected examples):
     #       size: (num_plot_channels, )
-    #   channel_names = 1D array of channel names to plot, corresponding to channel indices (for all selected examples):
+    #   channel_names = 1D array of all channel names:
     #       size: (num_channels, )
     # Outputs: none
     def plot_autocorr(self, examples, channels, channel_names):
@@ -102,7 +103,7 @@ class Raw_power_spectral_density:
         # plot autocorrelation functions of selected examples and channels:
         for i in range(num_plot_examples):
             for j in range(num_plot_channels):
-                axes[j, i].set_title('Rxx[k] of Example {0}, {1}'.format(examples[i]+1, channel_names[channels[j]]))
+                axes[j, i].set_title('Rxx[k] of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
                 axes[j, i].plot(samples, self.Rxx[examples[i], channels[j]])
                 axes[j, i].set_xlabel('Samples')
                 axes[j, i].set_ylabel('Rxx[k]')
@@ -113,7 +114,7 @@ class Raw_power_spectral_density:
     #       size: (num_plot_examples, )
     #   channels = 1D array of channel indices to plot (for all selected examples):
     #       size: (num_plot_channels, )
-    #   channel_names = 1D array of channel names to plot, corresponding to channel indices (for all selected examples):
+    #   channel_names = 1D array of all channel names:
     #       size: (num_channels, )
     # Outputs: none
     def plot_PSD(self, examples, channels, channel_names):
@@ -131,7 +132,7 @@ class Raw_power_spectral_density:
         # plot power spectral densities of selected examples and channels:
         for i in range(num_plot_examples):
             for j in range(num_plot_channels):
-                axes[j, i].set_title('PSD of Example {0}, {1}'.format(examples[i]+1, channel_names[channels[j]]))
+                axes[j, i].set_title('PSD of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
                 axes[j, i].plot(self.freq[0, 0], self.PSD[examples[i], channels[j]])
                 axes[j, i].set_xlabel('Frequency (HZ)')
                 axes[j, i].set_ylabel('PSD')
