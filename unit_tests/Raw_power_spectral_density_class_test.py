@@ -1,0 +1,51 @@
+# This file contains unit tests for the Raw_power_spectral_density class in Raw_power_spectral_density_class.py (in
+#   classes folder):
+
+
+import numpy as np
+import matplotlib.pyplot as plotter
+from main_project import power_spectral_density as power
+from classes import Raw_power_spectral_density_class
+
+
+# --------------------TESTING Raw_power_spectral_density CLASS--------------------
+print("\n----------TESTING Raw_power_spectral_density CLASS----------\n")
+
+# dimensions of test array:
+num_examples = 3
+num_channels = 4
+num_samples = 100
+# test sampling frequency:
+sample_freq = 20
+# sampling period:
+sample_period = 1 / sample_freq
+# sample points:
+time = np.arange(0, num_samples)
+# test array:
+X = np.zeros((num_examples, num_channels, num_samples))
+for i in range(num_examples):
+    for j in range(num_channels):
+        # frequency of cosine wave (Hz):
+        freq_cosine1 = (i+1)
+        freq_cosine2 = 2 * (i + 1)
+        X[i, j] = np.cos((2 * np.pi * freq_cosine1) * sample_period * time) + np.cos((2 * np.pi * freq_cosine2) * sample_period * time) + np.random.uniform(-.2*j, .2*j, num_samples)
+
+# estimate power spectral density:
+Rxx, freq, PSD = power.estimate_psd(X, sample_freq)
+# create Raw_PSD object:
+raw_psd_object = Raw_power_spectral_density_class.Raw_power_spectral_density(num_examples, num_channels, num_samples, sample_freq, X, Rxx, freq, PSD)
+
+# examples to plot:
+examples = np.array([0, 1])
+# channels to plot:
+channels = np.array([0, 3])
+# names of channels to plot:
+channel_names = np.array(['C1', 'C2', 'C3', 'C4'])
+# display raw signals:
+raw_psd_object.plot_raw_signal(examples, channels, channel_names)
+# display autocorrelation functions:
+raw_psd_object.plot_autocorr(examples, channels, channel_names)
+# display power spectral densities:
+raw_psd_object.plot_PSD(examples, channels, channel_names)
+# show plots:
+plotter.show()
