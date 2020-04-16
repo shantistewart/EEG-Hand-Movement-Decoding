@@ -36,7 +36,7 @@ def average_PSD(PSD, bins, sample_freq):
         left = int(np.floor((bins[i, 0] / max_freq) * num_samples))
         # right sample index (round up):
         right = int(np.ceil((bins[i, 1] / max_freq) * num_samples))
-        print("Bin {0}: [{1}, {2})\n".format(i, left, right))
+        # print("Bin {0}: [{1}, {2})\n".format(i, left, right))
 
         # check that bin is valid:
         if left < 0 or right < 0 or left > num_samples or right > num_samples or left >= right:
@@ -74,7 +74,6 @@ def plot_average_PSD(PSD_bins, bins, examples, channels, channel_names):
     bin_labels = []
     for i in range(num_bins):
         bin_labels.append(str(bins[i, 0]) + "-" + str(bins[i, 1]) + " Hz")
-    print(bin_labels)
 
     # create and format subplot:
     fig, axes = plotter.subplots(num_plot_channels, num_plot_examples)
