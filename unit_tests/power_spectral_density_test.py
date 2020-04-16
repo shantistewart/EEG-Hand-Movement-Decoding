@@ -1,8 +1,8 @@
-# This file contains unit tests for power_spectral_density.py (in main_project folder):
+# This file contains unit tests for power_spectral_density.py (in feature_calculation folder):
 
 
 import numpy as np
-from main_project import power_spectral_density as power
+from feature_calculation import power_spectral_density as power
 
 
 # --------------------TESTING estimate_psd() FUNCTION--------------------

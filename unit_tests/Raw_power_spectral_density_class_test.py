@@ -5,7 +5,7 @@
 import numpy as np
 import matplotlib.pyplot as plotter
 # import function modules:
-from main_project import power_spectral_density as power
+from feature_calculation import power_spectral_density as power
 from classes import Raw_power_spectral_density_class
 
 
