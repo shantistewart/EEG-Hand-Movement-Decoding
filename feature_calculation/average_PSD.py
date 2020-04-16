@@ -1,4 +1,6 @@
-# This file contains a function that calculates average power spectral density values in selected frequency bins.
+# This file contains 2 functions:
+#   1) 1st function calculates average power spectral density values in selected frequency bins.
+#   2) 2nd function plots a bar graph of average power spectral density values in selected frequency bins.
 
 
 import numpy as np
@@ -44,3 +46,12 @@ def average_PSD(PSD, bins, sample_freq):
         PSD_bins[:, :, i] = np.mean(PSD[:, :, left:right], axis=2)
 
     return PSD_bins
+
+
+# Function description: plots a bar graph of average PSD values in selected frequency bins.
+# Inputs:
+#   PSD_bins = 3D array of average PSD values in selected frequency bins for multiple channels for multiple examples
+#       size: (num_examples, num_channels, num_bins)
+#   bins = frequency bins to calculate average PSD values for
+#       size: (num_bins, 2)
+# Outputs: none
