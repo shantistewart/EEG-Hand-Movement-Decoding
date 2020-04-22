@@ -26,13 +26,13 @@ def log_normalize(PSD, small_param):
     return PSD_norm
 
 
-# Function description: calculates principal components of channel_specific autocovariance matrices.
+# Function description: calculates principal components of channel_specific autocorrelation matrices.
 # Inputs:
 #   PSD_norm = 3D array of log-normalized (non-negative) PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
 # Outputs:
 #   eigen_vects = 3D array of eigenvectors (sorted in decreasing order of the magnitude of their eigenvalues) of
-#       of autocovariance matrices for each channel
+#       of autocorrelation matrices for multiple channels
 #       size: (num_channels, num_freq, num_freq)
 def calc_PC(PSD_norm):
     # number of channels:
@@ -40,15 +40,15 @@ def calc_PC(PSD_norm):
     # number of PSD frequencies:
     num_freq = PSD_norm.shape[2]
 
-    # calculate (un-normalized) autocovariance matrices (w.r.t. examples) for each channel:
-    cov_matrices = np.zeros((num_channels, num_freq, num_freq))
+    # calculate (un-normalized) autocorrelation matrices (w.r.t. examples) for each channel:
+    corr_matrices = np.zeros((num_channels, num_freq, num_freq))
     for i in range(num_freq):
         for j in range(num_freq):
-            cov_matrices[:, i, j] = np.sum(np.multiply(PSD_norm[:, :, i], PSD_norm[:, :, j]), axis=0)
+            corr_matrices[:, i, j] = np.sum(np.multiply(PSD_norm[:, :, i], PSD_norm[:, :, j]), axis=0)
     print("Channel-specific autocovariance matrices:\nSize: ", end="")
-    print(cov_matrices.shape)
-    print(cov_matrices)
+    print(corr_matrices.shape)
+    print(corr_matrices)
 
-    # determine eigenvectors/eigenvalues for each autocovariance matrix:
+    # determine eigenvectors/eigenvalues for each autocorrelation matrix:
 
     return
