@@ -25,7 +25,7 @@ print("")
 small_param = 0.0
 
 
-# """
+"""
 # --------------------TESTING log_normalize() FUNCTION--------------------
 print("\n----------TESTING log_normalize() FUNCTION----------\n")
 
@@ -37,10 +37,10 @@ print("Log-normalized PSD values:\nSize: ", end="")
 print(PSD_norm.shape)
 print(PSD_norm)
 print("")
-# """
+"""
 
 
-# """
+"""
 # --------------------TESTING unnorm_correlation() FUNCTION--------------------
 print("\n----------TESTING unnorm_correlation() FUNCTION----------\n")
 
@@ -51,10 +51,10 @@ print("Channel-specific autocorrelation matrices (unnormalized):\nSize: ", end="
 print(corr_matrices.shape)
 print(corr_matrices)
 print("")
-# """
+"""
 
 
-# """
+"""
 # --------------------TESTING unnorm_covariance() FUNCTION--------------------
 print("\n----------TESTING unnorm_covariance() FUNCTION----------\n")
 
@@ -65,4 +65,11 @@ print("Channel-specific autocovariance matrices (unnormalized):\nSize: ", end=""
 print(cov_matrices.shape)
 print(cov_matrices)
 print("")
-# """
+"""
+
+
+# --------------------TESTING pearson_covariance() FUNCTION--------------------
+print("\n----------TESTING pearson_covariance() FUNCTION----------\n")
+
+# call function:
+pearson_cov_matrices = PCA.pearson_covariance(PSD)
