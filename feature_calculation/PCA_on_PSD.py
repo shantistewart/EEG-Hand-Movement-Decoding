@@ -99,5 +99,9 @@ def pearson_covariance(PSD):
     num_freq = PSD.shape[2]
 
     # calculate Pearson autocovariance matrices (w.r.t. examples) for each channel:
+    cov_matrices = np.zeros((num_channels, num_freq, num_freq))
     for n in range(num_channels):
-        print(PSD[:, n, :])
+        # size of PSD[:, n, :] = (num_examples, num_freq)
+        cov_matrices[n] = np.corrcoef(PSD[:, n, :], rowvar=False)
+
+    return cov_matrices

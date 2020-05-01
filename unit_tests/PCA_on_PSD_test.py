@@ -68,8 +68,15 @@ print("")
 """
 
 
+# """
 # --------------------TESTING pearson_covariance() FUNCTION--------------------
 print("\n----------TESTING pearson_covariance() FUNCTION----------\n")
 
 # call function:
 pearson_cov_matrices = PCA.pearson_covariance(PSD)
+
+print("Channel-specific Pearson autocovariance matrices:\nSize: ", end="")
+print(pearson_cov_matrices.shape)
+print(pearson_cov_matrices)
+print("")
+# """
