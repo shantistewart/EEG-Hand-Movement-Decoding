@@ -16,15 +16,40 @@ import numpy.linalg as lin_alg
 def log_normalize(PSD, small_param):
     # calculate averages across examples:
     PSD_avg = np.mean(PSD, axis=0, keepdims=True)
+    """
     print("Example-average PSD values:\nSize: ", end="")
     print(PSD_avg.shape)
     print(PSD_avg)
     print("")
+    """
 
     # perform log-normalization across examples for each example, for each channel, for each frequency
     PSD_norm = np.log(PSD + small_param) - np.log(PSD_avg + small_param)
 
     return PSD_norm
+
+
+# Function description: calculates unnormalized channel-specific autocorrelation matrices.
+# Inputs:
+#   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
+#       size: (num_examples, num_channels, num_freq)
+# Outputs:
+#   cov_matrices = 3D array of unnormalized autocorrelation matrices
+#       size: (num_channels, num_freq, num_freq)
+def unnorm_correlation(PSD):
+    # number of channels:
+    num_channels = PSD.shape[1]
+    # number of PSD frequencies:
+    num_freq = PSD.shape[2]
+
+    # calculate unnormalized autocorrelation matrices (w.r.t. examples) for each channel:
+    corr_matrices = np.zeros((num_channels, num_freq, num_freq))
+    for i in range(num_freq):
+        for j in range(num_freq):
+            # size of PSD[:, :, :] = (num_examples, num_channels)
+            corr_matrices[:, i, j] = np.sum(np.multiply(PSD[:, :, i], PSD[:, :, j]), axis=0)
+
+    return corr_matrices
 
 
 # Function description: calculates unnormalized channel-specific autocovariance matrices.
@@ -42,16 +67,18 @@ def unnorm_covariance(PSD):
 
     # calculate averages across examples:
     PSD_avg = np.mean(PSD, axis=0, keepdims=True)
+    """
     print("Example-average PSD values:\nSize: ", end="")
     print(PSD_avg.shape)
     print(PSD_avg)
     print("")
+    """
 
     # calculate unnormalized autocovariance matrices (w.r.t. examples) for each channel:
     cov_matrices = np.zeros((num_channels, num_freq, num_freq))
     for i in range(num_freq):
         for j in range(num_freq):
+            # size of PSD[:, :, :] = (num_examples, num_channels)
             cov_matrices[:, i, j] = np.sum(np.multiply(PSD[:, :, i], PSD[:, :, j]), axis=0)
-    print("Channel-specific autocovariance matrices:\nSize: ", end="")
-    print(cov_matrices.shape)
-    print(cov_matrices)
+
+    return cov_matrices
