@@ -34,7 +34,7 @@ def log_normalize(PSD, small_param):
 #   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
 # Outputs:
-#   cov_matrices = 3D array of unnormalized autocorrelation matrices
+#   corr_matrices = 3D array of unnormalized autocorrelation matrices
 #       size: (num_channels, num_freq, num_freq)
 def unnorm_correlation(PSD):
     # number of channels:
