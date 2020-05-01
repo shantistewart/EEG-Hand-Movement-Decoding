@@ -13,6 +13,10 @@ print("\n----------TESTING average_PSD() FUNCTION----------\n")
 sample_freq = 100
 # test selected frequency bins:
 bins = np.array([[4.9, 5.1], [14.7, 14.7], [40.1, 49.9], [2.5, 47.5]])
+print("Test frequency bins:\nSize: ", end="")
+print(bins.shape)
+print(bins)
+print("")
 # dimensions of test array:
 num_examples = 2
 num_channels = 3
