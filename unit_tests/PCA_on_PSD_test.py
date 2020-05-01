@@ -104,3 +104,9 @@ print("")
 
 # call function:
 eig_vects = PCA.calc_eig_vects(matrices)
+
+# display sorted eigenvectors:
+print("Sorted eigenvectors:\nSize: ", end="")
+print(eig_vects.shape)
+print(eig_vects)
+print("")
