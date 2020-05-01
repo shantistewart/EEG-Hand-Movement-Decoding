@@ -46,7 +46,7 @@ def unnorm_correlation(PSD):
     corr_matrices = np.zeros((num_channels, num_freq, num_freq))
     for i in range(num_freq):
         for j in range(num_freq):
-            # size of PSD[:, :, :] = (num_examples, num_channels)
+            # size of PSD[:, :, i] = (num_examples, num_channels)
             corr_matrices[:, i, j] = np.sum(np.multiply(PSD[:, :, i], PSD[:, :, j]), axis=0)
 
     return corr_matrices
@@ -66,19 +66,20 @@ def unnorm_covariance(PSD):
     num_freq = PSD.shape[2]
 
     # calculate averages across examples:
+    #   size of PSD_avg = (1, num_channels, num_freq)
     PSD_avg = np.mean(PSD, axis=0, keepdims=True)
-    """
+    # """
     print("Example-average PSD values:\nSize: ", end="")
     print(PSD_avg.shape)
     print(PSD_avg)
     print("")
-    """
+    # """
 
     # calculate unnormalized autocovariance matrices (w.r.t. examples) for each channel:
     cov_matrices = np.zeros((num_channels, num_freq, num_freq))
     for i in range(num_freq):
         for j in range(num_freq):
-            # size of PSD[:, :, :] = (num_examples, num_channels)
-            cov_matrices[:, i, j] = np.sum(np.multiply(PSD[:, :, i], PSD[:, :, j]), axis=0)
+            # size of PSD[:, :, i] = (num_examples, num_channels)
+            cov_matrices[:, i, j] = np.sum(np.multiply(PSD[:, :, i]-PSD_avg[:, :, i], PSD[:, :, j]-PSD_avg[:, :, j]), axis=0)
 
     return cov_matrices
