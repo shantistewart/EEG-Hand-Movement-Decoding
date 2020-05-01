@@ -47,6 +47,7 @@ print("\n----------TESTING unnorm_correlation() FUNCTION----------\n")
 # call function:
 corr_matrices = PCA.unnorm_correlation(PSD)
 
+# display unnormalized autocorrelation matrices:
 print("Channel-specific autocorrelation matrices (unnormalized):\nSize: ", end="")
 print(corr_matrices.shape)
 print(corr_matrices)
@@ -61,6 +62,7 @@ print("\n----------TESTING unnorm_covariance() FUNCTION----------\n")
 # call function:
 cov_matrices = PCA.unnorm_covariance(PSD)
 
+# display unnormalized autocovariance matrices:
 print("Channel-specific autocovariance matrices (unnormalized):\nSize: ", end="")
 print(cov_matrices.shape)
 print(cov_matrices)
@@ -75,6 +77,7 @@ print("\n----------TESTING pearson_covariance() FUNCTION----------\n")
 # call function:
 pearson_cov_matrices = PCA.pearson_covariance(PSD)
 
+# display Pearson correlation coefficient autocovariance matrices:
 print("Channel-specific Pearson autocovariance matrices:\nSize: ", end="")
 print(pearson_cov_matrices.shape)
 print(pearson_cov_matrices)
