@@ -27,29 +27,31 @@ def log_normalize(PSD, small_param):
     return PSD_norm
 
 
-# Function description: calculates principal components of channel_specific autocorrelation matrices.
+# Function description: calculates unnormalized channel-specific autocovariance matrices.
 # Inputs:
-#   PSD_norm = 3D array of log-normalized (non-negative) PSD values for multiple channels for multiple examples
+#   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
 # Outputs:
-#   eigen_vects = 3D array of eigenvectors (sorted in decreasing order of the magnitude of their eigenvalues) of
-#       of autocorrelation matrices for multiple channels
+#   cov_matrices = 3D array of unnormalized autocovariance matrices
 #       size: (num_channels, num_freq, num_freq)
-def calc_PC(PSD_norm):
+def unnorm_covariance(PSD):
     # number of channels:
-    num_channels = PSD_norm.shape[1]
+    num_channels = PSD.shape[1]
     # number of PSD frequencies:
-    num_freq = PSD_norm.shape[2]
+    num_freq = PSD.shape[2]
 
-    # calculate (un-normalized) autocorrelation matrices (w.r.t. examples) for each channel:
-    corr_matrices = np.zeros((num_channels, num_freq, num_freq))
+    # calculate averages across examples:
+    PSD_avg = np.mean(PSD, axis=0, keepdims=True)
+    print("Example-average PSD values:\nSize: ", end="")
+    print(PSD_avg.shape)
+    print(PSD_avg)
+    print("")
+
+    # calculate unnormalized autocovariance matrices (w.r.t. examples) for each channel:
+    cov_matrices = np.zeros((num_channels, num_freq, num_freq))
     for i in range(num_freq):
         for j in range(num_freq):
-            corr_matrices[:, i, j] = np.sum(np.multiply(PSD_norm[:, :, i], PSD_norm[:, :, j]), axis=0)
+            cov_matrices[:, i, j] = np.sum(np.multiply(PSD[:, :, i], PSD[:, :, j]), axis=0)
     print("Channel-specific autocovariance matrices:\nSize: ", end="")
-    print(corr_matrices.shape)
-    print(corr_matrices)
-
-    # determine eigenvectors/eigenvalues for each autocorrelation matrix:
-
-    return
+    print(cov_matrices.shape)
+    print(cov_matrices)

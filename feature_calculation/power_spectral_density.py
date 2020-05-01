@@ -26,9 +26,9 @@ def estimate_psd(X, sample_freq):
     # sampling period:
     sample_period = 1 / sample_freq
 
-    # estimate non-normalized 2nd-order moments (over all samples) for each example for each channel:
+    # estimate unnormalized 2nd-order moments (over all samples) for each example for each channel:
     second_moment = np.sum(np.multiply(X, X), axis=2, keepdims=True)
-    # print("Non-normalized seconds moments:")
+    # print("Unnormalized seconds moments:")
     # print(second_moment)
     # print("")
 
