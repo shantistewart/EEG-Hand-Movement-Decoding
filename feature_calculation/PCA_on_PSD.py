@@ -19,6 +19,7 @@ def log_normalize(PSD, small_param):
     print("Example-average PSD values:\nSize: ", end="")
     print(PSD_avg.shape)
     print(PSD_avg)
+    print("")
 
     # perform log-normalization across examples for each example, for each channel, for each frequency
     PSD_norm = np.log(PSD + small_param) - np.log(PSD_avg + small_param)
