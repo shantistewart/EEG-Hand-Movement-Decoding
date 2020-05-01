@@ -5,7 +5,6 @@ import numpy as np
 import matplotlib.pyplot as plotter
 from feature_calculation import PCA_on_PSD as PCA
 
-
 # dimensions of test array:
 num_examples = 3
 num_channels = 2
@@ -26,7 +25,7 @@ print("")
 small_param = 0.0001
 
 
-# """
+"""
 # --------------------TESTING log_normalize() FUNCTION--------------------
 print("\n----------TESTING log_normalize() FUNCTION----------\n")
 
@@ -38,10 +37,10 @@ print("Log-normalized PSD values:\nSize: ", end="")
 print(PSD_norm.shape)
 print(PSD_norm)
 print("")
-# """
+"""
 
 
-# """
+"""
 # --------------------TESTING unnorm_correlation() FUNCTION--------------------
 print("\n----------TESTING unnorm_correlation() FUNCTION----------\n")
 
@@ -52,10 +51,10 @@ print("Channel-specific autocorrelation matrices (unnormalized):\nSize: ", end="
 print(corr_matrices.shape)
 print(corr_matrices)
 print("")
-# """
+"""
 
 
-# """
+"""
 # --------------------TESTING unnorm_covariance() FUNCTION--------------------
 print("\n----------TESTING unnorm_covariance() FUNCTION----------\n")
 
@@ -66,10 +65,10 @@ print("Channel-specific autocovariance matrices (unnormalized):\nSize: ", end=""
 print(cov_matrices.shape)
 print(cov_matrices)
 print("")
-# """
+"""
 
 
-# """
+"""
 # --------------------TESTING pearson_covariance() FUNCTION--------------------
 print("\n----------TESTING pearson_covariance() FUNCTION----------\n")
 
@@ -80,4 +79,25 @@ print("Channel-specific Pearson autocovariance matrices:\nSize: ", end="")
 print(pearson_cov_matrices.shape)
 print(pearson_cov_matrices)
 print("")
-# """
+"""
+
+
+# --------------------TESTING calc_eig_vects() FUNCTION--------------------
+print("\n----------TESTING calc_eig_vects() FUNCTION----------\n")
+
+# dimensions of test array:
+num_channels = 2
+num_freq = 5
+# test input array:
+matrices = np.zeros((num_channels, num_freq, num_freq))
+for n in range(num_channels):
+    for i in range(num_freq):
+        for j in range(num_freq):
+            matrices[n, i, j] = (n + 1) * ((i + 1) * (j + 1))  # * (2*((i+j+1) % 2) - 1)
+print("\nTest input matrices:\nSize: ", end="")
+print(matrices.shape)
+print(matrices)
+print("")
+
+# call function:
+eig_vects = PCA.calc_eig_vects(matrices)

@@ -2,7 +2,6 @@
 
 
 import numpy as np
-import numpy.linalg as lin_alg
 
 
 # Function description: performs log-normalization of PSD values across all examples.
@@ -116,3 +115,20 @@ def pearson_covariance(PSD):
 #       sorted in decreasing order of magnitude of corresponding eigenvalues
 #       size: (num_channels, num_freq, num_freq)
 #       eig_vects[:, i] = ith eigenvector
+def calc_eig_vects(matrices):
+    # calculate eigenvalues/eigenvectors:
+    eig_vals, eig_vects = np.linalg.eigh(matrices)
+
+    # reorder eigenvectors to be in decreasing order of magnitude of corresponding eigenvalues:
+    eig_vects = np.flip(eig_vects, axis=2)
+
+    # """
+    eig_vals = np.flip(eig_vals, axis=1)
+    # """
+    print("Sorted eigenvalues:\nSize: ", end="")
+    print(eig_vals.shape)
+    print(eig_vals)
+    print("")
+    # """
+
+    return eig_vects
