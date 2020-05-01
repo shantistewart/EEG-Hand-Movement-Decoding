@@ -19,6 +19,7 @@ for i in range(num_examples):
     for j in range(num_channels):
         for k in range(num_freq):
             PSD[i, j, k] = (i % 2 + 1) * (j * num_freq + k + 1)
+            # PSD[i, j, k] = ((i % 2 + 1) * (j * num_freq + k + 1)) * (2*(k % 2) - 1)
 print("Test input array:\nSize: ", end="")
 print(PSD.shape)
 print(PSD)
@@ -38,7 +39,7 @@ print("")
 """
 
 
-# """
+"""
 # --------------------TESTING unnorm_correlation() FUNCTION--------------------
 print("\n----------TESTING unnorm_correlation() FUNCTION----------\n")
 
@@ -49,7 +50,7 @@ print("Channel-specific autocorrelation matrices (unnormalized):\nSize: ", end="
 print(corr_matrices.shape)
 print(corr_matrices)
 print("")
-# """
+"""
 
 
 # """
