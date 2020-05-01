@@ -17,15 +17,16 @@ for i in range(num_examples):
         for k in range(num_freq):
             PSD[i, j, k] = (i % 2 + 1) * (j * num_freq + k + 1)
             # PSD[i, j, k] = ((i % 2 + 1) * (j * num_freq + k + 1)) * (2*(k % 2) - 1)
+        # PSD[i, j, :] = np.random.rand(num_freq)
 print("\nTest input array:\nSize: ", end="")
 print(PSD.shape)
 print(PSD)
 print("")
 # small parameter to avoid ln(0):
-small_param = 0.0
+small_param = 0.0001
 
 
-"""
+# """
 # --------------------TESTING log_normalize() FUNCTION--------------------
 print("\n----------TESTING log_normalize() FUNCTION----------\n")
 
@@ -37,10 +38,10 @@ print("Log-normalized PSD values:\nSize: ", end="")
 print(PSD_norm.shape)
 print(PSD_norm)
 print("")
-"""
+# """
 
 
-"""
+# """
 # --------------------TESTING unnorm_correlation() FUNCTION--------------------
 print("\n----------TESTING unnorm_correlation() FUNCTION----------\n")
 
@@ -51,10 +52,10 @@ print("Channel-specific autocorrelation matrices (unnormalized):\nSize: ", end="
 print(corr_matrices.shape)
 print(corr_matrices)
 print("")
-"""
+# """
 
 
-"""
+# """
 # --------------------TESTING unnorm_covariance() FUNCTION--------------------
 print("\n----------TESTING unnorm_covariance() FUNCTION----------\n")
 
@@ -65,7 +66,7 @@ print("Channel-specific autocovariance matrices (unnormalized):\nSize: ", end=""
 print(cov_matrices.shape)
 print(cov_matrices)
 print("")
-"""
+# """
 
 
 # """
