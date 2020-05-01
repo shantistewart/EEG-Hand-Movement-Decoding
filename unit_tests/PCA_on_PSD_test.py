@@ -25,13 +25,13 @@ print("")
 small_param = 0.0
 
 
+# """
 # --------------------TESTING log_normalize() FUNCTION--------------------
 print("\n----------TESTING log_normalize() FUNCTION----------\n")
 
 # call function:
 PSD_norm = PCA.log_normalize(PSD, small_param)
 
-# """
 # display log-normalized PSD values:
 print("Log-normalized PSD values:\nSize: ", end="")
 print(PSD_norm.shape)
