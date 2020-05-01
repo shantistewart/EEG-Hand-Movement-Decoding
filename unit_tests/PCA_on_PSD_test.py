@@ -6,9 +6,6 @@ import matplotlib.pyplot as plotter
 from feature_calculation import PCA_on_PSD as PCA
 
 
-# --------------------TESTING log_normalize() FUNCTION--------------------
-print("\n----------TESTING log_normalize() FUNCTION----------\n")
-
 # dimensions of test array:
 num_examples = 3
 num_channels = 2
@@ -20,26 +17,30 @@ for i in range(num_examples):
         for k in range(num_freq):
             PSD[i, j, k] = (i % 2 + 1) * (j * num_freq + k + 1)
             # PSD[i, j, k] = ((i % 2 + 1) * (j * num_freq + k + 1)) * (2*(k % 2) - 1)
-print("Test input array:\nSize: ", end="")
+print("\nTest input array:\nSize: ", end="")
 print(PSD.shape)
 print(PSD)
 print("")
 # small parameter to avoid ln(0):
 small_param = 0.0
 
+
+# --------------------TESTING log_normalize() FUNCTION--------------------
+print("\n----------TESTING log_normalize() FUNCTION----------\n")
+
 # call function:
 PSD_norm = PCA.log_normalize(PSD, small_param)
 
-"""
+# """
 # display log-normalized PSD values:
 print("Log-normalized PSD values:\nSize: ", end="")
 print(PSD_norm.shape)
 print(PSD_norm)
 print("")
-"""
+# """
 
 
-"""
+# """
 # --------------------TESTING unnorm_correlation() FUNCTION--------------------
 print("\n----------TESTING unnorm_correlation() FUNCTION----------\n")
 
@@ -50,7 +51,7 @@ print("Channel-specific autocorrelation matrices (unnormalized):\nSize: ", end="
 print(corr_matrices.shape)
 print(corr_matrices)
 print("")
-"""
+# """
 
 
 # """
