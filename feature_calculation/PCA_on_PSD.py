@@ -83,3 +83,21 @@ def unnorm_covariance(PSD):
             cov_matrices[:, i, j] = np.sum(np.multiply(PSD[:, :, i]-PSD_avg[:, :, i], PSD[:, :, j]-PSD_avg[:, :, j]), axis=0)
 
     return cov_matrices
+
+
+# Function description: calculates Pearson correlation coefficient channel-specific autocovariance matrices.
+# Inputs:
+#   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
+#       size: (num_examples, num_channels, num_freq)
+# Outputs:
+#   cov_matrices = 3D array of Pearson correlation coefficient autocovariance matrices
+#       size: (num_channels, num_freq, num_freq)
+def pearson_covariance(PSD):
+    # number of channels:
+    num_channels = PSD.shape[1]
+    # number of PSD frequencies:
+    num_freq = PSD.shape[2]
+
+    # calculate Pearson autocovariance matrices (w.r.t. examples) for each channel:
+    for n in range(num_channels):
+        print(PSD[:, n, :])
