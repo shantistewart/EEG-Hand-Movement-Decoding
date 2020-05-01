@@ -29,7 +29,7 @@ def log_normalize(PSD, small_param):
     return PSD_norm
 
 
-# Function description: calculates unnormalized channel-specific autocorrelation matrices.
+# Function description: calculates unnormalized channel-specific autocorrelation matrices of PSD values.
 # Inputs:
 #   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
@@ -52,7 +52,7 @@ def unnorm_correlation(PSD):
     return corr_matrices
 
 
-# Function description: calculates unnormalized channel-specific autocovariance matrices.
+# Function description: calculates unnormalized channel-specific autocovariance matrices of PSD values.
 # Inputs:
 #   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
@@ -85,7 +85,7 @@ def unnorm_covariance(PSD):
     return cov_matrices
 
 
-# Function description: calculates Pearson correlation coefficient channel-specific autocovariance matrices.
+# Function description: calculates channel-specific Pearson autocovariance matrices of PSD values.
 # Inputs:
 #   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
@@ -105,3 +105,14 @@ def pearson_covariance(PSD):
         cov_matrices[n] = np.corrcoef(PSD[:, n, :], rowvar=False)
 
     return cov_matrices
+
+
+# Function description: calculates eigenvalues/eigenvectors of PSD autocovariance/autocorrelation matrices.
+# Inputs:
+#   matrices = 3D array of PSD autocovariance/autocorrelation matrices
+#       size: (num_channels, num_freq, num_freq)
+# Outputs:
+#   eig_vects = 3D array of normalized (unit-length) eigenvectors of PSD autocovariance/autocorrelation matrices,
+#       sorted in decreasing order of magnitude of corresponding eigenvalues
+#       size: (num_channels, num_freq, num_freq)
+#       eig_vects[:, i] = ith eigenvector
