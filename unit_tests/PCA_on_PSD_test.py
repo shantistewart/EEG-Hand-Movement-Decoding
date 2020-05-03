@@ -14,7 +14,7 @@ PSD = np.zeros((num_examples, num_channels, num_freq))
 for i in range(num_examples):
     for j in range(num_channels):
         for k in range(num_freq):
-            PSD[i, j, k] = (i % 2 + 1) * (j * num_freq + k + 1)
+            PSD[i, j, k] = (i + 1) * (j * num_freq + k + 1)
             # PSD[i, j, k] = ((i % 2 + 1) * (j * num_freq + k + 1)) * (2*(k % 2) - 1)
         # PSD[i, j, :] = np.random.rand(num_freq)
 print("\nTest input array:\nSize: ", end="")
@@ -85,6 +85,7 @@ print("")
 """
 
 
+"""
 # --------------------TESTING calc_eig_vects() FUNCTION--------------------
 print("\n----------TESTING calc_eig_vects() FUNCTION----------\n")
 
@@ -110,3 +111,8 @@ print("Sorted eigenvectors:\nSize: ", end="")
 print(eig_vects.shape)
 print(eig_vects)
 print("")
+"""
+
+
+# --------------------TESTING project_onto_pcs() FUNCTION--------------------
+print("\n----------TESTING project_onto_pcs() FUNCTION----------\n")

@@ -125,3 +125,10 @@ def calc_eig_vects(matrices):
 # Outputs:
 #   project_weights = 3D array of projection weights onto principal components (eigenvectors)
 #       size: (num_channels, num_examples,
+def project_onto_pcs(PSD, eig_vects, num_pcs):
+    # reorder dimensions of 3D tensor so that PSD[n, i, j] = PSD of channel n, example i, frequency j:
+    PSD = np.transpose(PSD, axes=(1, 0, 2))
+    print("\nReordered PSD:\nSize: ", end="")
+    print(PSD.shape)
+    print(PSD)
+    print("")
