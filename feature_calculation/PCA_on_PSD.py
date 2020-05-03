@@ -15,12 +15,6 @@ import numpy as np
 def log_normalize(PSD, small_param):
     # calculate averages across examples:
     PSD_avg = np.mean(PSD, axis=0, keepdims=True)
-    # """
-    print("Example-average PSD values:\nSize: ", end="")
-    print(PSD_avg.shape)
-    print(PSD_avg)
-    print("")
-    # """
 
     # perform log-normalization across examples for each example, for each channel, for each frequency
     PSD_norm = np.log(PSD + small_param) - np.log(PSD_avg + small_param)
@@ -67,12 +61,6 @@ def unnorm_covariance(PSD):
     # calculate averages across examples:
     #   size of PSD_avg = (1, num_channels, num_freq)
     PSD_avg = np.mean(PSD, axis=0, keepdims=True)
-    # """
-    print("Example-average PSD values:\nSize: ", end="")
-    print(PSD_avg.shape)
-    print(PSD_avg)
-    print("")
-    # """
 
     # calculate unnormalized autocovariance matrices (w.r.t. examples) for each channel:
     cov_matrices = np.zeros((num_channels, num_freq, num_freq))
@@ -121,14 +109,5 @@ def calc_eig_vects(matrices):
 
     # reorder eigenvectors to be in decreasing order of magnitude of corresponding eigenvalues:
     eig_vects = np.flip(eig_vects, axis=2)
-
-    # """
-    eig_vals = np.flip(eig_vals, axis=1)
-    # """
-    print("Sorted eigenvalues:\nSize: ", end="")
-    print(eig_vals.shape)
-    print(eig_vals)
-    print("")
-    # """
 
     return eig_vects
