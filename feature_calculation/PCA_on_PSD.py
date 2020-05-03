@@ -113,7 +113,7 @@ def calc_eig_vects(matrices):
     return eig_vects
 
 
-# Function description: calculates projection weights of PSD values onto principal components.
+# Function description: calculates projection weights of PSD values onto principal components for all channels.
 # Inputs:
 #   PSD = 3D array of PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
@@ -122,13 +122,31 @@ def calc_eig_vects(matrices):
 #       size: (num_channels, num_freq, num_freq)
 #       eig_vects[n, :, i] = ith eigenvector of channel n
 #   num_pcs = number of principal components (eigenvectors) to project onto
+#       validity: num_pcs <= num_freq
 # Outputs:
 #   project_weights = 3D array of projection weights onto principal components (eigenvectors)
-#       size: (num_channels, num_examples,
+#       size: (num_examples, num_channels, num_pcs)
 def project_onto_pcs(PSD, eig_vects, num_pcs):
-    # reorder dimensions of 3D tensor so that PSD[n, i, j] = PSD of channel n, example i, frequency j:
+    # reorder dimensions of PSD so that PSD[n, p, f] = PSD of channel n, example p, frequency f:
+    #   size of reordered PSD = (num_channels, num_examples, num_freq)
     PSD = np.transpose(PSD, axes=(1, 0, 2))
-    print("\nReordered PSD:\nSize: ", end="")
+    """
+    print("Transposed test input array:\nSize: ", end="")
     print(PSD.shape)
     print(PSD)
     print("")
+    """
+
+    # calculate projection weights of PSD values onto num_pcs principal components for all channels:
+    project_weights = np.matmul(PSD, eig_vects[:, :, :num_pcs])
+    """
+    print("Non-transposed projection weights:\nSize: ", end="")
+    print(project_weights.shape)
+    print(project_weights)
+    print("")
+    """
+    # reorder dimensions of project_weights so that project_weights[p, n, f] = projection weight of example p,
+    #   channel, onto principal component f
+    project_weights = np.transpose(project_weights, axes=(1, 0, 2))
+
+    return project_weights

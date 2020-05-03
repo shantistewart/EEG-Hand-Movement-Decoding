@@ -5,10 +5,11 @@ import numpy as np
 import matplotlib.pyplot as plotter
 from feature_calculation import PCA_on_PSD as PCA
 
+
 # dimensions of test array:
 num_examples = 3
 num_channels = 2
-num_freq = 4
+num_freq = 5
 # test input array:
 PSD = np.zeros((num_examples, num_channels, num_freq))
 for i in range(num_examples):
@@ -98,7 +99,7 @@ for n in range(num_channels):
     for i in range(num_freq):
         for j in range(num_freq):
             matrices[n, i, j] = (n + 1) * ((i + 1) * (j + 1))  # * (2*((i+j+1) % 2) - 1)
-print("\nTest input matrices:\nSize: ", end="")
+print("Test input matrices:\nSize: ", end="")
 print(matrices.shape)
 print(matrices)
 print("")
@@ -114,5 +115,30 @@ print("")
 """
 
 
+# """
 # --------------------TESTING project_onto_pcs() FUNCTION--------------------
 print("\n----------TESTING project_onto_pcs() FUNCTION----------\n")
+
+# test principal components array:
+pcs = np.zeros((num_channels, num_freq, num_freq))
+for n in range(num_channels):
+    for i in range(num_freq):
+        for j in range(num_freq):
+            pcs[n, i, j] = j
+print("Test principal components array:\nSize: ", end="")
+print(pcs.shape)
+print(pcs)
+print("")
+# number of principal components to project onto:
+num_pcs = num_freq - 1
+print("Number of principal components to project onto: {0}\n".format(num_pcs))
+
+# call function:
+project_weights = PCA.project_onto_pcs(PSD, pcs, num_pcs)
+
+# display projection weights:
+print("Projection weights:\nSize: ", end="")
+print(project_weights.shape)
+print(project_weights)
+print("\n")
+# """
