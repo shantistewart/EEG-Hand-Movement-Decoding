@@ -24,7 +24,7 @@ def log_normalize(PSD, small_param):
 
 # Function description: calculates unnormalized channel-specific autocorrelation matrices of PSD values.
 # Inputs:
-#   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
+#   PSD = 3D array of PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
 # Outputs:
 #   corr_matrices = 3D array of unnormalized autocorrelation matrices
@@ -47,7 +47,7 @@ def unnorm_correlation(PSD):
 
 # Function description: calculates unnormalized channel-specific autocovariance matrices of PSD values.
 # Inputs:
-#   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
+#   PSD = 3D array of PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
 # Outputs:
 #   cov_matrices = 3D array of unnormalized autocovariance matrices
@@ -74,7 +74,7 @@ def unnorm_covariance(PSD):
 
 # Function description: calculates channel-specific Pearson autocovariance matrices of PSD values.
 # Inputs:
-#   PSD = 3D array of (non-negative) PSD values for multiple channels for multiple examples
+#   PSD = 3D array of PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
 # Outputs:
 #   cov_matrices = 3D array of Pearson correlation coefficient autocovariance matrices
@@ -100,9 +100,9 @@ def pearson_covariance(PSD):
 #       size: (num_channels, num_freq, num_freq)
 # Outputs:
 #   eig_vects = 3D array of normalized (unit-length) eigenvectors of PSD autocovariance/autocorrelation matrices,
-#       sorted in decreasing order of magnitude of corresponding eigenvalues
+#       sorted in decreasing order of magnitude of corresponding eigenvalues (for each channel)
 #       size: (num_channels, num_freq, num_freq)
-#       eig_vects[:, i] = ith eigenvector
+#       eig_vects[n, :, i] = ith eigenvector of channel n
 def calc_eig_vects(matrices):
     # calculate eigenvalues/eigenvectors:
     eig_vals, eig_vects = np.linalg.eigh(matrices)
@@ -111,3 +111,17 @@ def calc_eig_vects(matrices):
     eig_vects = np.flip(eig_vects, axis=2)
 
     return eig_vects
+
+
+# Function description: calculates projection weights of PSD values onto principal components.
+# Inputs:
+#   PSD = 3D array of PSD values for multiple channels for multiple examples
+#       size: (num_examples, num_channels, num_freq)
+#   eig_vects = 3D array of normalized (unit-length) eigenvectors of PSD autocovariance/autocorrelation matrices,
+#       sorted in decreasing order of magnitude of corresponding eigenvalues (for each channel)
+#       size: (num_channels, num_freq, num_freq)
+#       eig_vects[n, :, i] = ith eigenvector of channel n
+#   num_pcs = number of principal components (eigenvectors) to project onto
+# Outputs:
+#   project_weights = 3D array of projection weights onto principal components (eigenvectors)
+#       size: (num_channels, num_examples,
