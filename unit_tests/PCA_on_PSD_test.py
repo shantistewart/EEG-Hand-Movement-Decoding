@@ -2,7 +2,6 @@
 
 
 import numpy as np
-import matplotlib.pyplot as plotter
 from feature_calculation import PCA_on_PSD as PCA
 
 
