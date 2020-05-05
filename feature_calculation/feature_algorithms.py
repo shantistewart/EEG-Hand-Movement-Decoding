@@ -18,3 +18,11 @@ from feature_calculation import PCA_on_PSD as PCA
 # Outputs:
 #   PSD_bins = 3D array of average PSD values in selected frequency bins for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_bins)
+def average_PSD(X, sample_freq, bins):
+    # estimate power spectral density:
+    Rxx, freq, PSD = power.estimate_psd(X, sample_freq)
+
+    # calculate average PSD values in bins:
+    PSD_avg = average_PSD.calc_average_PSD(PSD, bins, sample_freq)
+
+    return PSD_avg
