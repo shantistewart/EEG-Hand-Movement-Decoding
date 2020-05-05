@@ -6,8 +6,8 @@ import matplotlib.pyplot as plotter
 from feature_calculation import average_PSD
 
 
-# --------------------TESTING average_PSD() FUNCTION--------------------
-print("\n----------TESTING average_PSD() FUNCTION----------\n")
+# --------------------TESTING calc_average_PSD() FUNCTION--------------------
+print("\n----------TESTING calc_average_PSD() FUNCTION----------\n")
 
 # test sampling frequency:
 sample_freq = 100
@@ -33,7 +33,7 @@ print(PSD)
 print("")
 
 # call function:
-PSD_avg = average_PSD.average_PSD(PSD, bins, sample_freq)
+PSD_avg = average_PSD.calc_average_PSD(PSD, bins, sample_freq)
 
 # display average PSD values:
 print("Average PSD values:\nSize: ", end="")

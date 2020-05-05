@@ -17,7 +17,7 @@ import matplotlib.pyplot as plotter
 # Outputs:
 #   PSD_bins = 3D array of average PSD values in selected frequency bins for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_bins)
-def average_PSD(PSD, bins, sample_freq):
+def calc_average_PSD(PSD, bins, sample_freq):
     # number of examples:
     num_examples = PSD.shape[0]
     # number of channels:
