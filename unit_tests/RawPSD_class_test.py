@@ -4,8 +4,8 @@
 import numpy as np
 import matplotlib.pyplot as plotter
 # import function modules:
-from feature_calculation import power_spectral_density as power
 from classes import RawPSD_class
+from feature_calculation import power_spectral_density as power
 from feature_calculation import average_PSD
 
 
@@ -54,7 +54,7 @@ raw_psd_object.plot_PSD(examples, channels, channel_names)
 # test selected frequency bins:
 bins = np.array([[0, 2], [2, 4], [4, 6], [6, 8], [8, 10]])
 # calculate average PSD values in selected frequency bins:
-PSD_avg = average_PSD.average_PSD(PSD, bins, sample_freq)
+PSD_avg = average_PSD.calc_average_PSD(PSD, bins, sample_freq)
 # plot bar graph:
 average_PSD.plot_average_PSD(PSD_avg, bins, examples, channels, channel_names)
 
