@@ -28,7 +28,7 @@ for i in range(num_examples):
     for j in range(num_channels):
         # frequency of cosine wave (Hz):
         freq_cosine = (i+1)
-        X[i, j] = np.cos((2 * np.pi * freq_cosine) * sample_period * time) + np.random.uniform(-.2*(j+1), .2*(j+1), num_samples)
+        X[i, j] = (2-i) * np.cos((2 * np.pi * freq_cosine) * sample_period * time) + np.random.uniform(-.2*(j+1), .2*(j+1), num_samples)
         # make last example different:
         if i == num_examples-1:
             X[i, j] = np.exp(-.05*time) + np.random.uniform(-.2*(j+1), .2*(j+1), num_samples)
