@@ -26,12 +26,6 @@ def estimate_psd(X, sample_freq):
     # sampling period:
     sample_period = 1 / sample_freq
 
-    # estimate unnormalized 2nd-order moments (over all samples) for each example for each channel:
-    second_moment = np.sum(np.multiply(X, X), axis=2, keepdims=True)
-    # print("Unnormalized seconds moments:")
-    # print(second_moment)
-    # print("")
-
     # estimate non-negative part of autocorrelation function for each example for each channel:
     Rxx_pos = np.zeros((num_examples, num_channels, num_samples))
     for k in range(0, num_samples):
@@ -41,10 +35,16 @@ def estimate_psd(X, sample_freq):
         X_n = X[:, :, k:]
         # X[:, :, n-k] with X[:, :, num_samples-k...num_samples-1] elements removed (equivalently zero-padded):
         X_shift = X[:, :, :overlap]
-        # calculate vector inner product (over all samples) for each example for each channel:
-        Rxx_pos[:, :, k] = np.sum(np.multiply(X_n, X_shift), axis=2)
-    # normalize non-negative part of autocorrelation functions:
+        # calculate normalized vector inner product (over all samples) for each example for each channel:
+        Rxx_pos[:, :, k] = np.sum(np.multiply(X_n, X_shift), axis=2) / num_samples
+
+    # different normalization:
+    """
+    # estimate unnormalized 2nd-order moments (over all samples) for each example for each channel:
+    second_moment = np.sum(np.multiply(X, X), axis=2, keepdims=True)
+    # normalize autocorrelation functions:
     Rxx_pos = np.divide(Rxx_pos, second_moment)
+    """
 
     # calculate power spectral density =  Fourier transform of autocorrelation function (for each example for each
     #   channel), using Hermitian FFT (since autocorrelation function is symmetric):
