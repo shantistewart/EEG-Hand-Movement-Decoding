@@ -40,7 +40,7 @@ def calc_correlation_matrices(PSD):
     for i in range(num_freq):
         for j in range(num_freq):
             # size of PSD[:, :, i] = (num_examples, num_channels)
-            corr_matrices[:, i, j] = np.sum(np.multiply(PSD[:, :, i], PSD[:, :, j]), axis=0)
+            corr_matrices[:, i, j] = np.mean(np.multiply(PSD[:, :, i], PSD[:, :, j]), axis=0)
 
     return corr_matrices
 
@@ -67,7 +67,7 @@ def calc_covariance_matrices(PSD):
     for i in range(num_freq):
         for j in range(num_freq):
             # size of PSD[:, :, i] = (num_examples, num_channels)
-            cov_matrices[:, i, j] = np.sum(np.multiply(PSD[:, :, i]-PSD_avg[:, :, i], PSD[:, :, j]-PSD_avg[:, :, j]), axis=0)
+            cov_matrices[:, i, j] = np.mean(np.multiply(PSD[:, :, i] - PSD_avg[:, :, i], PSD[:, :, j] - PSD_avg[:, :, j]), axis=0)
 
     return cov_matrices
 
