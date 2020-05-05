@@ -40,49 +40,49 @@ print("")
 """
 
 
-"""
-# --------------------TESTING unnorm_correlation() FUNCTION--------------------
-print("\n----------TESTING unnorm_correlation() FUNCTION----------\n")
+# """
+# --------------------TESTING calc_correlation_matrices() FUNCTION--------------------
+print("\n----------TESTING calc_correlation_matrices() FUNCTION----------\n")
 
 # call function:
-corr_matrices = PCA.unnorm_correlation(PSD)
+corr_matrices = PCA.calc_correlation_matrices(PSD)
 
-# display unnormalized autocorrelation matrices:
-print("Channel-specific autocorrelation matrices (unnormalized):\nSize: ", end="")
+# display autocorrelation matrices:
+print("Channel-specific autocorrelation matrices:\nSize: ", end="")
 print(corr_matrices.shape)
 print(corr_matrices)
 print("")
-"""
+# """
 
 
-"""
-# --------------------TESTING unnorm_covariance() FUNCTION--------------------
-print("\n----------TESTING unnorm_covariance() FUNCTION----------\n")
+# """
+# --------------------TESTING calc_covariance_matrices() FUNCTION--------------------
+print("\n----------TESTING calc_covariance_matrices() FUNCTION----------\n")
 
 # call function:
-cov_matrices = PCA.unnorm_covariance(PSD)
+cov_matrices = PCA.calc_covariance_matrices(PSD)
 
-# display unnormalized autocovariance matrices:
-print("Channel-specific autocovariance matrices (unnormalized):\nSize: ", end="")
+# display autocovariance matrices:
+print("Channel-specific autocovariance matrices:\nSize: ", end="")
 print(cov_matrices.shape)
 print(cov_matrices)
 print("")
-"""
+# """
 
 
-"""
-# --------------------TESTING pearson_covariance() FUNCTION--------------------
-print("\n----------TESTING pearson_covariance() FUNCTION----------\n")
+# """
+# --------------------TESTING calc_pearson_covariance_matrices() FUNCTION--------------------
+print("\n----------TESTING calc_pearson_covariance_matrices() FUNCTION----------\n")
 
 # call function:
-pearson_cov_matrices = PCA.pearson_covariance(PSD)
+pearson_cov_matrices = PCA.calc_pearson_covariance_matrices(PSD)
 
 # display Pearson correlation coefficient autocovariance matrices:
 print("Channel-specific Pearson autocovariance matrices:\nSize: ", end="")
 print(pearson_cov_matrices.shape)
 print(pearson_cov_matrices)
 print("")
-"""
+# """
 
 
 """

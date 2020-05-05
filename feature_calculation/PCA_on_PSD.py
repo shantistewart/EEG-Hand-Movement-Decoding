@@ -22,20 +22,20 @@ def log_normalize(PSD, small_param):
     return PSD_norm
 
 
-# Function description: calculates unnormalized channel-specific autocorrelation matrices of PSD values.
+# Function description: calculates channel-specific autocorrelation matrices of PSD values.
 # Inputs:
 #   PSD = 3D array of PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
 # Outputs:
-#   corr_matrices = 3D array of unnormalized autocorrelation matrices
+#   corr_matrices = 3D array of autocorrelation matrices
 #       size: (num_channels, num_freq, num_freq)
-def unnorm_correlation(PSD):
+def calc_correlation_matrices(PSD):
     # number of channels:
     num_channels = PSD.shape[1]
     # number of PSD frequencies:
     num_freq = PSD.shape[2]
 
-    # calculate unnormalized autocorrelation matrices (w.r.t. examples) for each channel:
+    # calculate autocorrelation matrices (w.r.t. examples) for each channel:
     corr_matrices = np.zeros((num_channels, num_freq, num_freq))
     for i in range(num_freq):
         for j in range(num_freq):
@@ -45,14 +45,14 @@ def unnorm_correlation(PSD):
     return corr_matrices
 
 
-# Function description: calculates unnormalized channel-specific autocovariance matrices of PSD values.
+# Function description: calculates channel-specific autocovariance matrices of PSD values.
 # Inputs:
 #   PSD = 3D array of PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
 # Outputs:
-#   cov_matrices = 3D array of unnormalized autocovariance matrices
+#   cov_matrices = 3D array of autocovariance matrices
 #       size: (num_channels, num_freq, num_freq)
-def unnorm_covariance(PSD):
+def calc_covariance_matrices(PSD):
     # number of channels:
     num_channels = PSD.shape[1]
     # number of PSD frequencies:
@@ -62,7 +62,7 @@ def unnorm_covariance(PSD):
     #   size of PSD_avg = (1, num_channels, num_freq)
     PSD_avg = np.mean(PSD, axis=0, keepdims=True)
 
-    # calculate unnormalized autocovariance matrices (w.r.t. examples) for each channel:
+    # calculate autocovariance matrices (w.r.t. examples) for each channel:
     cov_matrices = np.zeros((num_channels, num_freq, num_freq))
     for i in range(num_freq):
         for j in range(num_freq):
@@ -79,7 +79,7 @@ def unnorm_covariance(PSD):
 # Outputs:
 #   cov_matrices = 3D array of Pearson correlation coefficient autocovariance matrices
 #       size: (num_channels, num_freq, num_freq)
-def pearson_covariance(PSD):
+def calc_pearson_covariance_matrices(PSD):
     # number of channels:
     num_channels = PSD.shape[1]
     # number of PSD frequencies:
@@ -94,12 +94,12 @@ def pearson_covariance(PSD):
     return cov_matrices
 
 
-# Function description: calculates eigenvalues/eigenvectors of PSD autocovariance/autocorrelation matrices.
+# Function description: calculates eigenvalues/eigenvectors of PSD statistical matrices.
 # Inputs:
-#   matrices = 3D array of PSD autocovariance/autocorrelation matrices
+#   matrices = 3D array of PSD statistical matrices
 #       size: (num_channels, num_freq, num_freq)
 # Outputs:
-#   eig_vects = 3D array of normalized (unit-length) eigenvectors of PSD autocovariance/autocorrelation matrices,
+#   eig_vects = 3D array of normalized (unit-length) eigenvectors of PSD statistical matrices,
 #       sorted in decreasing order of magnitude of corresponding eigenvalues (for each channel)
 #       size: (num_channels, num_freq, num_freq)
 #       eig_vects[n, :, i] = ith eigenvector of channel n
@@ -117,7 +117,7 @@ def calc_eig_vects(matrices):
 # Inputs:
 #   PSD = 3D array of PSD values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_freq)
-#   eig_vects = 3D array of normalized (unit-length) eigenvectors of PSD autocovariance/autocorrelation matrices,
+#   eig_vects = 3D array of normalized (unit-length) eigenvectors of PSD statistical matrices,
 #       sorted in decreasing order of magnitude of corresponding eigenvalues (for each channel)
 #       size: (num_channels, num_freq, num_freq)
 #       eig_vects[n, :, i] = ith eigenvector of channel n
