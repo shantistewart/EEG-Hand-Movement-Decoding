@@ -5,9 +5,7 @@
 
 import numpy as np
 # import function modules:
-from feature_calculation import power_spectral_density as power
-from feature_calculation import average_PSD
-from feature_calculation import PCA_on_PSD
+from models.feature_calculation import average_PSD, power_spectral_density as power, PCA_on_PSD
 
 
 # Function description: calculate average power spectral density values in selected frequency bins.

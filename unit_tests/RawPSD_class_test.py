@@ -5,9 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plotter
 # import function modules:
 from classes import RawPSD_class
-from feature_calculation import power_spectral_density as power
-from feature_calculation import average_PSD
-
+from models.feature_calculation import average_PSD, power_spectral_density as power
 
 # --------------------TESTING RawPSD CLASS--------------------
 print("\n----------TESTING RawPSD CLASS----------\n")

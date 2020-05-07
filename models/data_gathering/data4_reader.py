@@ -14,7 +14,7 @@ def ReadComp4(patient_num, path_to_file):
     left_array = []
     right_array = []
 
-    for i in range(1, 2):
+    for i in range(1, 3):
         for j in range(1, 61):
             left_file = left_file_form + str(i) + "_" + str(j) + ".txt"
             right_file = right_file_form + str(i) + "_" + str(j) + ".txt"
@@ -26,12 +26,23 @@ def ReadComp4(patient_num, path_to_file):
 # Stride and window are in seconds! Note that
 # stride is the start time for a particular window.
 # The window_len is the length of the window
-def stride_window(eeg_trial, stride, window_len):
-    num_strides = len(eeg_trial) // stride
+# Output:
+#   An array of
+def stride_window(eeg_trial, stride, window_len, frequency):
+    if window_len > len(eeg_trial):
+        sys.exit("Window length longer than trial length")
+
+    stride_examples = stride * frequency
+    window_examples = window_len * frequency
+    num_strides = len(eeg_trial) // stride_examples
+    # If window size is too long, need to cut back on stride size
+    while (num_strides * stride_examples) + window_examples > len(eeg_trial):
+        num_strides = num_strides - 1
+
     grouped_features = []
     for i in range(num_strides):
-        window_start = i * stride
-        window_end = window_start + window_len
+        window_start = i * stride_examples
+        window_end = window_start + window_examples
         grouped_features += [eeg_trial[window_start:window_end]]
     return grouped_features
 
