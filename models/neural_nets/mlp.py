@@ -31,7 +31,6 @@ patient_range = range(1, 10)
 # Output:
 def group_feat_and_labels(window_len, stride, frequency, sorted_data, trial_label):
     feat_array = []
-    label_array = []
 
     for trial_data in sorted_data:
         # grouped features is a 3D array, (strides, windows, channels)

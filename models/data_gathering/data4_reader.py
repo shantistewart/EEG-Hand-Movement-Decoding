@@ -21,7 +21,7 @@ def ReadComp4(patient_num, path_to_file):
             left_array += [np.loadtxt(left_file)]
             right_array += [np.loadtxt(right_file)]
 
-    return left_array, right_array
+    return np.array(left_array), np.array(right_array)
 
 # Stride and window are in seconds! Note that
 # stride is the start time for a particular window.
