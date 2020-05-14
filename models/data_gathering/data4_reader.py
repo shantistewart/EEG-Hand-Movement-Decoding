@@ -32,10 +32,10 @@ def stride_window(eeg_trial, stride, window_len, frequency):
     if window_len > len(eeg_trial):
         sys.exit("Window length longer than trial length")
 
-    stride_examples = stride * frequency
-    window_examples = window_len * frequency
+    stride_examples = int(stride * frequency)
+    window_examples = int(window_len * frequency)
     num_strides = len(eeg_trial) // stride_examples
-    # If window size is too long, need to cut back on stride size
+    # If window size is too long, need to cut back on number of stride
     while (num_strides * stride_examples) + window_examples > len(eeg_trial):
         num_strides = num_strides - 1
 
