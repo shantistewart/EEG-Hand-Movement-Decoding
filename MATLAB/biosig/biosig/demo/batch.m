@@ -18,7 +18,7 @@ fn = 'L:\BCI7B\s74\*.bkr';    % or this way
 %[s,M] = laplace(s,montage);   
 
 
-% get number of classes
+% get number of plotting
 CL = [];
 if HDR.EVENT.N > 0;
         HDR.Classlabel = unique(HDR.EVENT.TYP);

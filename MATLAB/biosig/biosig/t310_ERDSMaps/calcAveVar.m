@@ -22,8 +22,8 @@ function r = calcAveVar(s, h, t, varargin)
 %                   are calculated.
 %
 % Optional input parameters (variable argument list):
-%   'class'    ... List of classes used in the calculation <1xM>.
-%                  Default: all available classes are used.
+%   'class'    ... List of plotting used in the calculation <1xM>.
+%                  Default: all available plotting are used.
 %   'bandpass' ... Bandpass filter cutoff frequencies (in Hz) <1 x 2>.
 %                  Default: No bandpass filter.
 %   'heading'  ... Heading of the plot <string>.
@@ -78,7 +78,7 @@ if length(t) == 2  % If only start and end time are provided, use full resolutio
 end;
 
 % Default parameters, can be overwritten by varargin
-class = [];  % All classes are used in the calculation
+class = [];  % All plotting are used in the calculation
 bandpass = [];  % No bandpass filter
 heading = [];  % Default heading
 montage = [];  % Default montage

@@ -2,7 +2,7 @@ function [o] = bci3eval(x1,x2,DIM)
 % BCI3eval evaluations a BCI-result as suggested in [1,2]. 
 %   - It returns the classification error, the signal to noise ratio, 
 %   the mutual information, as well as mean, standard error and 
-%   standard deviation for both classes. 
+%   standard deviation for both plotting.
 %   - time course of these resulting parameters are supported
 %   - Missing values can be encoded as NaN.   
 % 
@@ -17,10 +17,10 @@ function [o] = bci3eval(x1,x2,DIM)
 % see also: SUMSKIPNAN, PLOTA
 %
 % REFERENCES: 
-%  [1] Schlögl A., Neuper C. Pfurtscheller G.
+%  [1] Schlï¿½gl A., Neuper C. Pfurtscheller G.
 %	Estimating the mutual information of an EEG-based Brain-Computer-Interface
 %	Biomedizinische Technik 47(1-2): 3-8, 2002.
-%  [2] A. Schlögl, C. Keinrath, R. Scherer, G. Pfurtscheller,
+%  [2] A. Schlï¿½gl, C. Keinrath, R. Scherer, G. Pfurtscheller,
 %	Information transfer of an EEG-based Bran-computer interface.
 %	Proceedings of the 1st International IEEE EMBS Conference on Neural Engineering, pp.641-644, Mar 20-22, 2003. 
 %  [3] Evaluation of the dataset III of the BCI-competition 2003. 

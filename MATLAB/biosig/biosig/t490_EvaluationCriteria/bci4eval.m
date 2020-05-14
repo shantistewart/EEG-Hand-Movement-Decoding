@@ -1,13 +1,13 @@
 function [o] = bci4eval(tsd,TRIG,cl,pre,post,Fs)
-% BCI4eval evaluates a BCI-result for two and more classes
+% BCI4eval evaluates a BCI-result for two and more plotting
 %
-%   Two classes are evaluated like in [1,2]:
+%   Two plotting are evaluated like in [1,2]:
 %   - It returns the classification error, the signal to noise ratio, 
 %   the mutual information, as well as mean, standard error, 
-%   within-class accuracy and standard deviation for both classes. 
+%   within-class accuracy and standard deviation for both plotting.
 %   - time course of these resulting parameters are supported
 %
-%   More than two classes are evaluated with 
+%   More than two plotting are evaluated with
 %   - Kappa coefficient including standard deviation 
 %   - Accuracy
 %   
@@ -16,8 +16,8 @@ function [o] = bci4eval(tsd,TRIG,cl,pre,post,Fs)
 % X = bci4eval(tsd,trig,cl,pre,post,Fs)
 % INPUT:
 %       tsd     continous output 
-%               for 2 classes, tsd must have size Nx1 
-%               size NxM for M-classes, for each row the largest value 
+%               for 2 plotting, tsd must have size Nx1
+%               size NxM for M-plotting, for each row the largest value
 %               determines the assigned class 
 %       trig    trigger time points
 %       cl      classlabels
@@ -27,14 +27,14 @@ function [o] = bci4eval(tsd,TRIG,cl,pre,post,Fs)
 %
 % OUTPUT: 
 %       X is a struct with various results  
-%       2-classes:
-%               X.MEAN1, XMEAN2: mean of both classes      
+%       2-plotting:
+%               X.MEAN1, XMEAN2: mean of both plotting
 %               X.ERR           error rate 
 %               X.p_value       significance level of paired t-test 
 %               X.SNR           signal-to-noise ratio
 %               X.I             mutual information
 %               X.AUC           area-under-the-(ROC) curve
-%       N(>2)-classes:
+%       N(>2)-plotting:
 %               X.KAP00         Cohen's kappa coefficient
 %               X.Ksd00         standard error of kappa coefficient 
 %               X.ACC00         accuracy 
@@ -53,17 +53,17 @@ function [o] = bci4eval(tsd,TRIG,cl,pre,post,Fs)
 % see also: SUMSKIPNAN, PLOTA, BCI3EVAL
 %
 % REFERENCES: 
-%  [1] Schlögl A., Neuper C. Pfurtscheller G.
+%  [1] Schlï¿½gl A., Neuper C. Pfurtscheller G.
 %	Estimating the mutual information of an EEG-based Brain-Computer-Interface
 %	Biomedizinische Technik 47(1-2): 3-8, 2002.
-%  [2] A. Schlögl, C. Keinrath, R. Scherer, G. Pfurtscheller,
+%  [2] A. Schlï¿½gl, C. Keinrath, R. Scherer, G. Pfurtscheller,
 %	Information transfer of an EEG-based Bran-computer interface.
 %	Proceedings of the 1st International IEEE EMBS Conference on Neural Engineering, pp.641-644, Mar 20-22, 2003. 
-%  [3]  A. Schlögl, Evaluation of the dataset III of the BCI-competition 2003. 
+%  [3]  A. Schlï¿½gl, Evaluation of the dataset III of the BCI-competition 2003. 
 %	http://ida.first.fraunhofer.de/projects/bci/competition/results/TR_BCI2003_III.pdf
-% [4] Schlögl A, Kronegg J, Huggins JE, Mason SG;
+% [4] Schlï¿½gl A, Kronegg J, Huggins JE, Mason SG;
 %	Evaluation criteria in BCI research.
-%	(Eds.) G. Dornhege, J.R. Millan, T. Hinterberger, D.J. McFarland, K.-R.Müller;
+%	(Eds.) G. Dornhege, J.R. Millan, T. Hinterberger, D.J. McFarland, K.-R.Mï¿½ller;
 %	Towards Brain-Computer Interfacing, MIT Press, p327-342, 2007
 
 

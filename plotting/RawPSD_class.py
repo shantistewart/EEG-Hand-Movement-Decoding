@@ -136,3 +136,4 @@ class RawPSD:
                 axes[j, i].plot(self.freq[0, 0], self.PSD[examples[i], channels[j]])
                 axes[j, i].set_xlabel('Frequency (HZ)')
                 axes[j, i].set_ylabel('PSD')
+

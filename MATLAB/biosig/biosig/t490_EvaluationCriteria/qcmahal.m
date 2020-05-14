@@ -9,10 +9,10 @@ function [Q,D,R,ECM]=qcmahal(ECM,ECM2);
 %	D(k,l) gives the distance of the k-th mean to the class 'l'
 %
 % [Q,D,R,COV]=qcmahal(XC);
-% optimization to reduce the number of classes
+% optimization to reduce the number of plotting
 % 
 % Q is list of distances.  
-% R is a list how the classes should be summarized
+% R is a list how the plotting should be summarized
 % COV gives the suggested class definition
 %
 %	Copyright (c) 1999-2002 by Alois Schloegl

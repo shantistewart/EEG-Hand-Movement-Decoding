@@ -20,7 +20,7 @@ function [kap,se,H,z,p0,SA,R]=kappa(d,c,arg3,w)
 % sACC	specific accuracy
 % MI 	Mutual information or transfer information (in [bits])
 % X 	is a struct containing all the fields above
-%       For two classes, a number of additional summary statistics including
+%       For two plotting, a number of additional summary statistics including
 %         TPR, FPR, FDR, PPV, NPF, F1, dprime, Matthews Correlation coefficient (MCC) or
 %	Phi coefficient (PHI=MCC), Specificity and Sensitivity
 %       are provided. Note, the positive category must the larger label (in d and c), otherwise

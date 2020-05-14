@@ -38,7 +38,7 @@ function r = calcErdsMapFFT(s, h, t, f_borders, f_bandwidths, f_steps, class, re
 %                    <1xF-1>.
 %   f_steps      ... Frequency step sizes for the segments specified in
 %                    f_borders (in Hz) <1xF-1>.
-%   class        ... List of classes used in the calculation <1xM>.
+%   class        ... List of plotting used in the calculation <1xM>.
 %   ref          ... Reference interval (in s) <1x2>.
 %   submean      ... Subtract the mean signal to suppress evoked components
 %                    <1x1 logical>.
