@@ -20,6 +20,12 @@ def build_model(input_shape, num_outputs, num_conv_layers=2, num_dense_layers=1,
     # fully connected layers:
     model.add(layers.Flatten())
     model.add(layers.Dense(num_hidden_nodes, activation='relu'))
+    # output layer:
     model.add(layers.Dense(num_outputs))
+
+    # compile mode:
+    model.compile(optimizer='Adam',
+                  loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
+                  metrics=['accuracy'])
 
     return model
