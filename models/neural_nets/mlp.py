@@ -1,6 +1,19 @@
 from models.feature_calculation import feature_algorithms as feature
+from models.data_gathering import data4_reader as feature_gen
 import numpy as np
 import tensorflow as tf
+import sklearn
+
+def group_feat_and_labels(window_len, stride, frequency, sorted_data, trial_label):
+    feat_array = []
+    label_array = []
+
+    for index, trial_data in enumerate(sorted_data):
+        grouped_features = feature_gen.stride_window(trial_data, stride, window_len, frequency)
+        example_labels = [trial_label] * len(grouped_features)
+        feat_array += [grouped_features]
+        label_array += [example_labels]
+    return feat_array, label_array
 
 # Here we have the hyper-parameters and the array of
 # np training data as inputs.
