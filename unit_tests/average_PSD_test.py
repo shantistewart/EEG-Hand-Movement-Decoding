@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plotter
 from models.feature_calculation import average_PSD
 
+
 # --------------------TESTING calc_average_PSD() FUNCTION--------------------
 print("\n----------TESTING calc_average_PSD() FUNCTION----------\n")
 

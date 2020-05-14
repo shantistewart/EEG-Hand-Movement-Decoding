@@ -140,7 +140,7 @@ else
         end;
 end;
 
-        % signal detection theory applied on a sample-basis for multiple classes
+        % signal detection theory applied on a sample-basis for multiple plotting
 [X.kappa, X.kapSD, H, z] = kappa(D(:), STATE(:));
 X.AS.H   = H; 					% confusion matrix 
 

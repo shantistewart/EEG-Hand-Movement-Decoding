@@ -17,7 +17,7 @@ function [R,CC]=xval(D,classlabel,MODE,arg4)
 %    D:	data features (one feature per column, one sample per row)
 %    classlabel	labels of each sample, must have the same number of rows as D. 
 % 		Two different encodings are supported: 
-%		{-1,1}-encoding (multiple classes with separate columns for each class) or
+%		{-1,1}-encoding (multiple plotting with separate columns for each class) or
 %		1..M encoding. 
 % 		So [1;2;3;1;4] is equivalent to 
 %			[+1,-1,-1,-1;
@@ -62,7 +62,7 @@ function [R,CC]=xval(D,classlabel,MODE,arg4)
 % References: 
 % [1] R. Duda, P. Hart, and D. Stork, Pattern Classification, second ed. 
 %       John Wiley & Sons, 2001. 
-% [2] A. Schlögl, J. Kronegg, J.E. Huggins, S. G. Mason;
+% [2] A. Schlï¿½gl, J. Kronegg, J.E. Huggins, S. G. Mason;
 %       Evaluation criteria in BCI research.
 %       (Eds.) G. Dornhege, J.R. Millan, T. Hinterberger, D.J. McFarland, K.-R.MÃ¼ller;
 %       Towards Brain-Computer Interfacing, MIT Press, 2007, p.327-342

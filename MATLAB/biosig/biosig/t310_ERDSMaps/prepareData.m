@@ -28,7 +28,7 @@ path_name = './';
 data = '*.gdf';
 
 channels = 0;  % 0 ... All channels
-classes = [1];  % [] ... All classes
+classes = [1];  % [] ... All plotting
 method = 'bp';  % 'bp' or 'fft'
 refmethod = 'classic';  % 'classic' or 'trial'
 

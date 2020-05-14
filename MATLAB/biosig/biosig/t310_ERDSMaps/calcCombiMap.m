@@ -43,8 +43,8 @@ function r = calcCombiMap(s, h, t, f_borders, varargin)
 %   'f_steps'      ... Frequency step sizes for the segments specified in
 %                      f_borders (in Hz) <1xF-1>.
 %                      Default: 1Hz in all segments.
-%   'class'        ... List of classes used in the calculation <1xM>.
-%                      Default: all available classes are used.
+%   'class'        ... List of plotting used in the calculation <1xM>.
+%                      Default: all available plotting are used.
 %   'ref'          ... Reference interval (in s) <1x2>.
 %                      Default: the whole trial is used as reference.
 %   'submean'      ... Subtract the mean signal to suppress evoked components 
@@ -119,7 +119,7 @@ end;
 % method = 'bp';  % Use bandpower method to calculate the maps
 % f_bandwidths = 2 * ones(1, length(f_borders) - 1);  % Use 2Hz bands for all segments
 % f_steps = ones(1, length(f_borders) - 1);  % Use step size of 1Hz for all segments
-% class = [];  % All classes are used in the calculation
+% class = [];  % All plotting are used in the calculation
 % ref = [t(1), t(3)];  % Take the whole trial as reference
 % submean = true;  % Subtract mean before calculation
 % sig = 'none';  % No significance test

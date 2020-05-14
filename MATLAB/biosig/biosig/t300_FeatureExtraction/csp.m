@@ -1,13 +1,13 @@
 function [V,D] = csp(ECM,arg2,arg3)
 % CSP computes common spatial patterns
-% 	this version supports multiple classes using a One-vs-Rest scheme
+% 	this version supports multiple plotting using a One-vs-Rest scheme
 %
 % [V] = csp(ECM)
 % [V] = csp(X,Y)
 % [V] = csp(...,Mode)
 %
 % ECM(k,:,:) is the extended covariance matrices (see COVM) for class k  
-% X,Y	are matrices of the two classes (one channel per column)
+% X,Y	are matrices of the two plotting (one channel per column)
 %	the number of columns must be the same for X and Y
 % Mode  = 'CSP0' uses common diagonalization 
 %	= 'CSP3' solves generalized eigenvalue problem

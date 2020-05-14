@@ -62,7 +62,7 @@ if (nargin < 5)
     trls = [];
 end;
 if (nargin < 6)
-    class = [];  % All classes
+    class = [];  % All plotting
 end;
 if (nargin < 7)
     rmartif = false;

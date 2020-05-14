@@ -4,6 +4,7 @@
 import numpy as np
 from models.feature_calculation import power_spectral_density as power
 
+
 # --------------------TESTING estimate_psd() FUNCTION--------------------
 print("\n----------TESTING estimate_psd() FUNCTION----------\n")
 

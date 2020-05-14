@@ -6,7 +6,7 @@ function B=wolpaw_entropy(P,N)
 %   B = log2(M) + acc*log2(acc) + (1-acc)*log2((1-acc)/(M-1))
 %
 %   acc Accuracy [0..1]  1 = 100%; 
-%   N   number of classes
+%   N   number of plotting
 %   B	mutual information 	 	 
 % 	
 %

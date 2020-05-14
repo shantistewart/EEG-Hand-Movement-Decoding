@@ -13,7 +13,7 @@ function [CC]=train_sc(D,classlabel,MODE,W)
 %   D		training samples (each row is a sample, each column is a feature)	
 %   classlabel	labels of each sample, must have the same number of rows as D. 
 % 		Two different encodings are supported: 
-%		{-1,1}-encoding (multiple classes with separate columns for each class) or
+%		{-1,1}-encoding (multiple plotting with separate columns for each class) or
 %		1..M encoding. 
 % 		So [1;2;3;1;4] is equivalent to 
 %			[+1,-1,-1,-1;

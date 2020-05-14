@@ -4,6 +4,7 @@
 import numpy as np
 from models.feature_calculation import PCA_on_PSD as PCA
 
+
 # dimensions of test array:
 num_examples = 3
 num_channels = 2

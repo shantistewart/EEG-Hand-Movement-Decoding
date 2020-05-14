@@ -1,4 +1,4 @@
-from feature_calculation import feature_algorithms as feature
+from models.feature_calculation import feature_algorithms as feature
 import numpy as np
 import tensorflow as tf
 

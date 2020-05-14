@@ -16,7 +16,7 @@ function [R] = tfmvar(s,TRIG,T,MOP,f,Fs,cl)
 %  N 	(scalar) number of frequencies distributed between 0..Fs/2 	
 %  Fs   sampling rate. 
 %  [CL,group]  is OPTIONAL
-%	CL 	are the labels for different classes, conditions, states. 
+%	CL 	are the labels for different plotting, conditions, states.
 %		CL must be a column vector having the same length than TRIG
 %       group 	is useful for controlling the resampling
 %		same numbers indicate that member belongs to the same group. 

@@ -80,7 +80,7 @@ function t = isequal3(nans_compare_equal, x, varargin)
   end
 
   if (t)
-    %% Check individual classes.
+    %% Check individual plotting.
     if (isstruct (x))
       %% Test the number of fields.
       fn_x = fieldnames (x);
