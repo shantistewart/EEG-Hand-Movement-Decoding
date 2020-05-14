@@ -93,10 +93,10 @@ def seperate_data(train_st_index, val_st_index, test_st_index, data_features, da
 
 
 
-# Here we have the hyper-parameters and the array of
-# np training data as inputs.
+# Here we generate our TensorFlow model for our data
+# This code is intended to fit the model, nothing more
 # Output: TensorFlow model
-def train_mlp(window_len, stride, train_data, train_labels, bins, hid_layer_nodes=None, epoch_cnt=None):
+def train_mlp(train_data, train_labels, bins, hid_layer_nodes=None, epoch_cnt=None):
     if epoch_cnt is None:
         epochs = 100
 
