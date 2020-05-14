@@ -27,7 +27,7 @@ def ReadComp4(patient_num, path_to_file):
 # stride is the start time for a particular window.
 # The window_len is the length of the window
 # Output:
-#   An array of
+#   A 3D array of dimension: (strides, channels, window_len)
 def stride_window(eeg_trial, stride, window_len, frequency):
     if window_len > len(eeg_trial):
         sys.exit("Window length longer than trial length")
@@ -44,5 +44,5 @@ def stride_window(eeg_trial, stride, window_len, frequency):
         window_start = i * stride_examples
         window_end = window_start + window_examples
         grouped_features += [eeg_trial[window_start:window_end]]
-    return grouped_features
+    return np.array(grouped_features)
 

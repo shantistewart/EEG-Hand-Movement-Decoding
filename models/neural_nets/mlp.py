@@ -98,15 +98,13 @@ def seperate_data(train_st_index, val_st_index, test_st_index, data_features, da
 # Output: TensorFlow model
 def train_mlp(train_data, train_labels, bins, hid_layer_nodes=None, epoch_cnt=None):
     if epoch_cnt is None:
-        epochs = 100
+        epoch_cnt = 100
 
     if hid_layer_nodes is None:
         hid_layer_nodes = 30
 
-    processed_train = feature.average_PSD_algorithm(train_data, bins)
-
     model = tf.keras.Sequential([
-        tf.keras.layers.Flatten(input_shape=(3, 5)),
+        tf.keras.layers.Flatten(input_shape=(3, bins.shape[0])),
         tf.keras.layers.Dense(hid_layer_nodes, activation='relu'),
         tf.keras.layers.Dense(2)  # output layer
         # Activation of each layer is linear (i.e. no activation:
@@ -165,5 +163,8 @@ if __name__ == '__main__':
     processed_val = feature.average_PSD_algorithm(X=val_data, sample_freq=sample_frequency, bins=freq_bins)
     processed_test = feature.average_PSD_algorithm(X=test_data, sample_freq=sample_frequency, bins=freq_bins)
 
-    print(np.array(train_data).shape)
-    print(processed_train.shape)
+    model = train_mlp(processed_train, train_labels, freq_bins)
+
+    val_loss, val_acc = model.evaluate(processed_val, val_labels)
+    print("Validation accuracy: ", val_acc)
+
