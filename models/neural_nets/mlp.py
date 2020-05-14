@@ -80,7 +80,7 @@ def gather_shuffle_data(patient_num, path_to_file, window_len, stride, frequency
 # This function is work in progress... The hope is that
 # this function will help rotate which data is for training,
 # which is for testing, and which is for validation
-def seperate_data(train_st_index, val_st_index, test_st_index, data_features, data_labels):
+def separate_data(train_st_index, val_st_index, test_st_index, data_features, data_labels):
     count = train_st_index
     stop = (train_st_index - 1) % len(data_labels)
     train_data = []
@@ -184,7 +184,7 @@ if __name__ == '__main__':
     for pat in patient_range:
         patient += ['Patient #%d' % pat]
 
-# patients 4, 6, 7, 8, 9
+# patients 4, 6, 7, 8, 9 produce errors
     plotter.bar(patient, patient_val)
     ax = plotter.ylim((0.4, 1))
     plotter.ylabel('Validation Accuracy')
