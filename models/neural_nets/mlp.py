@@ -2,6 +2,7 @@ from models.feature_calculation import feature_algorithms as feature
 from models.data_gathering import data4_reader as feature_gen
 import numpy as np
 import tensorflow as tf
+import matplotlib.pyplot as plotter
 import sklearn
 
 # Labels (Do not modify)
@@ -17,6 +18,8 @@ path_to_data_file = "../../MATLAB/biosig/Data_txt/"
 sample_frequency = 250
 # range of patients:
 patient_range = range(1, 10)
+
+
 ########################
 
 # This code groups features and labels, and
@@ -49,6 +52,7 @@ def group_feat_and_labels(window_len, stride, frequency, sorted_data, trial_labe
 
     return feat_array, label_array
 
+
 def gather_shuffle_data(patient_num, path_to_file, window_len, stride, frequency):
     left_data, right_data = feature_gen.ReadComp4(patient_num, path_to_file)
     all_label_data = []
@@ -72,11 +76,11 @@ def gather_shuffle_data(patient_num, path_to_file, window_len, stride, frequency
 
     return np.array(shuffled_features), np.array(shuffled_labels)
 
+
 # This function is work in progress... The hope is that
 # this function will help rotate which data is for training,
 # which is for testing, and which is for validation
 def seperate_data(train_st_index, val_st_index, test_st_index, data_features, data_labels):
-
     count = train_st_index
     stop = (train_st_index - 1) % len(data_labels)
     train_data = []
@@ -85,11 +89,9 @@ def seperate_data(train_st_index, val_st_index, test_st_index, data_features, da
     val_labels = []
     test_data = []
     test_labels = []
-    #while count != stop:
-
+    # while count != stop:
 
     return train_data, train_labels, val_data, val_labels, test_data, test_labels
-
 
 
 # Here we generate our TensorFlow model for our data
@@ -116,31 +118,14 @@ def train_mlp(train_data, train_labels, bins, hid_layer_nodes=None, epoch_cnt=No
         metrics=['accuracy']
     )
 
-    model.fit(train_data, train_labels, epochs=epoch_cnt)
+    history = model.fit(train_data, train_labels, epochs=epoch_cnt)
 
-    return model
+    return model, history
 
 
-if __name__ == '__main__':
-
-    # Do not change:
-    ############################
-    percentage_training = 0.6
-    percentage_validation = 0.2
-    percentage_testing = 0.2
-    ############################
-
-    # Hyper Parameters
-    ############################
-    # set window length to be 1 second
-    window_len = 1
-    # set stride to be .5 seconds
-    stride = .5
-    # frequency bins
-    freq_bins = np.array([[6., 8.], [8., 10.], [10., 12.], [12., 14.], [14., .5*sample_frequency]])
-    ############################
-
-    shuffled_features, shuffled_labels = gather_shuffle_data(patient_range[0], path_to_data_file, window_len, stride, sample_frequency)
+def gather_train_test(patient_num, window_len, stride):
+    shuffled_features, shuffled_labels = gather_shuffle_data(patient_num, path_to_data_file, window_len, stride,
+                                                             sample_frequency)
 
     # Split the data up for training, validation, and testing
     ###########################################
@@ -162,8 +147,46 @@ if __name__ == '__main__':
     processed_val = feature.average_PSD_algorithm(X=val_data, sample_freq=sample_frequency, bins=freq_bins)
     processed_test = feature.average_PSD_algorithm(X=test_data, sample_freq=sample_frequency, bins=freq_bins)
 
-    model = train_mlp(processed_train, train_labels, freq_bins)
+    return processed_train, train_labels, processed_val, val_labels, processed_test, test_labels
 
-    val_loss, val_acc = model.evaluate(processed_val, val_labels)
-    print("Validation accuracy: ", val_acc)
 
+if __name__ == '__main__':
+    # Do not change:
+    ############################
+    percentage_training = 0.6
+    percentage_validation = 0.2
+    percentage_testing = 0.2
+    ############################
+
+    # Hyper Parameters
+    ############################
+    # set window length to be 1 second
+    window_len = 1
+    # set stride to be .5 seconds
+    stride = .5
+    # frequency bins
+    freq_bins = np.array([[6., 8.], [8., 10.], [10., 12.], [12., 14.], [14., .5 * sample_frequency]])
+    ############################
+
+    patient_val = []
+
+    for pat in patient_range:
+        train_x, train_label, val_x, val_label, test_x, test_label = gather_train_test(pat, window_len,
+                                                                                       stride)
+        model, history = train_mlp(train_x, train_label, bins=freq_bins, hid_layer_nodes=20, epoch_cnt=90)
+        val_loss, val_accuracy = model.evaluate(val_x, val_label)
+        patient_val += [val_accuracy]
+
+    patient_val = np.array(patient_val)
+    average = np.average(patient_val)
+    print("Average validation accuracy across patients: %.4f" % average)
+    patient = []
+    for pat in patient_range:
+        patient += ['Patient #%d' % pat]
+
+# patients 4, 6, 7, 8, 9
+    plotter.bar(patient, patient_val)
+    ax = plotter.ylim((0.4, 1))
+    plotter.ylabel('Validation Accuracy')
+    plotter.title('Validation Accuracies for Patients')
+    plotter.show()
