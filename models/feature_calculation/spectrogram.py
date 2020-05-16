@@ -5,11 +5,6 @@ import numpy as np
 from models.feature_calculation import feature_algorithms
 
 
-def segment_data(X, num_segments, window_size):
-
-    return X
-
-
 def window_data(X, window_size, stride_size):
 
     return X
