@@ -1,4 +1,4 @@
-# This file contains a class for a convolutional neural network.
+# This file contains functions to build and train a convolutional neural network.
 
 
 import matplotlib.pyplot as plotter
