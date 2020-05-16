@@ -14,18 +14,36 @@ from models.feature_calculation import feature_algorithms
 #   num_chunks = number of chunks to split each original example into
 # Outputs:
 #   X_window = windowed raw signals
-#       size: (num_chunks * num_windows * num_examples, num_channels, num_samples)
-#   num_windows = number of windows per chunk
+#       size: (num_examples, num_windows, num_channels, window_size)
 def window_data(X, window_size, stride_size, num_chunks):
+    # number of examples:
+    num_examples = X.shape[0]
+    # number of channels:
+    num_channels = X.shape[1]
+    # number of samples:
+    num_samples = X.shape[2]
 
-    return X
+    # determine number of possible windows:
+    num_windows = int(np.floor((num_samples - window_size) / stride_size) + 1)
+    # make num_windows evenly divisible by num_chunks (if not already):
+    num_windows = num_windows - np.mod(num_windows, num_chunks)
+
+    X_windows = np.zeros(num_examples, num_windows, num_channels, window_size)
+    for i in range(num_windows):
+        # start of window index:
+        start_index = i * stride_size
+        # end of window index (inclusive):
+        end_index = start_index + window_size - 1
+
+        X_windows[:, i, :, :] = X[:, :, start_index:end_index+1]
+
+    return X_windows
 
 
 # Function description: creates power spectral density spectrograms.
 # Inputs:
 #   X_window = windowed raw signals
-#       size: (num_chunks * num_windows * num_examples, num_channels, num_samples)
-#   num_windows = number of windows per chunk
+#       size: (num_examples, num_windows, num_channels, window_size)
 #   num_chunks = number of chunks to split each original example into
 #   sample_freq = sampling frequency
 #   max_freq = maximum frequency of PSD to consider
