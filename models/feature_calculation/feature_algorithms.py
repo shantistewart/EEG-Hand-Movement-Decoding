@@ -41,7 +41,7 @@ def average_PSD_algorithm(X, sample_freq, bins):
 #       if matrix type == 1: autocorrelation matrices are calculated
 #       if matrix type == 2: autocovariance matrices are calculated
 #       else: Pearson autocovariance matrices are calculated
-#   small_param = a small number to ensure that log(0) does not occur
+#   small_param = a small number to ensure that log(0) does not occur for log-normalization
 # Outputs:
 #   project_weights = 3D array of projection weights onto principal components (eigenvectors)
 #       size: (num_examples, num_channels, num_pcs)
