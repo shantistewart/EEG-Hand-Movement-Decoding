@@ -9,9 +9,9 @@ from models.feature_calculation import spectrogram
 print("\n----------TESTING window_data() FUNCTION----------\n")
 
 # dimensions of test array:
-num_examples = 3
+num_examples = 2
 num_channels = 2
-num_samples = 10
+num_samples = 11
 # test array:
 X = np.zeros((num_examples, num_channels, num_samples))
 for i in range(num_examples):
@@ -36,14 +36,12 @@ X_window = spectrogram.window_data(X, window_size, stride_size, num_chunks)
 print("Windowed array:\nSize: ", end="")
 print(X_window.shape)
 print(X_window)
-print("\n")
+print("")
 
 
 # --------------------TESTING create_spectrogram() FUNCTION--------------------
 print("\n----------TESTING create_spectrogram() FUNCTION----------\n")
 
-# test number of chunks:
-num_chunks = 2
 # test sampling frequency:
 sample_freq = 100
 # test max frequency and number of bins:
@@ -56,10 +54,10 @@ matrix_type = 0
 small_param = 0.0001
 
 # call function:
-PSD = spectrogram.create_spectrogram(X_window, num_chunks, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param)
+spectrograms = spectrogram.create_spectrogram(X_window, num_chunks, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param)
 
-# display partially flattened windowed array:
-print("PSD values:\nSize: ", end="")
-print(PSD.shape)
-print(PSD)
+# display spectrograms:
+print("Spectrograms:\nSize: ", end="")
+print(spectrograms.shape)
+print(spectrograms)
 print("\n")
