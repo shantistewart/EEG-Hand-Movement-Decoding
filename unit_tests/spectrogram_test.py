@@ -17,7 +17,7 @@ X = np.zeros((num_examples, num_channels, num_samples))
 for i in range(num_examples):
     for j in range(num_channels):
         for k in range(num_samples):
-            X[i, j, k] = (i + 1) * (2*np.mod(j+1, 2) - 1) * (k + 1)
+            X[i, j, k] = (i + 1) * (j*num_samples + k + 1) # * (2*np.mod(j+1, 2) - 1)
 print("Test input array:\nSize: ", end="")
 print(X.shape)
 print(X)

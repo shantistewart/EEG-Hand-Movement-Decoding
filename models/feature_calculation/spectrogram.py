@@ -96,6 +96,10 @@ def create_spectrogram(X_window, num_chunks, sample_freq, max_freq, num_bins, PC
     # number of windows per chunk:
     num_windows_per_chunk = int(num_windows/num_chunks)
     # chunk PSD values into spectrograms:
+    #   size of spectrograms: (num_examples*num_chunks, num_windows_per_chunk, num_channels, window_size)
     spectrograms = np.reshape(PSD, (num_examples*num_chunks, num_windows_per_chunk, num_channels, window_size))
+
+    # reorder dimensions of spectrograms so that spectrograms[p, n, t, f] = spectrogram[t, f] of example p, channel n
+    spectrograms = np.transpose(spectrograms, axes=(0, 2, 1, 3))
 
     return spectrograms
