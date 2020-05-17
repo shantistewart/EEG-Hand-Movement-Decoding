@@ -12,13 +12,13 @@ from models.feature_calculation import average_PSD, power_spectral_density as po
 # Inputs:
 #   X = 3D array of signal values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_samples)
-#   sample_freq = sampling frequency
 #   bins = frequency bins to calculate average PSD values for
 #       size: (num_bins, 2)
+#   sample_freq = sampling frequency
 # Outputs:
 #   PSD_bins = 3D array of average PSD values in selected frequency bins for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_bins)
-def average_PSD_algorithm(X, sample_freq, bins):
+def average_PSD_algorithm(X, bins, sample_freq):
     # estimate power spectral density:
     Rxx, freq, PSD = power.estimate_psd(X, sample_freq)
 
@@ -46,9 +46,6 @@ def average_PSD_algorithm(X, sample_freq, bins):
 #   project_weights = 3D array of projection weights onto principal components (eigenvectors)
 #       size: (num_examples, num_channels, num_pcs)
 def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs, matrix_type, small_param):
-    # estimate power spectral density:
-    Rxx, freq, PSD = power.estimate_psd(X, sample_freq)
-
     # construct frequency bins for PSD average calculation:
     bin_width = max_freq / num_bins
     bins = np.zeros((num_bins, 2))
@@ -57,23 +54,23 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs, matrix_typ
         bins[i, 1] = (i + 1) * bin_width
 
     # calculate average PSD values in frequency bins:
-    PSD_avg = average_PSD.calc_average_PSD(PSD, bins, sample_freq)
+    PSD_avg = average_PSD_algorithm(X, bins, sample_freq)
 
     # log-normalize frequency-bin-average PSD values across examples:
     PSD_norm = PCA_on_PSD.log_normalize(PSD_avg, small_param)
 
     # calculate selected statistical matrices of PSD values:
     if matrix_type == 1:
-        stat_matrices = PCA_on_PSD.calc_correlation_matrices(PSD)
+        stat_matrices = PCA_on_PSD.calc_correlation_matrices(PSD_norm)
     elif matrix_type == 2:
-        stat_matrices = PCA_on_PSD.calc_covariance_matrices(PSD)
+        stat_matrices = PCA_on_PSD.calc_covariance_matrices(PSD_norm)
     else:
-        stat_matrices = PCA_on_PSD.calc_pearson_covariance_matrices(PSD)
+        stat_matrices = PCA_on_PSD.calc_pearson_covariance_matrices(PSD_norm)
 
     # calculate eigenvectors of PSD statistical matrices:
     eig_vects = PCA_on_PSD.calc_eig_vects(stat_matrices)
 
     # calculates projection weights of PSD values onto principal components (eigenvectors):
-    project_weights = PCA_on_PSD.project_onto_pcs(PSD, eig_vects, num_pcs)
+    project_weights = PCA_on_PSD.project_onto_pcs(PSD_norm, eig_vects, num_pcs)
 
     return project_weights

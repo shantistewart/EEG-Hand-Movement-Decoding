@@ -61,8 +61,6 @@ def window_data(X, window_size, stride_size, num_chunks):
 #   small_param = a small number to ensure that log(0) does not occur for log-normalization
 # Outputs:
 def create_spectrogram(X_window, num_chunks, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param):
-    # number of examples:
-    num_examples = X_window.shape[0]
     # number of windows:
     num_windows = X_window.shape[1]
     # number of channels:
@@ -78,5 +76,23 @@ def create_spectrogram(X_window, num_chunks, sample_freq, max_freq, num_bins, PC
     # combine first 2 dimensions of X_window:
     #   new size: (num_examples*num_windows, num_channels, window_size)
     X_window = np.reshape(X_window, (-1, num_channels, window_size))
+    print("Partially flattened windowed array:\nSize: ", end="")
+    print(X_window.shape)
+    print("")
 
-    return X_window
+    # apply PCA algorithm if desired:
+    if PCA == 1:
+        PSD = feature_algorithms.PCA_on_PSD_algorithm(X_window, sample_freq, max_freq, num_bins, num_pcs, matrix_type, small_param)
+    # else calculate average-bin PSD values:
+    else:
+        # construct frequency bins for PSD average calculation:
+        bin_width = max_freq / num_bins
+        bins = np.zeros((num_bins, 2))
+        for i in range(num_bins):
+            bins[i, 0] = i * bin_width
+            bins[i, 1] = (i + 1) * bin_width
+
+        # calculate average PSD values in frequency bins:
+        PSD = feature_algorithms.average_PSD_algorithm(X_window, bins, sample_freq)
+
+    return PSD
