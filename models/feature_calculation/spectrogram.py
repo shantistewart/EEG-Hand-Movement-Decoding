@@ -28,7 +28,7 @@ def window_data(X, window_size, stride_size, num_chunks):
     # make num_windows evenly divisible by num_chunks (if not already):
     num_windows = num_windows - np.mod(num_windows, num_chunks)
 
-    X_windows = np.zeros(num_examples, num_windows, num_channels, window_size)
+    X_windows = np.zeros((num_examples, num_windows, num_channels, window_size))
     for i in range(num_windows):
         # start of window index:
         start_index = i * stride_size
