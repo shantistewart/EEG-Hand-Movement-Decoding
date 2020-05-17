@@ -45,6 +45,7 @@ def window_data(X, window_size, stride_size, num_chunks):
 #   X_window = windowed raw signals
 #       size: (num_examples, num_windows, num_channels, window_size)
 #   num_chunks = number of chunks to split each original example into
+#       validity: must be a factor of num_windows
 #   sample_freq = sampling frequency
 #   max_freq = maximum frequency of PSD to consider
 #   num_bins = number of frequency bins for average PSD calculation
@@ -59,6 +60,23 @@ def window_data(X, window_size, stride_size, num_chunks):
 #       else: Pearson autocovariance matrices are calculated
 #   small_param = a small number to ensure that log(0) does not occur for log-normalization
 # Outputs:
-def create_spectrogram(X, num_windows, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param):
+def create_spectrogram(X_window, num_chunks, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param):
+    # number of examples:
+    num_examples = X_window.shape[0]
+    # number of windows:
+    num_windows = X_window.shape[1]
+    # number of channels:
+    num_channels = X_window.shape[2]
+    # window_size:
+    window_size = X_window.shape[3]
 
-    return X
+    # check validity of num_chunks:
+    if np.mod(num_windows, num_chunks) != 0:
+        print("Invalid number of chunks.\n")
+        return None
+
+    # combine first 2 dimensions of X_window:
+    #   new size: (num_examples*num_windows, num_channels, window_size)
+    X_window = np.reshape(X_window, (-1, num_channels, window_size))
+
+    return X_window
