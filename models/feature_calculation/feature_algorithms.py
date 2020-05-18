@@ -115,6 +115,9 @@ def spectrogram_algorithm(train, X, window_size_example, stride_size_example, wi
     # create more training examples by sliding time window segmentation:
     if train:
         X = spectrogram.window_data(X, window_size_example, stride_size_example)
+        # combine first 2 dimensions of X:
+        #   new size: (num_examples*num_windows, num_channels, window_size)
+        X = np.reshape(X, (-1, X.shape[2], X.shape[3]))
 
     # window data for PSD estimation
     X_window = spectrogram.window_data(X, window_size_PSD, stride_size_PSD)
