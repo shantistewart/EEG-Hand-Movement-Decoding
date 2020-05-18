@@ -69,7 +69,8 @@ def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, 
 
     # apply PCA algorithm if selected:
     if PCA == 1:
-        PSD = feature_algorithms.PCA_on_PSD_algorithm(X_window, sample_freq, max_freq, num_bins, num_pcs, matrix_type, small_param)
+        PSD = feature_algorithms.PCA_on_PSD_algorithm(X_window, sample_freq, max_freq, num_bins, num_pcs, matrix_type,
+                                                      small_param)
     else:
         # construct frequency bins for PSD average calculation:
         bin_width = max_freq / num_bins

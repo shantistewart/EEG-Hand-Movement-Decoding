@@ -101,3 +101,4 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs, matrix_typ
 # Outputs:
 #   spectrograms = PSD spectrograms
 #       size: (new_num_examples, num_channels, num_windows, num_bins)
+# def spectrogram_algorithm(X, window_size_example, stride_size_example, window_size_PSD, stride_size_PSD)

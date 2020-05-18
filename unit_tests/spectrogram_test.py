@@ -52,7 +52,8 @@ matrix_type = 0
 small_param = 0.0001
 
 # call function:
-spectrograms = spectrogram.create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param)
+spectrograms = spectrogram.create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type,
+                                              small_param)
 
 # display spectrograms:
 print("Spectrograms:\nSize: ", end="")
