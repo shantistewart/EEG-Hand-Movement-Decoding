@@ -85,4 +85,19 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs, matrix_typ
 #   stride_size_example = size of "stride" of sliding window to create new examples, in seconds
 #   window_size_PSD = size of sliding window to calculate PSD, in seconds
 #   stride_size_PSD = size of "stride" of sliding window to calculate PSD, in seconds
+#   sample_freq = sampling frequency
+#   max_freq = maximum frequency of PSD to consider
+#   num_bins = number of frequency bins for average PSD calculation
+#   PCA = parameter to select whether to apply PCA algorithm
+#       if PCA == 1: PCA algorithm is applied
+#       else: PCA algorithm is not applied
+#   num_pcs = number of principal components (eigenvectors) to project onto
+#       validity: num_pcs <= num_freq
+#   matrix_type = parameter to select which type of statistical matrix to calculate:
+#       if matrix type == 1: autocorrelation matrices are calculated
+#       if matrix type == 2: autocovariance matrices are calculated
+#       else: Pearson autocovariance matrices are calculated
+#   small_param = a small number to ensure that log(0) does not occur for log-normalization
 # Outputs:
+#   spectrograms = PSD spectrograms
+#       size: (new_num_examples, num_channels, num_windows, num_bins)
