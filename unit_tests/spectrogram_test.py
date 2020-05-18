@@ -10,8 +10,8 @@ print("\n----------TESTING window_data() FUNCTION----------\n")
 
 # dimensions of test array:
 num_examples = 2
-num_channels = 2
-num_samples = 10
+num_channels = 3
+num_samples = 11
 # test array:
 X = np.zeros((num_examples, num_channels, num_samples))
 for i in range(num_examples):
@@ -44,7 +44,7 @@ print("\n----------TESTING create_spectrogram() FUNCTION----------\n")
 sample_freq = 100
 # test max frequency and number of bins:
 max_freq = sample_freq / 4
-num_bins = window_size
+num_bins = 2*window_size
 # test PCA parameters:
 PCA = 0
 num_pcs = 10

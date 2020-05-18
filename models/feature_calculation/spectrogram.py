@@ -55,19 +55,17 @@ def window_data(X, window_size, stride_size):
 #       else: Pearson autocovariance matrices are calculated
 #   small_param = a small number to ensure that log(0) does not occur for log-normalization
 # Outputs:
+#   spectrograms = PSD spectrograms
+#       size: (num_examples, num_channels, num_windows, num_bins)
 def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param):
     # number of examples:
     num_examples = X_window.shape[0]
     # number of windows:
     num_windows = X_window.shape[1]
-    # number of channels:
-    num_channels = X_window.shape[2]
-    # window_size:
-    window_size = X_window.shape[3]
 
     # combine first 2 dimensions of X_window:
     #   new size: (num_examples*num_windows, num_channels, window_size)
-    X_window = np.reshape(X_window, (-1, num_channels, window_size))
+    X_window = np.reshape(X_window, (-1, X_window.shape[2], X_window.shape[3]))
 
     # apply PCA algorithm if selected:
     if PCA == 1:
@@ -84,7 +82,7 @@ def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, 
         PSD = feature_algorithms.average_PSD_algorithm(X_window, bins, sample_freq)
 
     # undo combining of first 2 dimensions of X_window:
-    spectrograms = np.reshape(PSD, (num_examples, num_windows, num_channels, window_size))
+    spectrograms = np.reshape(PSD, (num_examples, num_windows, PSD.shape[1], PSD.shape[2]))
     # reorder dimensions of spectrograms so that spectrograms[p, n, t, f] = spectrogram[t, f] of example p, channel n
     spectrograms = np.transpose(spectrograms, axes=(0, 2, 1, 3))
 

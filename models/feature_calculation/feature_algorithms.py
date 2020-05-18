@@ -1,11 +1,12 @@
-# This file contains 2 functions:
+# This file contains 3 functions:
 #   1) Feature calculation algorithm 1: average PSD values in selected frequency bins.
 #   2) Feature calculation algorithm 2: Principal Component Analysis on PSD values.
+#   3) Feature calculation algorithm 3: spectrogram creation.
 
 
 import numpy as np
 # import function modules:
-from models.feature_calculation import average_PSD, power_spectral_density as power, PCA_on_PSD
+from models.feature_calculation import power_spectral_density as power, average_PSD, PCA_on_PSD, spectrogram
 
 
 # Function description: calculate average power spectral density values in selected frequency bins.
@@ -74,3 +75,14 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs, matrix_typ
     project_weights = PCA_on_PSD.project_onto_pcs(PSD_norm, eig_vects, num_pcs)
 
     return project_weights
+
+
+# Function description: creates power spectral density spectrograms, with an option to apply the PCA algorithm.
+# Inputs:
+#   X = 3D array of signal values for multiple channels for multiple examples
+#       size: (num_examples, num_channels, num_samples)
+#   window_size_example = size of sliding window to create new examples, in seconds
+#   stride_size_example = size of "stride" of sliding window to create new examples, in seconds
+#   window_size_PSD = size of sliding window to calculate PSD, in seconds
+#   stride_size_PSD = size of "stride" of sliding window to calculate PSD, in seconds
+# Outputs:
