@@ -25,16 +25,16 @@ def window_data(X, window_size, stride_size):
     # determine number of possible windows:
     num_windows = int(np.floor((num_samples - window_size) / stride_size) + 1)
 
-    X_windows = np.zeros((num_examples, num_windows, num_channels, window_size))
+    X_window = np.zeros((num_examples, num_windows, num_channels, window_size))
     for i in range(num_windows):
         # start of window index:
         start_index = i * stride_size
         # end of window index (inclusive):
         end_index = start_index + window_size - 1
 
-        X_windows[:, i, :, :] = X[:, :, start_index:end_index+1]
+        X_window[:, i, :, :] = X[:, :, start_index:end_index+1]
 
-    return X_windows
+    return X_window
 
 
 # Function description: creates power spectral density spectrograms.

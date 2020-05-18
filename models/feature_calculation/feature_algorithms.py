@@ -79,10 +79,13 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs, matrix_typ
 
 # Function description: creates power spectral density spectrograms, with an option to apply the PCA algorithm.
 # Inputs:
+#   train = bool to select whether more examples should be created for training or not
+#       if train == True: training
+#       else: testing
 #   X = 3D array of signal values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_samples)
-#   window_size_example = size of sliding window to create new examples, in seconds
-#   stride_size_example = size of "stride" of sliding window to create new examples, in seconds
+#   window_size_example = size of sliding window to create more examples, in seconds
+#   stride_size_example = size of "stride" of sliding window to create more examples, in seconds
 #   window_size_PSD = size of sliding window to calculate PSD, in seconds
 #   stride_size_PSD = size of "stride" of sliding window to calculate PSD, in seconds
 #   sample_freq = sampling frequency
@@ -101,4 +104,16 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs, matrix_typ
 # Outputs:
 #   spectrograms = PSD spectrograms
 #       size: (new_num_examples, num_channels, num_windows, num_bins)
-# def spectrogram_algorithm(X, window_size_example, stride_size_example, window_size_PSD, stride_size_PSD)
+def spectrogram_algorithm(train, X, window_size_example, stride_size_example, window_size_PSD, stride_size_PSD,
+                          sample_freq, max_freq, PCA, num_pcs, matrix_type, small_param):
+    # convert window and stride sizes from seconds to samples:
+    window_size_example = int(np.floor(sample_freq * window_size_example))
+    stride_size_example = int(np.floor(sample_freq * stride_size_example))
+    window_size_PSD = int(np.floor(sample_freq * window_size_PSD))
+    stride_size_PSD = int(np.floor(sample_freq * stride_size_PSD))
+
+    # create more training examples by sliding time window segmentation:
+    if train:
+        X = spectrogram.window_data(X, window_size_example, stride_size_example)
+
+
