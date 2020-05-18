@@ -11,13 +11,13 @@ print("\n----------TESTING window_data() FUNCTION----------\n")
 # dimensions of test array:
 num_examples = 2
 num_channels = 2
-num_samples = 11
+num_samples = 10
 # test array:
 X = np.zeros((num_examples, num_channels, num_samples))
 for i in range(num_examples):
     for j in range(num_channels):
         for k in range(num_samples):
-            X[i, j, k] = (i + 1) * (j*num_samples + k + 1) # * (2*np.mod(j+1, 2) - 1)
+            X[i, j, k] = (i + 1) * (k + 1) * (2*np.mod(j+1, 2) - 1)
 print("Test input array:\nSize: ", end="")
 print(X.shape)
 print(X)
@@ -25,12 +25,10 @@ print("")
 # test window and stride sizes:
 window_size = 5
 stride_size = 2
-# test number of chunks:
-num_chunks = 2
-print("Window size, stride size, number of chunks: ({0}, {1}, {2})\n".format(window_size, stride_size, num_chunks))
+print("Window size and stride sizes: ({0}, {1})\n".format(window_size, stride_size))
 
 # call function:
-X_window = spectrogram.window_data(X, window_size, stride_size, num_chunks)
+X_window = spectrogram.window_data(X, window_size, stride_size)
 
 # display windowed array:
 print("Windowed array:\nSize: ", end="")
@@ -54,7 +52,7 @@ matrix_type = 0
 small_param = 0.0001
 
 # call function:
-spectrograms = spectrogram.create_spectrogram(X_window, num_chunks, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param)
+spectrograms = spectrogram.create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param)
 
 # display spectrograms:
 print("Spectrograms:\nSize: ", end="")
