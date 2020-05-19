@@ -53,12 +53,3 @@ def stride_window(eeg_trial, stride, window_len, frequency):
         window_end = window_start + window_examples
         grouped_features += [eeg_trial[window_start:window_end]]
     return np.array(grouped_features)
-
-
-def generate_features(patient_num, path_to_file):
-    # get features:
-    left_array, right_array = ReadComp4(patient_num, path_to_file)
-
-    # window data and create class labels:
-
-
