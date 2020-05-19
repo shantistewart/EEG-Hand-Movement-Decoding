@@ -5,7 +5,6 @@ import numpy as np
 import sklearn
 from models.data_gathering import data4_reader
 from models.feature_calculation import spectrogram
-from models.feature_calculation import feature_algorithms as feature
 
 # class labels (do not modify!):
 LEFT_HAND_LABEL = 0
