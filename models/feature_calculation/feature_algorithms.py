@@ -37,7 +37,7 @@ def average_PSD_algorithm(X, bins, sample_freq):
 #   max_freq = maximum frequency of PSD to consider
 #   num_bins = number of frequency bins for average PSD calculation
 #   num_pcs = number of principal components (eigenvectors) to project onto
-#       validity: num_pcs <= num_freq
+#       validity: num_pcs <= num_bins
 #   matrix_type = input to select which type of statistical matrix to calculate:
 #       if matrix type == 1: autocorrelation matrices are calculated
 #       if matrix type == 2: autocovariance matrices are calculated
@@ -46,7 +46,7 @@ def average_PSD_algorithm(X, bins, sample_freq):
 # Outputs:
 #   project_weights = 3D array of projection weights onto principal components (eigenvectors)
 #       size: (num_examples, num_channels, num_pcs)
-def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs, matrix_type, small_param):
+def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matrix_type=0, small_param=0.0001):
     # construct frequency bins for PSD average calculation:
     bin_width = max_freq / num_bins
     bins = np.zeros((num_bins, 2))
@@ -71,6 +71,9 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs, matrix_typ
     # calculate eigenvectors of PSD statistical matrices:
     eig_vects = PCA_on_PSD.calc_eig_vects(stat_matrices)
 
+    # default num_pcs to num_bins:
+    if num_pcs is None:
+        num_pcs = num_bins
     # calculates projection weights of PSD values onto principal components (eigenvectors):
     project_weights = PCA_on_PSD.project_onto_pcs(PSD_norm, eig_vects, num_pcs)
 
