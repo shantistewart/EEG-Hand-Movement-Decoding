@@ -3,6 +3,7 @@
 
 import numpy as np
 import sklearn
+# import function modules:
 from models.data_gathering import data4_reader
 from models.feature_calculation import spectrogram
 
