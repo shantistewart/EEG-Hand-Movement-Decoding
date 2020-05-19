@@ -5,7 +5,7 @@ import numpy as np
 from models.feature_calculation import feature_algorithms
 
 
-# Function description: performs a sliding-window segmentation on raw signal values.
+# Function description: performs sliding-window segmentation.
 # Inputs:
 #   X = 3D array of signal values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_samples)
