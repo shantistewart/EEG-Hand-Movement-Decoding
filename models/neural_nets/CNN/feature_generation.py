@@ -2,6 +2,7 @@
 
 
 import numpy as np
+import sklearn
 from models.data_gathering import data4_reader
 from models.feature_calculation import spectrogram
 from models.feature_calculation import feature_algorithms as feature
@@ -11,7 +12,7 @@ LEFT_HAND_LABEL = 0
 RIGHT_HAND_LABEL = 1
 
 
-# Function description: generates examples (raw data + class labels).
+# Function description: generates examples (raw data + class labels) with sliding window segmentation and shuffling.
 # Inputs:
 #   subject_num = number of human subject (1-9)
 #   path_to_file = path to data file
@@ -19,8 +20,17 @@ RIGHT_HAND_LABEL = 1
 #   stride_size = size of "stride" of sliding window to create more examples, in seconds
 #   sample_freq = sampling frequency
 # Outputs:
+#   X = (shuffled) raw data
+#       size: (2 * num_examples * num_windows, num_channels, window_size)
+#   Y = (shuffled) class labels
+#       size: (2 * num_examples * num_windows, num_channels, window_size)
 def generate_examples(subject_num, path_to_file, window_size, stride_size, sample_freq):
+    # convert window and stride sizes from seconds to samples:
+    window_size = int(np.floor(sample_freq * window_size))
+    stride_size = int(np.floor(sample_freq * stride_size))
+
     # get data:
+    #   size: (num_examples, num_channels, num_samples)
     leftX, rightX = data4_reader.ReadComp4(subject_num, path_to_file)
 
     # create more examples by sliding time window segmentation:
@@ -40,3 +50,8 @@ def generate_examples(subject_num, path_to_file, window_size, stride_size, sampl
     # concatenate left and right raw data/class labels:
     X = np.concatenate((leftX, rightX))
     Y = np.concatenate((leftY, rightY))
+
+    # shuffle raw data and class labels in unison:
+    X, Y = sklearn.utils.shuffle(X, Y, random_state=0)
+
+    return X, Y
