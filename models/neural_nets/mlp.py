@@ -50,7 +50,7 @@ def group_feat_and_labels(window_len, stride, frequency, sorted_data, trial_labe
 
     label_array = [trial_label] * feat_array.shape[0]
 
-    return feat_array, label_array
+    return feat_array, np.array(label_array)
 
 
 def gather_shuffle_data(patient_num, path_to_file, window_len, stride, frequency):

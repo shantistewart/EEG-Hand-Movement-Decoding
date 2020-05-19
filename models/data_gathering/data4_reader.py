@@ -4,6 +4,9 @@ import sys
 
 # Keep in mind, the sampling rate is 250Hz.
 # Input Patient number: 1-9
+# Outputs:
+#   left_array, right_array
+#       size: (num_trials, num_channels, num_samples)
 def ReadComp4(patient_num, path_to_file):
     if patient_num < 0 or patient_num > 9:
         sys.exit("Patient number invalid")
@@ -21,7 +24,12 @@ def ReadComp4(patient_num, path_to_file):
             left_array += [np.loadtxt(left_file)]
             right_array += [np.loadtxt(right_file)]
 
-    return np.array(left_array), np.array(right_array)
+    left_array = np.array(left_array)
+    right_array = np.array(right_array)
+    left_array = np.transpose(left_array, (0, 2, 1))
+    right_array = np.transpose(right_array, (0, 2, 1))
+
+    return left_array, right_array
 
 # Stride and window are in seconds! Note that
 # stride is the start time for a particular window.
@@ -44,5 +52,4 @@ def stride_window(eeg_trial, stride, window_len, frequency):
         window_start = i * stride_examples
         window_end = window_start + window_examples
         grouped_features += [eeg_trial[window_start:window_end]]
-    return np.transpose(np.array(grouped_features), (0, 2, 1))
-
+    return np.array(grouped_features)

@@ -39,7 +39,7 @@ PSD_avg = average_PSD.calc_average_PSD(PSD, bins, sample_freq)
 print("Average PSD values:\nSize: ", end="")
 print(PSD_avg.shape)
 print(PSD_avg)
-print("\n")
+print("")
 
 
 # --------------------TESTING plot_average_PSD() FUNCTION--------------------
