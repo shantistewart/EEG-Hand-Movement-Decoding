@@ -55,7 +55,6 @@ def group_feat_and_labels(window_len, stride, frequency, sorted_data, trial_labe
 
 def gather_shuffle_data(patient_num, path_to_file, window_len, stride, frequency):
     left_data, right_data = feature_gen.ReadComp4(patient_num, path_to_file)
-    all_label_data = []
 
     # Go through left data and add features and labels
     left_features, left_labels = group_feat_and_labels(window_len, stride, frequency, left_data, Left_Hand_Label)
@@ -67,9 +66,9 @@ def gather_shuffle_data(patient_num, path_to_file, window_len, stride, frequency
     right_features, right_labels = group_feat_and_labels(window_len, stride, frequency, right_data, Right_Hand_Label)
     # concatenate both arrays
     all_feature_data = np.concatenate((all_feature_data, right_features), axis=0)
-    all_label_data += right_labels
+    all_label_data = np.concatenate((all_label_data, right_labels), axis=0)
 
-    all_feature_data = np.swapaxes(all_feature_data, 1, 2)
+    #all_feature_data = np.swapaxes(all_feature_data, 1, 2)
 
     # Shuffle data
     shuffled_features, shuffled_labels = sklearn.utils.shuffle(all_feature_data, all_label_data)
@@ -118,7 +117,7 @@ def train_mlp(train_data, train_labels, bins, hid_layer_nodes=None, epoch_cnt=No
         metrics=['accuracy']
     )
 
-    history = model.fit(train_data, train_labels, epochs=epoch_cnt)
+    history = model.fit(train_data, train_labels, epochs=epoch_cnt, verbose=0)
 
     return model, history
 

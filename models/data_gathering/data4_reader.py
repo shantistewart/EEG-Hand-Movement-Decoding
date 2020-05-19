@@ -37,19 +37,19 @@ def ReadComp4(patient_num, path_to_file):
 # Output:
 #   A 3D array of dimension: (strides, channels, window_len)
 def stride_window(eeg_trial, stride, window_len, frequency):
-    if window_len > len(eeg_trial):
+    if window_len > eeg_trial.shape[1]:
         sys.exit("Window length longer than trial length")
 
     stride_examples = int(stride * frequency)
     window_examples = int(window_len * frequency)
-    num_strides = len(eeg_trial) // stride_examples
+    num_strides = eeg_trial.shape[1] // stride_examples
     # If window size is too long, need to cut back on number of stride
-    while (num_strides * stride_examples) + window_examples > len(eeg_trial):
+    while (num_strides * stride_examples) + window_examples > eeg_trial.shape[1]:
         num_strides = num_strides - 1
 
     grouped_features = []
     for i in range(num_strides):
         window_start = i * stride_examples
         window_end = window_start + window_examples
-        grouped_features += [eeg_trial[window_start:window_end]]
+        grouped_features += [eeg_trial[:, window_start:window_end]]
     return np.array(grouped_features)
