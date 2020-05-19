@@ -93,7 +93,7 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
 #       if PCA == 1: PCA algorithm is applied
 #       else: PCA algorithm is not applied
 #   num_pcs = number of principal components (eigenvectors) to project onto
-#       validity: num_pcs <= num_freq
+#       validity: num_pcs <= num_bins
 #   matrix_type = parameter to select which type of statistical matrix to calculate:
 #       if matrix type == 1: autocorrelation matrices are calculated
 #       if matrix type == 2: autocovariance matrices are calculated
