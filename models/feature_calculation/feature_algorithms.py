@@ -82,15 +82,10 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
 
 # Function description: creates power spectral density spectrograms, with an option to apply the PCA algorithm.
 # Inputs:
-#   train = bool to select whether more examples should be created for training or not
-#       if train == True: training
-#       else: testing
 #   X = 3D array of signal values for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_samples)
-#   window_size_example = size of sliding window to create more examples, in seconds
-#   stride_size_example = size of "stride" of sliding window to create more examples, in seconds
-#   window_size_PSD = size of sliding window to calculate PSD, in seconds
-#   stride_size_PSD = size of "stride" of sliding window to calculate PSD, in seconds
+#   window_size = size of sliding window to calculate PSD, in seconds
+#   stride_size = size of "stride" of sliding window to calculate PSD, in seconds
 #   sample_freq = sampling frequency
 #   max_freq = maximum frequency of PSD to consider
 #   num_bins = number of frequency bins for average PSD calculation
@@ -107,23 +102,14 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
 # Outputs:
 #   spectrograms = PSD spectrograms
 #       size: (new_num_examples, num_channels, num_windows, num_bins)
-def spectrogram_algorithm(train, X, window_size_example, stride_size_example, window_size_PSD, stride_size_PSD,
-                          sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param):
+def spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type,
+                          small_param):
     # convert window and stride sizes from seconds to samples:
-    window_size_example = int(np.floor(sample_freq * window_size_example))
-    stride_size_example = int(np.floor(sample_freq * stride_size_example))
-    window_size_PSD = int(np.floor(sample_freq * window_size_PSD))
-    stride_size_PSD = int(np.floor(sample_freq * stride_size_PSD))
-
-    # create more training examples by sliding time window segmentation:
-    if train:
-        X = spectrogram.window_data(X, window_size_example, stride_size_example)
-        # combine first 2 dimensions of X:
-        #   new size: (num_examples*num_windows, num_channels, window_size)
-        X = np.reshape(X, (-1, X.shape[2], X.shape[3]))
+    window_size = int(np.floor(sample_freq * window_size))
+    stride_size = int(np.floor(sample_freq * stride_size))
 
     # window data for PSD estimation
-    X_window = spectrogram.window_data(X, window_size_PSD, stride_size_PSD)
+    X_window = spectrogram.window_data(X, window_size, stride_size)
 
     # create spectrograms, optionally with the PCA algorithm:
     spectrograms = spectrogram.create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type,
