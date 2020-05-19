@@ -24,11 +24,10 @@ def build_model(input_shape, num_outputs=1, num_conv_layers=2, num_dense_layers=
     model = models.Sequential()
 
     # convolutional and max pooling layers:
-    model.add(layers.Conv2D(num_filters, kernel_size, padding='valid', data_format='channels_first', activation='relu',
-                            input_shape=input_shape))
-    model.add(layers.MaxPool2D(pool_size, padding='valid', data_format='channels_first'))
-    model.add(layers.Conv2D(num_filters, kernel_size, padding='valid', data_format='channels_first', activation='relu'))
-    model.add(layers.MaxPool2D(pool_size, padding='valid', data_format='channels_first'))
+    model.add(layers.Conv2D(num_filters, kernel_size, padding='valid', activation='relu', input_shape=input_shape))
+    model.add(layers.MaxPool2D(pool_size, padding='valid'))
+    model.add(layers.Conv2D(num_filters, kernel_size, padding='valid', activation='relu'))
+    model.add(layers.MaxPool2D(pool_size, padding='valid'))
 
     # fully connected layers:
     model.add(layers.Flatten())

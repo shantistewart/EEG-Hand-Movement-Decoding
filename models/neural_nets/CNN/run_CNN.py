@@ -1,6 +1,7 @@
 # This file contains code to run a convolutional neural network.
 
 
+import numpy as np
 # import function modules:
 from models.neural_nets.CNN import example_generation
 from models.feature_calculation import feature_algorithms
@@ -41,7 +42,7 @@ kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 50
 # for training CNN:
-num_epochs = 10
+num_epochs = 20
 batch_size = 32
 validation_fraction = 0.2
 
@@ -55,6 +56,8 @@ print(X.shape)
 # generate spectrogram features:
 X_spectro = feature_algorithms.spectrogram_algorithm(X, window_size_PSD, stride_size_PSD, sample_freq, max_freq,
                                                      num_bins, PCA, num_pcs, matrix_type, small_param)
+# move channels axis to last:
+X_spectro = np.transpose(X_spectro, axes=(0, 2, 3, 1))
 # display dimensions of spectrogram features:
 print("Size of spectrogram features: ", end="")
 print(X_spectro.shape)
