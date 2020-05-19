@@ -42,7 +42,7 @@ kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 50
 # for training CNN:
-num_epochs = 20
+num_epochs = 200
 batch_size = 32
 validation_fraction = 0.2
 
