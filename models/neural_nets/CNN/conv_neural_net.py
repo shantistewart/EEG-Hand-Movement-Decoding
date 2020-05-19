@@ -56,7 +56,7 @@ def train_model(model, x_train, y_train, num_epochs=10, batch_size=32, validatio
                   metrics=['accuracy'])
 
     # train model:
-    history = model.fit(x_train, y_train, batch_size=batch_size, epochs=num_epochs, verbose=2,
+    history = model.fit(x_train, y_train, epochs=int(num_epochs), verbose=2,
                         validation_split=validation_fraction)
     # extract training and validation accuracies:
     train_acc = history.history['accuracy']

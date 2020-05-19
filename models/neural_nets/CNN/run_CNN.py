@@ -40,6 +40,10 @@ num_filters = 3
 kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 50
+# for training CNN:
+num_epochs = 10
+batch_size = 32
+validation_fraction = 0.2
 
 
 X, Y = example_generation.generate_examples(subject_num, path_to_data_file, window_size_example, stride_size_example,
@@ -62,3 +66,5 @@ model = conv_neural_net.build_model(input_shape, num_outputs, num_conv_layers, n
                                     kernel_size, pool_size, num_hidden_nodes)
 # display model architecture:
 model.summary()
+# train model:
+history = conv_neural_net.train_model(model, X_spectro, Y, num_epochs, validation_fraction)
