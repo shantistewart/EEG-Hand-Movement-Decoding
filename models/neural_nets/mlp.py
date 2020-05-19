@@ -50,7 +50,7 @@ def group_feat_and_labels(window_len, stride, frequency, sorted_data, trial_labe
 
     label_array = [trial_label] * feat_array.shape[0]
 
-    return feat_array, np.array(label_array)
+    return feat_array, label_array
 
 
 def gather_shuffle_data(patient_num, path_to_file, window_len, stride, frequency):
@@ -68,6 +68,8 @@ def gather_shuffle_data(patient_num, path_to_file, window_len, stride, frequency
     # concatenate both arrays
     all_feature_data = np.concatenate((all_feature_data, right_features), axis=0)
     all_label_data += right_labels
+
+    #all_feature_data = np.swapaxes(all_feature_data, 1, 2)
 
     # Shuffle data
     shuffled_features, shuffled_labels = sklearn.utils.shuffle(all_feature_data, all_label_data)

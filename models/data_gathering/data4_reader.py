@@ -44,5 +44,5 @@ def stride_window(eeg_trial, stride, window_len, frequency):
         window_start = i * stride_examples
         window_end = window_start + window_examples
         grouped_features += [eeg_trial[window_start:window_end]]
-    return np.array(grouped_features)
+    return np.transpose(np.array(grouped_features), (0, 2, 1))
 
