@@ -1,8 +1,7 @@
 # This file contains unit tests for conv_neural_net.py (in neural_nets folder).
 
 
-from models.neural_nets import conv_neural_net as conv_net
-
+from models.neural_nets.CNN import conv_neural_net as conv_net
 
 # --------------------TESTING build_model() FUNCTION--------------------
 print("\n----------TESTING build_model() FUNCTION----------\n")
