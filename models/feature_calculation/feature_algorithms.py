@@ -101,7 +101,7 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
 #   small_param = a small number to ensure that log(0) does not occur for log-normalization
 # Outputs:
 #   spectrograms = PSD spectrograms
-#       size: (new_num_examples, num_channels, num_windows, num_bins)
+#       size: (num_examples, num_channels, num_windows, num_bins)
 def spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type,
                           small_param):
     # convert window and stride sizes from seconds to samples:
