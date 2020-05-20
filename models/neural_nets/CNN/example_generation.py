@@ -52,6 +52,6 @@ def generate_examples(subject_num, path_to_file, window_size, stride_size, sampl
     Y = np.concatenate((leftY, rightY))
 
     # shuffle raw data and class labels in unison:
-    X, Y = sklearn.utils.shuffle(X, Y, random_state=0)
+    X, Y = sklearn.utils.shuffle(X, Y)
 
     return X, Y
