@@ -25,6 +25,7 @@ import matplotlib.pyplot as plotter
 # Methods:
 #   plot_raw_signal(): plots raw signals of selected channels of selected examples.
 #   plot_autocorr(): plots autocorrelation functions of selected channels of selected examples.
+#   plot_PSD(): plots power spectral densities of selected channels of selected examples.
 class RawPSD:
     """Class of raw power spectral density values, autocorrelation functions, and raw signals."""
 
