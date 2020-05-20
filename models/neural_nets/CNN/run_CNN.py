@@ -81,6 +81,10 @@ CNN.model.summary()
 
 # train model:
 CNN.train_model(X_train, Y_train, num_epochs, batch_size, validation_fract)
+
+# evaluate model:
+test_acc = CNN.test_model(X_test, Y_test)
+
 # plot learning curve:
 CNN.plot_learn_curve()
 plotter.show()
