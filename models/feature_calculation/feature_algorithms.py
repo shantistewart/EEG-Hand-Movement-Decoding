@@ -102,8 +102,8 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
 # Outputs:
 #   spectrograms = PSD spectrograms
 #       size: (num_examples, num_channels, num_windows, num_bins)
-def spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type,
-                          small_param):
+def spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None,
+                          matrix_type=0, small_param=0.0001):
     # convert window and stride sizes from seconds to samples:
     window_size = int(np.floor(sample_freq * window_size))
     stride_size = int(np.floor(sample_freq * stride_size))
@@ -112,7 +112,7 @@ def spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq, nu
     X_window = example_generation.window_data(X, window_size, stride_size)
 
     # create spectrograms, optionally with the PCA algorithm:
-    spectrograms = spectrogram.create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type,
-                                                  small_param)
+    spectrograms = spectrogram.create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA=PCA, num_pcs=num_pcs,
+                                                  matrix_type=matrix_type, small_param=small_param)
 
     return spectrograms

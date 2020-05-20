@@ -1,9 +1,12 @@
 # This file contains functions to build and train a convolutional neural network.
 
 
+import numpy as np
 import matplotlib.pyplot as plotter
 import tensorflow as tf
 from tensorflow.keras import layers, models
+from models.neural_nets import example_generation
+from models.feature_calculation import feature_algorithms
 
 
 # Class description: builds, trains, and evaluates a convolutional neural network for binary classification.
@@ -102,4 +105,52 @@ class ConvNet:
         axes.set_xlabel('Epochs')
         axes.set_ylabel('Accuracy')
         axes.legend(loc='center right')
+
+    test_fract = 0.2
+    # for spectrogram creation:
+    window_size_PSD = 0.8
+    stride_size_PSD = 0.05
+    max_freq = 25.0
+    num_bins = 50
+    PCA = 0
+    num_pcs = num_bins
+    matrix_type = 0
+    small_param = 0.0001
+
+    # Function description: generates training and test set features for CNN.
+    # Inputs:
+    #   X = 3D array of raw signal values for multiple channels for multiple examples
+    #       size: (num_examples, num_channels, num_samples)
+    #   Y = class labels
+    #       size: (num_examples, )
+    #   window_size = size of sliding window to calculate PSD, in seconds
+    #   stride_size = size of "stride" of sliding window to calculate PSD, in seconds
+    #   sample_freq = sampling frequency
+    #   max_freq = maximum frequency of PSD to consider
+    #   num_bins = number of frequency bins for average PSD calculation
+    #   PCA = parameter to select whether to apply PCA algorithm
+    #       if PCA == 1: PCA algorithm is applied
+    #       else: PCA algorithm is not applied
+    #   num_pcs = number of principal components (eigenvectors) to project onto
+    #       validity: num_pcs <= num_bins
+    #   matrix_type = parameter to select which type of statistical matrix to calculate:
+    #       if matrix type == 1: autocorrelation matrices are calculated
+    #       if matrix type == 2: autocovariance matrices are calculated
+    #       else: Pearson autocovariance matrices are calculated
+    #   small_param = a small number to ensure that log(0) does not occur for log-normalization
+    #   test_fract = fraction of data to use as test set
+    # Outputs:
+    def generate_features(self, X, Y, window_size, stride_size, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None,
+                          matrix_type=0, small_param=0.0001, test_fract=0.2):
+        # generate spectrogram features:
+        X_spectro = feature_algorithms.spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq,
+                                                             num_bins, PCA=PCA, num_pcs=num_pcs,
+                                                             matrix_type=matrix_type, small_param=small_param)
+        # move channels axis to last (for compatibility with CNN architecture):
+        X_spectro = np.transpose(X_spectro, axes=(0, 2, 3, 1))
+
+        # split features and class labels into training (+ validation) and test sets:
+        X_train, Y_train, X_test, Y_test = example_generation.split_train_test(X_spectro, Y, test_fract=test_fract)
+
+        return X_train, Y_train, X_test, Y_test
 

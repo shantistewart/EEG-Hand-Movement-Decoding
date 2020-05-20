@@ -16,7 +16,7 @@ from models.feature_calculation import feature_algorithms
 #       if PCA == 1: PCA algorithm is applied
 #       else: PCA algorithm is not applied
 #   num_pcs = number of principal components (eigenvectors) to project onto
-#       validity: num_pcs <= num_freq
+#       validity: num_pcs <= num_bins
 #   matrix_type = parameter to select which type of statistical matrix to calculate:
 #       if matrix type == 1: autocorrelation matrices are calculated
 #       if matrix type == 2: autocovariance matrices are calculated
@@ -25,7 +25,8 @@ from models.feature_calculation import feature_algorithms
 # Outputs:
 #   spectrograms = PSD spectrograms
 #       size: (num_examples, num_channels, num_windows, num_bins)
-def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param):
+def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None, matrix_type=0,
+                       small_param=0.0001):
     # number of examples:
     num_examples = X_window.shape[0]
     # number of windows:
@@ -37,8 +38,8 @@ def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, 
 
     # apply PCA algorithm if selected:
     if PCA == 1:
-        PSD = feature_algorithms.PCA_on_PSD_algorithm(X_window, sample_freq, max_freq, num_bins, num_pcs, matrix_type,
-                                                      small_param)
+        PSD = feature_algorithms.PCA_on_PSD_algorithm(X_window, sample_freq, max_freq, num_bins, num_pcs=num_pcs,
+                                                      matrix_type=matrix_type, small_param=small_param)
     else:
         # construct frequency bins for PSD average calculation:
         bin_width = max_freq / num_bins
