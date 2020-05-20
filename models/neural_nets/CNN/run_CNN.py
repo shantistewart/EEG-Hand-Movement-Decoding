@@ -22,13 +22,13 @@ subject_num = 1
 
 # HYPERPARAMETERS:
 # for creating more training examples:
-window_size_example = 3.0
+window_size_example = 2.5
 stride_size_example = 0.1
 # for spectrogram creation:
-window_size_PSD = 1.0
-stride_size_PSD = 0.1
+window_size_PSD = 0.8
+stride_size_PSD = 0.05
 max_freq = 25.0
-num_bins = 25
+num_bins = 50
 PCA = 0
 num_pcs = num_bins
 matrix_type = 0
@@ -40,9 +40,9 @@ num_dense_layers = 1
 num_filters = 3
 kernel_size = 3
 pool_size = 2
-num_hidden_nodes = 50
+num_hidden_nodes = 200
 # for training CNN:
-num_epochs = 200
+num_epochs = 100
 batch_size = 32
 validation_fraction = 0.2
 
