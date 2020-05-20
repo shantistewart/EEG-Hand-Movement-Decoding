@@ -23,7 +23,7 @@ RIGHT_HAND_LABEL = 1
 #   X = (shuffled) raw data
 #       size: (2 * num_trials * num_windows, num_channels, window_size)
 #   Y = (shuffled) class labels
-#       size: (2 * num_trials * num_windows, num_channels, window_size)
+#       size: (2 * num_trials * num_windows, )
 def generate_examples(subject_num, path_to_file, window_size, stride_size, sample_freq):
     # convert window and stride sizes from seconds to samples:
     window_size = int(np.floor(sample_freq * window_size))
@@ -55,3 +55,31 @@ def generate_examples(subject_num, path_to_file, window_size, stride_size, sampl
     X, Y = sklearn.utils.shuffle(X, Y)
 
     return X, Y
+
+
+# Function description: splits features and class labels into training (+ validation) and test sets.
+# Inputs:
+#   X = (shuffled) features
+#       size: (num_examples,...)
+#   Y = (shuffled) class labels
+#       size: (num_examples,...)
+#   test_fract = fraction of data to use as test set
+# Outputs:
+#   X_train = training set features
+#   Y_train = training set class labels
+#   X_test = test set features
+#   Y_test = test set class labels
+def split_train_test(X, Y, test_fract=0.2):
+    # total number of examples:
+    num_examples = X.shape[0]
+
+    # start index of test set:
+    test_index = int(np.floor((1 - test_fract) * num_examples))
+
+    # split data into training and test sets:
+    X_train = X[:test_index]
+    Y_train = Y[:test_index]
+    X_test = X[test_index:]
+    Y_test = Y[test_index:]
+
+    return X_train, Y_train, X_test, Y_test
