@@ -97,9 +97,9 @@ class ConvNet:
     # Outputs:
     #   test_acc = test set accuracy
     def test_model(self, X_test, Y_test):
+        print("\n")
         test_loss, test_acc = self.model.evaluate(X_test, Y_test, verbose=1)
-        # display test accuracy:
-        print("\nTest set accuracy: {0}\n".format(test_acc))
+        print("Test set accuracy: {0}\n".format(test_acc))
 
         return test_acc
 
