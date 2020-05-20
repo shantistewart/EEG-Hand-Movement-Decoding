@@ -22,6 +22,8 @@ sample_freq = 250
 subject_num = 1
 
 # HYPERPARAMETERS:
+# test set fraction:
+test_fract = 0.2
 # for creating more training examples:
 window_size_example = 2.5
 stride_size_example = 0.1
@@ -47,10 +49,11 @@ batch_size = 32
 validation_fract = 0.2
 
 
+# get data and generate examples:
 X, Y = example_generation.generate_examples(subject_num, path_to_data_file, window_size_example, stride_size_example,
                                             sample_freq)
 # display dimensions of raw data:
-print("Size of raw data: ", end="")
+print("Size of raw data set: ", end="")
 print(X.shape)
 
 # generate spectrogram features:
@@ -58,23 +61,26 @@ X_spectro = feature_algorithms.spectrogram_algorithm(X, window_size_PSD, stride_
                                                      num_bins, PCA, num_pcs, matrix_type, small_param)
 # move channels axis to last:
 X_spectro = np.transpose(X_spectro, axes=(0, 2, 3, 1))
-# display dimensions of spectrogram features:
-print("Size of spectrogram features: ", end="")
-print(X_spectro.shape)
-print("")
+
+# split features and class labels into training (+ validation) and test sets:
+X_train, Y_train, X_test, Y_test = example_generation.split_train_test(X_spectro, Y, test_fract)
+print("Size of train set: ", end="")
+print(X_train.shape)
+print("Size of test set: ", end="")
+print(X_test.shape)
 
 # create ConvNet object:
 CNN = conv_neural_net.ConvNet(num_conv_layers, num_dense_layers, num_kernels, kernel_size, pool_size, num_hidden_nodes)
 
 # build CNN model:
-input_shape = (X_spectro.shape[1], X_spectro.shape[2], X_spectro.shape[3])
+input_shape = (X_train.shape[1], X_train.shape[2], X_train.shape[3])
 CNN.build_model(input_shape)
 # display model architecture:
 print("\n")
 CNN.model.summary()
 
 # train model:
-CNN.train_model(X_spectro, Y, num_epochs, batch_size, validation_fract)
+CNN.train_model(X_train, Y_train, num_epochs, batch_size, validation_fract)
 # plot learning curve:
 CNN.plot_learn_curve()
 plotter.show()

@@ -57,19 +57,19 @@ class ConvNet:
 
     # Function description: compiles and trains CNN.
     # Inputs:
-    #   x_train = training set features
-    #   y_train = training set class labels
+    #   X_train = training set features
+    #   Y_train = training set class labels
     #   num_epochs = number of epochs to train for
     #   batch_size = mini-batch size for training
     #   validation_fract = fraction of training set to use as validation set
     # Outputs: none
-    def train_model(self, x_train, y_train, num_epochs=10, batch_size=32, validation_fract=0.2):
+    def train_model(self, X_train, Y_train, num_epochs=10, batch_size=32, validation_fract=0.2):
         # compile model:
         self.model.compile(optimizer='Adam', loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
                            metrics=['binary_accuracy'])
 
         # train model:
-        self.history = self.model.fit(x_train, y_train, epochs=int(num_epochs), verbose=2,
+        self.history = self.model.fit(X_train, Y_train, epochs=int(num_epochs), verbose=2,
                                       validation_split=validation_fract)
 
     # Function description: plots learning curve (training and validation accuracy vs. epochs).
