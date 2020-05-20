@@ -5,8 +5,8 @@
 
 
 import numpy as np
-# import function modules:
 from models.feature_calculation import power_spectral_density as power, average_PSD, PCA_on_PSD, spectrogram
+from models.neural_nets import example_generation
 
 
 # Function description: calculate average power spectral density values in selected frequency bins.
@@ -109,7 +109,7 @@ def spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq, nu
     stride_size = int(np.floor(sample_freq * stride_size))
 
     # window data for PSD estimation
-    X_window = spectrogram.window_data(X, window_size, stride_size)
+    X_window = example_generation.window_data(X, window_size, stride_size)
 
     # create spectrograms, optionally with the PCA algorithm:
     spectrograms = spectrogram.create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type,

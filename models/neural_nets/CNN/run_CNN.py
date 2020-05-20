@@ -3,8 +3,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plotter
-# import function modules:
-from models.neural_nets.CNN import example_generation
+from models.neural_nets import example_generation
 from models.feature_calculation import feature_algorithms
 from models.neural_nets.CNN import conv_neural_net
 
