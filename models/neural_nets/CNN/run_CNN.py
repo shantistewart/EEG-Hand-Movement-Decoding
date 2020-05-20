@@ -34,15 +34,14 @@ num_pcs = num_bins
 matrix_type = 0
 small_param = 0.0001
 # for CNN architecture:
-num_outputs = 1
 num_conv_layers = 2
 num_dense_layers = 1
-num_filters = 3
+num_kernels = 3
 kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 200
 # for training CNN:
-num_epochs = 100
+num_epochs = 50
 batch_size = 32
 validation_fraction = 0.2
 
@@ -65,7 +64,7 @@ print("")
 
 # build CNN model:
 input_shape = (X_spectro.shape[1], X_spectro.shape[2], X_spectro.shape[3])
-model = conv_neural_net.build_model(input_shape, num_outputs, num_conv_layers, num_dense_layers, num_filters,
+model = conv_neural_net.build_model(input_shape, num_conv_layers, num_dense_layers, num_kernels,
                                     kernel_size, pool_size, num_hidden_nodes)
 # display model architecture:
 model.summary()
