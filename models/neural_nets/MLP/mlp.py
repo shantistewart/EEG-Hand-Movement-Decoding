@@ -13,7 +13,7 @@ Right_Hand_Label = 1
 # Other important variables (Do not modify)
 ########################
 # path to data files:
-path_to_data_file = "../../MATLAB/biosig/Data_txt/"
+path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 # frequency is 250Hz
 sample_frequency = 250
 # range of patients:
