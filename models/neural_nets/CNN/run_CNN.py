@@ -2,6 +2,7 @@
 
 
 import numpy as np
+import matplotlib.pyplot as plotter
 # import function modules:
 from models.neural_nets.CNN import example_generation
 from models.feature_calculation import feature_algorithms
@@ -41,9 +42,9 @@ kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 200
 # for training CNN:
-num_epochs = 50
+num_epochs = 100
 batch_size = 32
-validation_fraction = 0.2
+validation_fract = 0.2
 
 
 X, Y = example_generation.generate_examples(subject_num, path_to_data_file, window_size_example, stride_size_example,
@@ -62,11 +63,18 @@ print("Size of spectrogram features: ", end="")
 print(X_spectro.shape)
 print("")
 
+# create ConvNet object:
+CNN = conv_neural_net.ConvNet(num_conv_layers, num_dense_layers, num_kernels, kernel_size, pool_size, num_hidden_nodes)
+
 # build CNN model:
 input_shape = (X_spectro.shape[1], X_spectro.shape[2], X_spectro.shape[3])
-model = conv_neural_net.build_model(input_shape, num_conv_layers, num_dense_layers, num_kernels,
-                                    kernel_size, pool_size, num_hidden_nodes)
+CNN.build_model(input_shape)
 # display model architecture:
-model.summary()
+print("\n")
+CNN.model.summary()
+
 # train model:
-history = conv_neural_net.train_model(model, X_spectro, Y, num_epochs, validation_fraction)
+CNN.train_model(X_spectro, Y, num_epochs, batch_size, validation_fract)
+# plot learning curve:
+CNN.plot_learn_curve()
+plotter.show()
