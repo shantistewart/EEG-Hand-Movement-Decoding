@@ -22,7 +22,9 @@ from models.feature_calculation import feature_algorithms
 # Methods:
 #   build_model(): builds CNN architecture.
 #   train_model(): compiles and trains CNN.
+#   test_model(): evaluates CNN by computing accuracy on a test set.
 #   plot_learn_curve(): plots learning curve (training and validation accuracy vs. epochs).
+#   generate_features(): generates training and test set features for CNN.
 class ConvNet:
     """Class for a convolutional neural network for binary classification."""
 
@@ -106,17 +108,6 @@ class ConvNet:
         axes.set_ylabel('Accuracy')
         axes.legend(loc='center right')
 
-    test_fract = 0.2
-    # for spectrogram creation:
-    window_size_PSD = 0.8
-    stride_size_PSD = 0.05
-    max_freq = 25.0
-    num_bins = 50
-    PCA = 0
-    num_pcs = num_bins
-    matrix_type = 0
-    small_param = 0.0001
-
     # Function description: generates training and test set features for CNN.
     # Inputs:
     #   X = 3D array of raw signal values for multiple channels for multiple examples
@@ -140,6 +131,14 @@ class ConvNet:
     #   small_param = a small number to ensure that log(0) does not occur for log-normalization
     #   test_fract = fraction of data to use as test set
     # Outputs:
+    #   X_train = (shuffled) training set features
+    #       size: ((1-test_fract) * num_examples, num_channels, num_windows, num_bins)
+    #   Y_train = (shuffled) training set class labels
+    #       size: ((1-test_fract) * num_examples, )
+    #   X_test = (shuffled) test set features
+    #       size: (test_fract * num_examples, num_channels, num_windows, num_bins)
+    #   Y_test = (shuffled) test set class labels
+    #       size: (test_fract * num_examples, )
     def generate_features(self, X, Y, window_size, stride_size, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None,
                           matrix_type=0, small_param=0.0001, test_fract=0.2):
         # generate spectrogram features:

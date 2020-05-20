@@ -90,13 +90,17 @@ def generate_examples(subject_num, path_to_file, window_size, stride_size, sampl
 #   X = features
 #       size: (num_examples,...)
 #   Y = class labels
-#       size: (num_examples,...)
+#       size: (num_examples, )
 #   test_fract = fraction of data to use as test set
 # Outputs:
 #   X_train = (shuffled) training set features
+#       size: ((1-test_fract) * num_examples,...)
 #   Y_train = (shuffled) training set class labels
+#       size: ((1-test_fract) * num_examples, )
 #   X_test = (shuffled) test set features
+#       size: (test_fract * num_examples,...)
 #   Y_test = (shuffled) test set class labels
+#       size: (test_fract * num_examples, )
 def split_train_test(X, Y, test_fract=0.2):
     # shuffle raw data and class labels in unison:
     X, Y = sklearn.utils.shuffle(X, Y, random_state=0)
