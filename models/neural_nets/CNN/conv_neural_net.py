@@ -72,6 +72,19 @@ class ConvNet:
         self.history = self.model.fit(X_train, Y_train, epochs=int(num_epochs), verbose=2,
                                       validation_split=validation_fract)
 
+    # Function description: evaluates CNN by computing accuracy on a test set.
+    # Inputs:
+    #   X_test = test set features
+    #   Y_test = test set class labels
+    # Outputs:
+    #   test_acc = test set accuracy
+    def test_model(self, X_test, Y_test):
+        print("\n")
+        test_loss, test_acc = self.model.evaluate(X_test, Y_test, verbose=1)
+        print("Test set accuracy: {0}\n".format(test_acc))
+
+        return test_acc
+
     # Function description: plots learning curve (training and validation accuracy vs. epochs).
     # Inputs: none
     # Outputs: none
@@ -89,17 +102,4 @@ class ConvNet:
         axes.set_xlabel('Epochs')
         axes.set_ylabel('Accuracy')
         axes.legend(loc='center right')
-
-    # Function description: evaluates CNN by computing accuracy on a test set.
-    # Inputs:
-    #   X_test = test set features
-    #   Y_test = test set class labels
-    # Outputs:
-    #   test_acc = test set accuracy
-    def test_model(self, X_test, Y_test):
-        print("\n")
-        test_loss, test_acc = self.model.evaluate(X_test, Y_test, verbose=1)
-        print("Test set accuracy: {0}\n".format(test_acc))
-
-        return test_acc
 
