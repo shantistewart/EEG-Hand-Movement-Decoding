@@ -64,18 +64,18 @@ class RawPSD:
         time = self.sample_period * samples
 
         # create and format subplot:
-        fig, axes = plotter.subplots(num_plot_channels, num_plot_examples)
+        fig, axes = plotter.subplots(num_plot_examples, num_plot_channels)
         # reshape axes to handle shape error if either dimension = 1
-        axes = np.reshape(axes, (num_plot_channels, num_plot_examples))
+        axes = np.reshape(axes, (num_plot_examples, num_plot_channels))
         plotter.subplots_adjust(hspace=1)
 
         # plot raw signals of selected examples and channels:
         for i in range(num_plot_examples):
             for j in range(num_plot_channels):
-                axes[j, i].set_title('x[n] of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
-                axes[j, i].plot(time, self.X[examples[i], channels[j]])
-                axes[j, i].set_xlabel('Time (s)')
-                axes[j, i].set_ylabel('x[n]')
+                axes[i, j].set_title('x[n] of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
+                axes[i, j].plot(time, self.X[examples[i], channels[j]])
+                axes[i, j].set_xlabel('Time (s)')
+                axes[i, j].set_ylabel('x[n]')
 
     # Function description: plots autocorrelation functions of selected channels of selected examples.
     # Inputs:
@@ -96,18 +96,18 @@ class RawPSD:
         samples = np.arange(0, self.num_samples)
 
         # create and format subplot:
-        fig, axes = plotter.subplots(num_plot_channels, num_plot_examples)
+        fig, axes = plotter.subplots(num_plot_examples, num_plot_channels)
         # reshape axes to handle shape error if either dimension = 1
-        axes = np.reshape(axes, (num_plot_channels, num_plot_examples))
+        axes = np.reshape(axes, (num_plot_examples, num_plot_channels))
         plotter.subplots_adjust(hspace=1)
 
         # plot autocorrelation functions of selected examples and channels:
         for i in range(num_plot_examples):
             for j in range(num_plot_channels):
-                axes[j, i].set_title('Rxx[k] of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
-                axes[j, i].plot(samples, self.Rxx[examples[i], channels[j]])
-                axes[j, i].set_xlabel('Samples')
-                axes[j, i].set_ylabel('Rxx[k]')
+                axes[i, j].set_title('Rxx[k] of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
+                axes[i, j].plot(samples, self.Rxx[examples[i], channels[j]])
+                axes[i, j].set_xlabel('Samples')
+                axes[i, j].set_ylabel('Rxx[k]')
 
     # Function description: plots power spectral densities of selected channels of selected examples.
     # Inputs:
@@ -125,16 +125,16 @@ class RawPSD:
         num_plot_channels = channels.shape[0]
 
         # create and format subplot:
-        fig, axes = plotter.subplots(num_plot_channels, num_plot_examples)
+        fig, axes = plotter.subplots(num_plot_examples, num_plot_channels)
         # reshape axes to handle shape error if either dimension = 1
-        axes = np.reshape(axes, (num_plot_channels, num_plot_examples))
+        axes = np.reshape(axes, (num_plot_examples, num_plot_channels))
         plotter.subplots_adjust(hspace=1)
 
         # plot power spectral densities of selected examples and channels:
         for i in range(num_plot_examples):
             for j in range(num_plot_channels):
-                axes[j, i].set_title('PSD of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
-                axes[j, i].plot(self.freq[0, 0], self.PSD[examples[i], channels[j]])
-                axes[j, i].set_xlabel('Frequency (HZ)')
-                axes[j, i].set_ylabel('PSD')
+                axes[i, j].set_title('PSD of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
+                axes[i, j].plot(self.freq[0, 0], self.PSD[examples[i], channels[j]])
+                axes[i, j].set_xlabel('Frequency (HZ)')
+                axes[i, j].set_ylabel('PSD')
 

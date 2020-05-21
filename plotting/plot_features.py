@@ -22,9 +22,9 @@ sample_freq = 250
 subject_num = 1
 
 # examples to plot:
-examples = np.array([100, 300])
+examples = np.array([99, 100, 199, 200])
 # channels to plot:
-channels = np.array([0, 1])
+channels = np.array([0])
 # names of all channels:
 channel_names = np.array(['C1', 'C2', 'C3'])
 
@@ -62,6 +62,8 @@ raw_psd_object = RawPSD_class.RawPSD(num_examples, num_channels, num_samples, sa
 
 # display selected raw signals:
 raw_psd_object.plot_raw_signal(examples, channels, channel_names)
+# display selected autocorrelation functions:
+raw_psd_object.plot_autocorr(examples, channels, channel_names)
 # display selected power spectral densities:
 raw_psd_object.plot_PSD(examples, channels, channel_names)
 
