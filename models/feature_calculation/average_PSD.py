@@ -73,7 +73,7 @@ def plot_average_PSD(PSD_bins, bins, examples, channels, channel_names):
     # create bin labels:
     bin_labels = []
     for i in range(num_bins):
-        bin_labels.append(str(bins[i, 0]) + "-" + str(bins[i, 1]) + " Hz")
+        bin_labels.append(str(bins[i, 0]) + "-" + str(bins[i, 1]))
 
     # create and format subplot:
     fig, axes = plotter.subplots(num_plot_examples, num_plot_channels)

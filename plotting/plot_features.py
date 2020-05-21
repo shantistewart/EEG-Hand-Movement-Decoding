@@ -33,8 +33,8 @@ channel_names = np.array(['C1', 'C2', 'C3'])
 window_size_example = 3.5
 stride_size_example = 1.0
 # for average-bin PSD features:
-max_freq = 125
-num_bins = 5
+max_freq = 30
+num_bins = 15
 # for PCA on PSD features:
 PCA = 0
 num_pcs = num_bins
@@ -62,8 +62,6 @@ raw_psd_object = RawPSD_class.RawPSD(num_examples, num_channels, num_samples, sa
 
 # display selected raw signals:
 raw_psd_object.plot_raw_signal(examples, channels, channel_names)
-# display selected autocorrelation functions:
-raw_psd_object.plot_autocorr(examples, channels, channel_names)
 # display selected power spectral densities:
 raw_psd_object.plot_PSD(examples, channels, channel_names)
 
