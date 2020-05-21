@@ -17,7 +17,7 @@ from models.neural_nets import example_generation
 #       size: (num_bins, 2)
 #   sample_freq = sampling frequency
 # Outputs:
-#   PSD_bins = 3D array of average PSD values in selected frequency bins for multiple channels for multiple examples
+#   PSD_avg = 3D array of average PSD values in selected frequency bins for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_bins)
 def average_PSD_algorithm(X, bins, sample_freq):
     # estimate power spectral density:
