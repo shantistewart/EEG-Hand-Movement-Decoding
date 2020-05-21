@@ -24,7 +24,7 @@ subject_num = 1
 # examples to plot:
 examples = np.array([99, 100, 199, 200])
 # channels to plot:
-channels = np.array([0])
+channels = np.array([0, 1])
 # names of all channels:
 channel_names = np.array(['C1', 'C2', 'C3'])
 
@@ -34,7 +34,7 @@ window_size_example = 3.5
 stride_size_example = 1.0
 # for average-bin PSD features:
 max_freq = 30
-num_bins = 15
+num_bins = 10
 # for PCA on PSD features:
 PCA = 0
 num_pcs = num_bins
