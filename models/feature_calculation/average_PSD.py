@@ -76,9 +76,9 @@ def plot_average_PSD(PSD_bins, bins, examples, channels, channel_names):
         bin_labels.append(str(bins[i, 0]) + "-" + str(bins[i, 1]) + " Hz")
 
     # create and format subplot:
-    fig, axes = plotter.subplots(num_plot_channels, num_plot_examples)
+    fig, axes = plotter.subplots(num_plot_examples, num_plot_channels)
     # reshape axes to handle shape error if either dimension = 1
-    axes = np.reshape(axes, (num_plot_channels, num_plot_examples))
+    axes = np.reshape(axes, (num_plot_examples, num_plot_channels))
     plotter.subplots_adjust(hspace=1)
     # locations of labels:
     bin_loc = np.arange(num_bins)
@@ -88,9 +88,9 @@ def plot_average_PSD(PSD_bins, bins, examples, channels, channel_names):
     # plot bar graph of average PSD values in selected frequency bins:
     for i in range(num_plot_examples):
         for j in range(num_plot_channels):
-            axes[j, i].bar(bin_loc, PSD_bins[examples[i], channels[j]], width, label='PSD')
-            axes[j, i].set_title('Average PSD of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
-            axes[j, i].set_ylabel('Average PSD')
-            axes[j, i].set_xticks(bin_loc)
-            axes[j, i].set_xticklabels(bin_labels)
-            axes[j, i].legend()
+            axes[i, j].bar(bin_loc, PSD_bins[examples[i], channels[j]], width, label='PSD')
+            axes[i, j].set_title('Average PSD of Example {0}, {1}'.format(examples[i] + 1, channel_names[channels[j]]))
+            axes[i, j].set_ylabel('Average PSD')
+            axes[i, j].set_xticks(bin_loc)
+            axes[i, j].set_xticklabels(bin_labels)
+            axes[i, j].legend()
