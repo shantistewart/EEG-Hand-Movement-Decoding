@@ -5,8 +5,8 @@
 
 
 import numpy as np
-# import function modules:
 from models.feature_calculation import power_spectral_density as power, average_PSD, PCA_on_PSD, spectrogram
+from models.neural_nets import example_generation
 
 
 # Function description: calculate average power spectral density values in selected frequency bins.
@@ -17,7 +17,7 @@ from models.feature_calculation import power_spectral_density as power, average_
 #       size: (num_bins, 2)
 #   sample_freq = sampling frequency
 # Outputs:
-#   PSD_bins = 3D array of average PSD values in selected frequency bins for multiple channels for multiple examples
+#   PSD_avg = 3D array of average PSD values in selected frequency bins for multiple channels for multiple examples
 #       size: (num_examples, num_channels, num_bins)
 def average_PSD_algorithm(X, bins, sample_freq):
     # estimate power spectral density:
@@ -102,17 +102,17 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
 # Outputs:
 #   spectrograms = PSD spectrograms
 #       size: (num_examples, num_channels, num_windows, num_bins)
-def spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type,
-                          small_param):
+def spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None,
+                          matrix_type=0, small_param=0.0001):
     # convert window and stride sizes from seconds to samples:
     window_size = int(np.floor(sample_freq * window_size))
     stride_size = int(np.floor(sample_freq * stride_size))
 
     # window data for PSD estimation
-    X_window = spectrogram.window_data(X, window_size, stride_size)
+    X_window = example_generation.window_data(X, window_size, stride_size)
 
     # create spectrograms, optionally with the PCA algorithm:
-    spectrograms = spectrogram.create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type,
-                                                  small_param)
+    spectrograms = spectrogram.create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA=PCA, num_pcs=num_pcs,
+                                                  matrix_type=matrix_type, small_param=small_param)
 
     return spectrograms

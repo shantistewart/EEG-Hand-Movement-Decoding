@@ -5,38 +5,6 @@ import numpy as np
 from models.feature_calculation import feature_algorithms
 
 
-# Function description: performs sliding-window segmentation.
-# Inputs:
-#   X = 3D array of signal values for multiple channels for multiple examples
-#       size: (num_examples, num_channels, num_samples)
-#   window_size = size of sliding window, in samples
-#   stride_size = size of sliding window "stride", in samples
-# Outputs:
-#   X_window = windowed raw signals
-#       size: (num_examples, num_windows, num_channels, window_size)
-def window_data(X, window_size, stride_size):
-    # number of examples:
-    num_examples = X.shape[0]
-    # number of channels:
-    num_channels = X.shape[1]
-    # number of samples:
-    num_samples = X.shape[2]
-
-    # determine number of possible windows:
-    num_windows = int(np.floor((num_samples - window_size) / stride_size) + 1)
-
-    X_window = np.zeros((num_examples, num_windows, num_channels, window_size))
-    for i in range(num_windows):
-        # start of window index:
-        start_index = i * stride_size
-        # end of window index (inclusive):
-        end_index = start_index + window_size - 1
-
-        X_window[:, i, :, :] = X[:, :, start_index:end_index+1]
-
-    return X_window
-
-
 # Function description: creates power spectral density spectrograms.
 # Inputs:
 #   X_window = windowed raw signals
@@ -48,7 +16,7 @@ def window_data(X, window_size, stride_size):
 #       if PCA == 1: PCA algorithm is applied
 #       else: PCA algorithm is not applied
 #   num_pcs = number of principal components (eigenvectors) to project onto
-#       validity: num_pcs <= num_freq
+#       validity: num_pcs <= num_bins
 #   matrix_type = parameter to select which type of statistical matrix to calculate:
 #       if matrix type == 1: autocorrelation matrices are calculated
 #       if matrix type == 2: autocovariance matrices are calculated
@@ -57,7 +25,8 @@ def window_data(X, window_size, stride_size):
 # Outputs:
 #   spectrograms = PSD spectrograms
 #       size: (num_examples, num_channels, num_windows, num_bins)
-def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type, small_param):
+def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None, matrix_type=0,
+                       small_param=0.0001):
     # number of examples:
     num_examples = X_window.shape[0]
     # number of windows:
@@ -69,8 +38,8 @@ def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, 
 
     # apply PCA algorithm if selected:
     if PCA == 1:
-        PSD = feature_algorithms.PCA_on_PSD_algorithm(X_window, sample_freq, max_freq, num_bins, num_pcs, matrix_type,
-                                                      small_param)
+        PSD = feature_algorithms.PCA_on_PSD_algorithm(X_window, sample_freq, max_freq, num_bins, num_pcs=num_pcs,
+                                                      matrix_type=matrix_type, small_param=small_param)
     else:
         # construct frequency bins for PSD average calculation:
         bin_width = max_freq / num_bins
