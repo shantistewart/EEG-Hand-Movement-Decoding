@@ -1,3 +1,4 @@
+from os import path
 import numpy as np
 import sys
 
@@ -17,12 +18,18 @@ def ReadComp4(patient_num, path_to_file):
     left_array = []
     right_array = []
 
-    for i in range(1, 3):
+    for i in range(1, 6):
         for j in range(1, 61):
             left_file = left_file_form + str(i) + "_" + str(j) + ".txt"
             right_file = right_file_form + str(i) + "_" + str(j) + ".txt"
-            left_array += [np.loadtxt(left_file)]
-            right_array += [np.loadtxt(right_file)]
+            if path.exists(left_file):
+                left_array += [np.loadtxt(left_file)]
+            #else:
+            #    print("Left file is not available %d %d %d" %(patient_num, i, j))
+            if path.exists(right_file):
+                right_array += [np.loadtxt(right_file)]
+            #else:
+            #    print("Right file is not available %d %d %d" %(patient_num, i, j))
 
     left_array = np.array(left_array)
     right_array = np.array(right_array)
