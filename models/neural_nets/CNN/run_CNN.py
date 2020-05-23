@@ -14,7 +14,7 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 sample_freq = 250
 
 # subject number:
-subject_num = 7
+subject_num = 8
 
 # HYPERPARAMETERS:
 # test set fraction:
