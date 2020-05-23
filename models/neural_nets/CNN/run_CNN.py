@@ -14,7 +14,7 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 sample_freq = 250
 
 # subject number:
-subject_num = 1
+subject_num = 7
 
 # HYPERPARAMETERS:
 # test set fraction:
@@ -39,7 +39,7 @@ kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 200
 # for training CNN:
-num_epochs = 300
+num_epochs = 150
 batch_size = 32
 validation_fract = 0.2
 
