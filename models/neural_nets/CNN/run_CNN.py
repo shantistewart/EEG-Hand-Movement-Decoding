@@ -14,14 +14,14 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 sample_freq = 250
 
 # subject number:
-subject_num = 3
+subject_num = 1
 
 # HYPERPARAMETERS:
 # test set fraction:
-test_fract = 0.15
+test_fract = 0.2
 # for creating more training examples:
 window_size_example = 2.5
-stride_size_example = 0.2
+stride_size_example = 0.15
 # for spectrogram creation:
 window_size_PSD = 0.8
 stride_size_PSD = 0.05
