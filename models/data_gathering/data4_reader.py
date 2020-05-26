@@ -55,7 +55,7 @@ def stride_window(eeg_trial, stride, window_len, frequency):
         num_strides = num_strides - 1
 
     grouped_features = []
-    for i in range(num_strides):
+    for i in range(num_strides + 1):
         window_start = i * stride_examples
         window_end = window_start + window_examples
         grouped_features += [eeg_trial[:, window_start:window_end]]
