@@ -22,10 +22,10 @@ sample_freq = 250
 subject_num = 1
 
 # examples to plot:
-examples = np.array([99, 199])
+examples = np.array([55, 355])
 num_plot_examples = examples.shape[0]
 # channels to plot:
-channels = np.array([0])
+channels = np.array([0, 2])
 num_plot_channels = channels.shape[0]
 # names of all channels:
 channel_names = np.array(['C1', 'C2', 'C3'])
