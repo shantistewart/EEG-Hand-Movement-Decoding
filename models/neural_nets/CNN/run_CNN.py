@@ -5,6 +5,7 @@ import matplotlib.pyplot as plotter
 from models.neural_nets import example_generation
 from models.neural_nets.CNN import conv_neural_net
 
+
 print("\n")
 
 # NOT TO BE MODIFIED:
@@ -14,7 +15,7 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 sample_freq = 250
 
 # subject number:
-subject_num = 8
+subject_num = 1
 
 # HYPERPARAMETERS:
 # test set fraction:
