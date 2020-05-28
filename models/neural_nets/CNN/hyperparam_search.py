@@ -13,7 +13,7 @@ print("\n")
 sample_freq = 250
 
 # subjects to evaluate:
-subject_nums = np.array([1, 3, 5])
+subject_nums = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 # HYPERPARAMETERS:
 # for data set creation:
@@ -42,7 +42,7 @@ num_epochs = 100
 batch_size = 64
 validation_fract = 0.2
 
-# call function:
+# evaluate selected subjects:
 avg_train_acc, avg_val_acc, train_acc, val_acc = evaluate_CNN.train_eval_CNN(subject_nums, window_size_example,
                                                                              stride_size_example, sample_freq,
                                                                              num_conv_layers, num_dense_layers,
@@ -63,5 +63,8 @@ print("Validation accuracies for subjects:")
 print(val_acc)
 print("Average validation accuracy: {0}\n".format(avg_val_acc))
 
-# display plots:
+# plot a bar graph of accuracies:
+evaluate_CNN.plot_accuracies(train_acc, val_acc)
+
+# display all plots:
 plotter.show()

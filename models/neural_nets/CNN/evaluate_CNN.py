@@ -1,6 +1,8 @@
 # This file contains a function to train/evaluate a convolutional neural network across subjects.
 
 
+import numpy as np
+import matplotlib.pyplot as plotter
 from models.neural_nets import example_generation
 from models.neural_nets.CNN import conv_neural_net
 
@@ -114,3 +116,44 @@ def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sampl
     avg_val_acc = avg_val_acc / num_subjects
 
     return avg_train_acc, avg_val_acc, train_acc, val_acc
+
+
+# Function description: plots a bar graph of training and validation accuracies for selected subjects.
+# Inputs:
+#   train_acc = dictionary of training accuracies for subjects
+#   val_acc = dictionary of validation accuracies for subjects
+# Outputs: none
+def plot_accuracies(train_acc, val_acc):
+    # convert dictionaries to arrays:
+    train_acc = np.array(list(train_acc.items()))
+    val_acc = np.array(list(val_acc.items()))
+    # extract subject numbers (keys):
+    subject_nums = train_acc[:, 0]
+    # extract accuracies (values):
+    train_acc = train_acc[:, 1]
+    val_acc = val_acc[:, 1]
+
+    # number of subjects:
+    num_subjects = subject_nums.shape[0]
+
+    # create subject labels:
+    subject_labels = []
+    for subject in subject_nums:
+        subject_labels.append('Subject ' + str(int(subject)))
+
+    # create and format subplot:
+    fig, ax = plotter.subplots()
+    # plotter.subplots_adjust(hspace=1)
+    # locations of labels:
+    bin_loc = np.arange(num_subjects)
+    # width of bars:
+    width = 2. / num_subjects
+
+    # plot bar graph of training and validation accuracies as percentages:
+    ax.bar(bin_loc - width/2, 100 * train_acc, width, label='training accuracy')
+    ax.bar(bin_loc + width/2, 100 * val_acc, width, label='validation accuracy')
+    ax.set_title('Training and Validation Accuracies Across Subjects')
+    ax.set_ylabel('Accuracy (Percentage)')
+    ax.set_xticks(bin_loc)
+    ax.set_xticklabels(subject_labels)
+    ax.legend(loc='upper right')
