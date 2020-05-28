@@ -1,4 +1,4 @@
-# This file contains functions to build and train a convolutional neural network.
+# This file contains a class to build and train a convolutional neural network.
 
 
 import numpy as np
