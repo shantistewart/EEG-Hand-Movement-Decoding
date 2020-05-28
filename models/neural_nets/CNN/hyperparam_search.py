@@ -56,7 +56,7 @@ avg_train_acc, avg_val_acc, train_acc, val_acc = evaluate_CNN.train_eval_CNN(sub
                                                                              test_fract=test_fract, standard=standard)
 
 # display training and validation accuracies for subjects:
-print("Training accuracies for subjects:")
+print("\n\n\nTraining accuracies for subjects:")
 print(train_acc)
 print("Average training accuracy: {0}\n".format(avg_train_acc))
 print("Validation accuracies for subjects:")
