@@ -74,7 +74,7 @@ class ConvNet:
                            metrics=['binary_accuracy'])
 
         # train model:
-        self.history = self.model.fit(X_train, Y_train, batch_size=batch_size, epochs=num_epochs, verbose=2,
+        self.history = self.model.fit(X_train, Y_train, batch_size=int(batch_size), epochs=int(num_epochs), verbose=2,
                                       validation_split=validation_fract)
 
     # Function description: evaluates CNN by computing accuracy on a test set.
