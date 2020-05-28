@@ -130,6 +130,9 @@ class ConvNet:
     #       else: Pearson autocovariance matrices are calculated
     #   small_param = a small number to ensure that log(0) does not occur for log-normalization
     #   test_fract = fraction of data to use as test set
+    #   standard = parameter to select whether to standardize features
+    #       if standard == True: features are standardized
+    #       else: features are not standardized
     # Outputs:
     #   X_train = (shuffled) training set features
     #       size: ((1-test_fract) * num_examples, num_windows, num_bins, num_channels)
@@ -140,7 +143,7 @@ class ConvNet:
     #   Y_test = (shuffled) test set class labels
     #       size: (test_fract * num_examples, )
     def generate_features(self, X, Y, window_size, stride_size, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None,
-                          matrix_type=0, small_param=0.0001, test_fract=0.2):
+                          matrix_type=0, small_param=0.0001, test_fract=0.2, standard=True):
         # generate spectrogram features:
         X_spectro = feature_algorithms.spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq,
                                                              num_bins, PCA=PCA, num_pcs=num_pcs,
@@ -150,6 +153,10 @@ class ConvNet:
 
         # split features and class labels into training (+ validation) and test sets:
         X_train, Y_train, X_test, Y_test = example_generation.split_train_test(X_spectro, Y, test_fract=test_fract)
+
+        # standardize features if selected:
+        if standard:
+            X_train, X_test = example_generation.standardize_data(X_train, X_test)
 
         return X_train, Y_train, X_test, Y_test
 

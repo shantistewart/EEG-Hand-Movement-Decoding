@@ -18,11 +18,11 @@ sample_freq = 250
 subject_num = 1
 
 # HYPERPARAMETERS:
-# test set fraction:
-test_fract = 0.15
-# for creating more training examples:
+# for data set creation:
 window_size_example = 2.5
 stride_size_example = 0.1
+test_fract = 0.15
+standard = True
 # for spectrogram creation:
 window_size_PSD = 0.8
 stride_size_PSD = 0.05
@@ -58,7 +58,7 @@ CNN = conv_neural_net.ConvNet(num_conv_layers, num_dense_layers, num_kernels, ke
 X_train, Y_train, X_test, Y_test = CNN.generate_features(X, Y, window_size_PSD, stride_size_PSD, sample_freq, max_freq,
                                                          num_bins, PCA=PCA, num_pcs=num_pcs,
                                                          matrix_type=matrix_type, small_param=small_param,
-                                                         test_fract=test_fract)
+                                                         test_fract=test_fract, standard=standard)
 print("Size of train set: ", end="")
 print(X_train.shape)
 print("Size of test set: ", end="")
