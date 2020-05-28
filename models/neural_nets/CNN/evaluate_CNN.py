@@ -96,8 +96,12 @@ def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sampl
         # plot learning curve:
         CNN.plot_learn_curve()
 
-        train_acc[subject] = subject + 0.5
-        val_acc[subject] = subject + 0.1
+        # extract training and validation accuracies and record final values:
+        train_acc = CNN.history.history['binary_accuracy']
+        val_acc = CNN.history.history['val_binary_accuracy']
+        train_acc[subject] = train_acc[num_epochs-1]
+        val_acc[subject] = val_acc[num_epochs-1]
+        # keep running sum of training and validation accuracies:
         avg_train_acc += train_acc[subject]
         avg_val_acc += val_acc[subject]
 
