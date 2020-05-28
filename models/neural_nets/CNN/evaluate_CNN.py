@@ -4,8 +4,7 @@
 from models.neural_nets.CNN import conv_neural_net
 
 
-# Function description: trains different CNN's for all subjects and calculates average validation accuracy across all
-#   subjects.
+# Function description: trains and evaluates a CNN for selected subjects (separate instance for each subject).
 # Inputs:
 #   subject_nums = list of subject numbers to evaluate
 # Outputs:
