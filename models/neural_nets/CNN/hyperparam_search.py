@@ -2,6 +2,7 @@
 
 
 import numpy as np
+import matplotlib.pyplot as plotter
 from models.neural_nets.CNN import evaluate_CNN
 
 
@@ -12,7 +13,7 @@ print("\n")
 sample_freq = 250
 
 # subjects to evaluate:
-subject_nums = np.array([1, 3, 7])
+subject_nums = np.array([1, 3, 5])
 
 # HYPERPARAMETERS:
 # for data set creation:
@@ -61,3 +62,6 @@ print("Average training accuracy: {0}\n".format(avg_train_acc))
 print("Validation accuracies for subjects:")
 print(val_acc)
 print("Average validation accuracy: {0}\n".format(avg_val_acc))
+
+# display plots:
+plotter.show()
