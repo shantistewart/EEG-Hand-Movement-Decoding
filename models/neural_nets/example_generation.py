@@ -118,3 +118,27 @@ def split_train_test(X, Y, test_fract=0.2):
     Y_test = Y[test_index:]
 
     return X_train, Y_train, X_test, Y_test
+
+
+# Function description: standardizes training set and standardizes test set with statistics from training set.
+#   standardization: remove mean (center) and divide by variance (normalize)
+# Inputs:
+#   X_train = training set features
+#       size: (num_train_examples,...)
+#   X_test = test set features
+#       size: (num_test_examples,...)
+# Outputs:
+#   X_train = standardized training set features
+#       size: (num_train_examples,...)
+#   X_test = standardized (by training set) test set features
+#       size: (num_test_examples,...)
+def standardize_data(X_train, X_test):
+    # calculate statistics (across examples) of training set:
+    mean_train = np.mean(X_train, axis=0, keepdims=True)
+    std_train = np.std(X_train, axis=0, keepdims=True)
+
+    # standardize training and test sets by training set statistics:
+    X_train = (X_train - mean_train) / std_train
+    X_test = (X_test - mean_train) / std_train
+
+    return X_train, X_test
