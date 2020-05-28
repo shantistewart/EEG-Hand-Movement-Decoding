@@ -15,7 +15,7 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 sample_freq = 250
 
 # subject number:
-subject_num = 1
+subject_num = 6
 
 # HYPERPARAMETERS:
 # for data set creation:
@@ -78,5 +78,5 @@ CNN.train_model(X_train, Y_train, num_epochs, batch_size, validation_fract)
 test_acc = CNN.test_model(X_test, Y_test)
 
 # plot learning curve:
-CNN.plot_learn_curve()
+CNN.plot_learn_curve(subject_num)
 plotter.show()

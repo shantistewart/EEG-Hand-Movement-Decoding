@@ -68,13 +68,13 @@ class ConvNet:
     #   batch_size = mini-batch size for training
     #   validation_fract = fraction of training set to use as validation set
     # Outputs: none
-    def train_model(self, X_train, Y_train, num_epochs=10, batch_size=32, validation_fract=0.2):
+    def train_model(self, X_train, Y_train, num_epochs, batch_size, validation_fract):
         # compile model:
         self.model.compile(optimizer='Adam', loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
                            metrics=['binary_accuracy'])
 
         # train model:
-        self.history = self.model.fit(X_train, Y_train, epochs=int(num_epochs), verbose=2,
+        self.history = self.model.fit(X_train, Y_train, batch_size=batch_size, epochs=num_epochs, verbose=2,
                                       validation_split=validation_fract)
 
     # Function description: evaluates CNN by computing accuracy on a test set.
@@ -91,17 +91,18 @@ class ConvNet:
         return test_acc
 
     # Function description: plots learning curve (training and validation accuracy vs. epochs).
-    # Inputs: none
+    # Inputs:
+    #   subject_num = number of subject
     # Outputs: none
-    def plot_learn_curve(self):
+    def plot_learn_curve(self, subject_num):
         # extract training and validation accuracies:
         train_acc = self.history.history['binary_accuracy']
         val_acc = self.history.history['val_binary_accuracy']
 
         # plot learning curve:
         fig, axes = plotter.subplots()
-        axes.set_title('CNN with {0} Convolutional Layers and {1} Dense Layers'
-                       .format(self.num_conv_layers, self.num_dense_layers))
+        axes.set_title('Subject {0}: CNN with {1} Convolutional Layers and {2} Dense Layers'
+                       .format(subject_num, self.num_conv_layers, self.num_dense_layers))
         axes.plot(train_acc, label='training accuracy')
         axes.plot(val_acc, label='validation accuracy')
         axes.set_xlabel('Epochs')
