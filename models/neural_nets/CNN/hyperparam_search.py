@@ -6,6 +6,6 @@ from models.neural_nets.CNN import evaluate_CNN
 
 
 # subjects to evaluate:
-subject_nums = [1, 3, 5, 7, 9]
+subject_nums = np.array([1, 3, 5, 7, 9])
 
 evaluate_CNN.train_eval_CNN(subject_nums)
