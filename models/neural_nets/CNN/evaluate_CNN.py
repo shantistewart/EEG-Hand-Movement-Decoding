@@ -46,6 +46,10 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 #       if standard == True: features are standardized
 #       else: features are not standardized
 # Outputs:
+#   avg_train_acc = average training accuracy across subjects
+#   avg_val_acc = average validation accuracy across subjects
+#   train_acc = dictionary of training accuracies for subjects
+#   val_acc = dictionary of validation accuracies for subjects
 def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sample_freq, num_conv_layers,
                    num_dense_layers, num_kernels, kernel_size, pool_size, num_hidden_nodes, num_epochs, batch_size,
                    validation_fract, window_size_PSD, stride_size_PSD, max_freq, num_bins, PCA=0, num_pcs=None,
