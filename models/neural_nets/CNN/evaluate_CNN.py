@@ -16,10 +16,19 @@ def train_eval_CNN(subject_nums):
     # dictionaries for training and validation accuracies for subjects:
     train_acc = {}
     val_acc = {}
+    # average training and validation accuracies:
+    avg_train_acc = 0
+    avg_val_acc = 0
 
     # train a different CNN instance for each subject and record training/validation accuracies:
     for subject in subject_nums:
         train_acc[subject] = subject + 0.5
         val_acc[subject] = subject + 0.1
+        avg_train_acc +=  train_acc[subject]
+        avg_val_acc += val_acc[subject]
 
-    return train_acc, val_acc
+    # normalize averages:
+    avg_train_acc = avg_train_acc / num_subjects
+    avg_val_acc = avg_val_acc / num_subjects
+
+    return avg_train_acc, avg_val_acc, train_acc, val_acc
