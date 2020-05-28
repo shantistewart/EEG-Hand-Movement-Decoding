@@ -41,7 +41,7 @@ pool_size = 2
 num_hidden_nodes = 200
 # for training CNN:
 num_epochs = 100
-batch_size = 32
+batch_size = 64
 validation_fract = 0.2
 
 # get data and generate examples:
