@@ -132,11 +132,11 @@ class ConvNet:
     #   test_fract = fraction of data to use as test set
     # Outputs:
     #   X_train = (shuffled) training set features
-    #       size: ((1-test_fract) * num_examples, num_channels, num_windows, num_bins)
+    #       size: ((1-test_fract) * num_examples, num_windows, num_bins, num_channels)
     #   Y_train = (shuffled) training set class labels
     #       size: ((1-test_fract) * num_examples, )
     #   X_test = (shuffled) test set features
-    #       size: (test_fract * num_examples, num_channels, num_windows, num_bins)
+    #       size: (test_fract * num_examples, num_windows, num_bins, num_channels)
     #   Y_test = (shuffled) test set class labels
     #       size: (test_fract * num_examples, )
     def generate_features(self, X, Y, window_size, stride_size, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None,
