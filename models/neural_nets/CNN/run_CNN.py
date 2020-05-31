@@ -1,4 +1,4 @@
-# This file contains code to run a convolutional neural network.
+# This file contains code to run a convolutional neural network for binary classification.
 
 
 import matplotlib.pyplot as plotter
