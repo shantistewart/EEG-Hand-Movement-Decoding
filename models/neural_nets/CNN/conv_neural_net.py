@@ -157,8 +157,8 @@ class ConvNet:
         X_spectro = np.transpose(X_spectro, axes=(0, 2, 3, 1))
 
         # split features and class labels into training, validation, and test sets:
-        X_train, Y_train, X_val, Y_val, X_test, Y_test = example_generation.split_train_test(X_spectro, Y, val_fract,
-                                                                                             test_fract)
+        X_train, Y_train, X_val, Y_val, X_test, Y_test = example_generation.split_data(X_spectro, Y, val_fract,
+                                                                                       test_fract)
 
         # standardize features if selected:
         if standard:

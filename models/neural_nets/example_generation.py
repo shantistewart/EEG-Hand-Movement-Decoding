@@ -115,7 +115,7 @@ def generate_examples(subject_num, path_to_file, window_size, stride_size, sampl
 #       size: (test_fract * num_examples,...)
 #   Y_test = (shuffled) test set class labels
 #       size: (test_fract * num_examples, )
-def split_train_test(X, Y, val_fract, test_fract):
+def split_data(X, Y, val_fract, test_fract):
     # total number of examples:
     num_examples = X.shape[0]
 
