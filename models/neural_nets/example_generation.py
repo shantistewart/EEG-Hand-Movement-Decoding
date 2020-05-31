@@ -43,12 +43,12 @@ def window_data(X, window_size, stride_size):
     return X_window
 
 
-# Function description: generates examples (raw data + class labels) with sliding window segmentation.
+# Function description: generates examples (raw data + class labels) with sliding window augmentation.
 # Inputs:
-#   subject_num = number of human subject (1-9)
+#   subject_num = number of subject (1-9)
 #   path_to_file = path to data file
-#   window_size = size of sliding window to create more examples, in seconds
-#   stride_size = size of "stride" of sliding window to create more examples, in seconds
+#   window_size = size of sliding window (to create more examples), in seconds
+#   stride_size = size of "stride" of sliding window (to create more examples), in seconds
 #   sample_freq = sampling frequency
 # Outputs:
 #   X = raw data
@@ -61,16 +61,16 @@ def generate_examples(subject_num, path_to_file, window_size, stride_size, sampl
     stride_size = int(np.floor(sample_freq * stride_size))
 
     # get data:
-    #   size: (num_trials, num_channels, num_samples)
+    #   size of leftX, rightX: (num_trials, num_channels, num_samples)
     leftX, rightX = data4_reader.ReadComp4(subject_num, path_to_file)
 
     # create more examples by sliding time window segmentation:
-    #   new size: (num_trials, num_windows, num_channels, window_size)
+    #   new size of leftX, rightX: (num_trials, num_windows, num_channels, window_size)
     leftX = window_data(leftX, window_size, stride_size)
     rightX = window_data(rightX, window_size, stride_size)
 
-    # combine first 2 dimensions (num_examples * num_windows):
-    #   new size: (num_trials * num_windows, num_channels, window_size):
+    # combine first 2 dimensions (num_trials * num_windows):
+    #   new size of leftX, rightX: (num_trials * num_windows, num_channels, window_size):
     leftX = np.reshape(leftX, (-1, leftX.shape[2], leftX.shape[3]))
     rightX = np.reshape(rightX, (-1, rightX.shape[2], rightX.shape[3]))
 
