@@ -64,11 +64,10 @@ def generate_examples(subject_num, path_to_file, window_size, stride_size, sampl
     # get raw data:
     #   size of leftX, rightX: (0.5*num_trials, num_channels, num_samples)
     leftX, rightX = data4_reader.ReadComp4(subject_num, path_to_file)
-    half_num_trials = leftX.shape[0]
     num_channels = leftX.shape[1]
     # generate corresponding class labels:
-    leftY = LEFT_HAND_LABEL * np.ones(half_num_trials, dtype=int)
-    rightY = RIGHT_HAND_LABEL * np.ones(half_num_trials, dtype=int)
+    leftY = LEFT_HAND_LABEL * np.ones(leftX.shape[0], dtype=int)
+    rightY = RIGHT_HAND_LABEL * np.ones(rightX.shape[0], dtype=int)
 
     # concatenate left and right raw data/class labels:
     #   size of X: (num_trials, num_channels, num_samples), size of Y: (num_trials, )

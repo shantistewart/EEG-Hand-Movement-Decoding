@@ -36,7 +36,7 @@ small_param = 0.0001
 # for CNN architecture:
 num_conv_layers = 2
 num_dense_layers = 1
-num_kernels = 10
+num_kernels = 3
 kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 300
