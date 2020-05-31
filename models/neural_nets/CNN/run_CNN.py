@@ -19,7 +19,7 @@ subject_num = 1
 
 # HYPERPARAMETERS:
 # for data set creation:
-window_size_example = 3.5
+window_size_example = 2.5
 stride_size_example = 0.1
 val_fract = 0.2
 test_fract = 0.15
@@ -39,7 +39,7 @@ num_dense_layers = 1
 num_kernels = 3
 kernel_size = 3
 pool_size = 2
-num_hidden_nodes = 300
+num_hidden_nodes = 200
 # for training CNN:
 num_epochs = 100
 batch_size = 64
