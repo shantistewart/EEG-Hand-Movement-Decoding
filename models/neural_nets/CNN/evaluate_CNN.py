@@ -28,7 +28,6 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 #   num_hidden_nodes = number of nodes of fully connected layers (except last layer)
 #   num_epochs = number of epochs to train for
 #   batch_size = mini-batch size for training
-#   validation_fract = fraction of training set to use as validation set
 #   window_size_PSD = size of sliding window to calculate PSD, in seconds
 #   stride_size_PSD = size of "stride" of sliding window to calculate PSD, in seconds
 #   max_freq = maximum frequency of PSD to consider
@@ -55,8 +54,8 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 #   val_acc = dictionary of validation accuracies for subjects
 def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sample_freq, num_conv_layers,
                    num_dense_layers, num_kernels, kernel_size, pool_size, num_hidden_nodes, num_epochs, batch_size,
-                   validation_fract, window_size_PSD, stride_size_PSD, max_freq, num_bins, PCA=0, num_pcs=None,
-                   matrix_type=0, small_param=0.0001, val_fract=0.2, test_fract=0.15, standard=True):
+                   window_size_PSD, stride_size_PSD, max_freq, num_bins, PCA=0, num_pcs=None, matrix_type=2,
+                   small_param=0.0001, val_fract=0.2, test_fract=0.15, standard=True):
     # number of subjects:
     num_subjects = subject_nums.shape[0]
     # dictionaries for training and validation accuracies for subjects:
