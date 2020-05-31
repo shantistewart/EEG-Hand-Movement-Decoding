@@ -150,7 +150,7 @@ def plot_accuracies(train_acc, val_acc):
     # locations of labels:
     bin_loc = np.arange(num_subjects)
     # width of bars:
-    width = 2. / num_subjects
+    width = 0.25
 
     # plot bar graph of training and validation accuracies as percentages:
     ax.bar(bin_loc - width/2, 100 * train_acc, width, label='training accuracy')
