@@ -134,7 +134,7 @@ def split_train_test(X, Y, val_fract, test_fract):
     # separately shuffle training, validation, and test sets:
     X_train, Y_train = sklearn.utils.shuffle(X_train, Y_train)
     X_val, Y_val = sklearn.utils.shuffle(X_val, Y_val)
-    X_test, Y_test = sklearn.utils.shuffle((X_test, Y_test))
+    X_test, Y_test = sklearn.utils.shuffle(X_test, Y_test)
 
     return X_train, Y_train, X_val, Y_val, X_test, Y_test
 
