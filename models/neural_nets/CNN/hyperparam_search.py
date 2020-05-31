@@ -13,7 +13,7 @@ print("\n")
 sample_freq = 250
 
 # subjects to evaluate:
-subject_nums = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+subject_nums = np.array([1, 4, 7, 8])
 
 # HYPERPARAMETERS:
 # for data set creation:
@@ -39,7 +39,7 @@ kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 300
 # for training CNN:
-num_epochs = 50
+num_epochs = 25
 batch_size = 64
 
 # evaluate selected subjects:
