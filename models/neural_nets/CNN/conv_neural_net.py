@@ -106,7 +106,7 @@ class ConvNet:
         axes.plot(val_acc, label='validation accuracy')
         axes.set_xlabel('Epochs')
         axes.set_ylabel('Accuracy')
-        axes.legend(loc='center right')
+        axes.legend(loc='upper right')
 
     # Function description: generates training and test set features for CNN.
     # Inputs:
