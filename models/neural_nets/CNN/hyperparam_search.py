@@ -18,7 +18,7 @@ subject_nums = np.array([1, 4, 8])
 # HYPERPARAMETERS:
 # for data set creation:
 window_size_example = 2.5
-stride_size_example = 0.25
+stride_size_example = 0.1
 val_fract = 0.15
 test_fract = 0.15
 standard = True
