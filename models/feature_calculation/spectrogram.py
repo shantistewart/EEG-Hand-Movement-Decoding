@@ -25,8 +25,8 @@ from models.feature_calculation import feature_algorithms
 # Outputs:
 #   spectrograms = PSD spectrograms
 #       size: (num_examples, num_channels, num_windows, num_bins)
-def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None, matrix_type=0,
-                       small_param=0.0001):
+def create_spectrogram(X_window, sample_freq, max_freq, num_bins, PCA, num_pcs, matrix_type,
+                       small_param):
     # number of examples:
     num_examples = X_window.shape[0]
     # number of windows:
