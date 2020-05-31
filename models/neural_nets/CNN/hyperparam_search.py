@@ -13,7 +13,7 @@ print("\n")
 sample_freq = 250
 
 # subjects to evaluate:
-subject_nums = np.array([1, 4, 7, 8])
+subject_nums = np.array([1, 4, 8])
 
 # HYPERPARAMETERS:
 # for data set creation:
