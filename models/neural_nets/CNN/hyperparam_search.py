@@ -39,7 +39,7 @@ kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 300
 # for training CNN:
-num_epochs = 100
+num_epochs = 50
 batch_size = 64
 
 # evaluate selected subjects:
