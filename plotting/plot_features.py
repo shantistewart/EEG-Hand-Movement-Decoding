@@ -19,10 +19,10 @@ path_to_data_file = "../MATLAB/biosig/Data_txt/"
 sample_freq = 250
 
 # subject number:
-subject_num = 1
+subject_num = 7
 
 # examples to plot:
-examples = np.array([55, 355])
+examples = np.array([49, 249, 449])
 num_plot_examples = examples.shape[0]
 # channels to plot:
 channels = np.array([0, 2])
@@ -40,7 +40,7 @@ num_bins = 10
 # for PCA on PSD features:
 PCA = 0
 num_pcs = num_bins
-matrix_type = 0
+matrix_type = 2
 small_param = 0.0001
 # for spectrogram creation:
 window_size_PSD = 1.0
@@ -66,7 +66,7 @@ Rxx, freq, PSD = power.estimate_psd(X, sample_freq)
 raw_psd_object = RawPSD_class.RawPSD(num_examples, num_channels, num_samples, sample_freq, X, Rxx, freq, PSD)
 
 # display selected raw signals:
-# raw_psd_object.plot_raw_signal(examples, channels, channel_names)
+raw_psd_object.plot_raw_signal(examples, channels, channel_names)
 # display selected power spectral densities:
 raw_psd_object.plot_PSD(examples, channels, channel_names)
 
@@ -100,12 +100,12 @@ for i, axis in enumerate(axes.flat):
     # get indices of example and channel:
     example_ind = i // num_plot_channels
     channel_ind = i % num_plot_channels
-    axis.imshow(np.transpose(X_spectro[examples[example_ind], channels[channel_ind]]), cmap='gray', aspect='equal',
+    axis.imshow(np.transpose(X_spectro[examples[example_ind], channels[channel_ind]]), aspect='equal',
                 origin='lower')
     axis.set_title('Spectrogram of Example {0}, {1}'.format(examples[example_ind] + 1,
                                                             channel_names[channels[channel_ind]]))
 plotter.tight_layout(True)
 
 
-# show plots:
+# display plots:
 plotter.show()
