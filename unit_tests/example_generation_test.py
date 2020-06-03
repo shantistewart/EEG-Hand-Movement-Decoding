@@ -3,6 +3,30 @@
 
 import numpy as np
 from models.neural_nets import example_generation as example
+from models.data_gathering import data4_reader
+
+
+print("\n")
+
+
+# NOT TO BE MODIFIED:
+# path to data files:
+path_to_file = "../MATLAB/biosig/Data_txt/"
+# sampling frequency:
+sample_freq = 250
+
+# subject number:
+subject_num = 2
+
+# temporary testing:
+# get raw data:
+leftX, rightX = data4_reader.ReadComp4(subject_num, path_to_file)
+# display shape of leftX and rightX:
+print("leftX size: ", end="")
+print(leftX.shape)
+print("rightX size: ", end="")
+print(rightX.shape)
+print("")
 
 
 # --------------------TESTING window_data() FUNCTION--------------------
