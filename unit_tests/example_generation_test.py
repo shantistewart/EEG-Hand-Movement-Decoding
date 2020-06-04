@@ -41,6 +41,7 @@ window_size_ = 3
 stride_size_ = 2
 print("Window and stride sizes in seconds: ({0}, {1})\n".format(window_size_, stride_size_))
 
+
 """
 # --------------------TESTING ReadComp4() FUNCTION--------------------
 print("\n----------TESTING ReadComp4() FUNCTION----------\n")
@@ -55,6 +56,7 @@ print(rightX.shape)
 print("\n")
 """
 
+
 """
 # --------------------TESTING window_data() FUNCTION--------------------
 print("\n----------TESTING window_data() FUNCTION----------\n")
@@ -68,6 +70,7 @@ print(x_window.shape)
 print(x_window)
 print("\n")
 """
+
 
 # --------------------TESTING generate_examples() FUNCTION--------------------
 print("\n----------TESTING generate_examples() FUNCTION----------\n")
@@ -176,4 +179,36 @@ print("")
 print("Generated example class labels:\nSize: ", end="")
 print(y_window.shape)
 print(y_window)
+print("\n")
+
+
+# --------------------TESTING split_data() FUNCTION--------------------
+print("\n----------TESTING split_data() FUNCTION----------\n")
+
+# data set split parameters:
+val_fract = 0.15
+test_fract = 0.15
+
+# call function:
+X_train, Y_train, X_val, Y_val, X_test, Y_test = example.split_data(x_window, y_window, val_fract, test_fract)
+
+# display training/validation/test features and class labels:
+print("X_train:\nSize: ", end="")
+print(X_train.shape)
+print(X_train)
+print("\nY_train:\nSize: ", end="")
+print(Y_train.shape)
+print(Y_train)
+print("\nX_val:\nSize: ", end="")
+print(X_val.shape)
+print(X_val)
+print("\nY_val:\nSize: ", end="")
+print(Y_val.shape)
+print(Y_val)
+print("\nX_test:\nSize: ", end="")
+print(X_test.shape)
+print(X_test)
+print("\nY_test:\nSize: ", end="")
+print(Y_test.shape)
+print(Y_test)
 print("\n")
