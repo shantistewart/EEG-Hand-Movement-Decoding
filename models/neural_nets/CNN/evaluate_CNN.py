@@ -47,6 +47,12 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 #   standard = parameter to select whether to standardize features
 #       if standard == True: features are standardized
 #       else: features are not standardized
+#   L2_reg = L2 regularization parameter
+#       if L2_reg == 0: L2 regularization is not used
+#       else: L2 regularization is used
+#   dropout_reg = dropout regularization parameter
+#       if dropout_reg == 0: L2 regularization is not used
+#       else: dropout regularization is used
 # Outputs:
 #   avg_train_acc = average training accuracy across subjects
 #   avg_val_acc = average validation accuracy across subjects
@@ -55,7 +61,7 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sample_freq, num_conv_layers,
                    num_dense_layers, num_kernels, kernel_size, pool_size, num_hidden_nodes, num_epochs, batch_size,
                    window_size_PSD, stride_size_PSD, max_freq, num_bins, PCA=0, num_pcs=None, matrix_type=2,
-                   small_param=0.0001, val_fract=0.2, test_fract=0.15, standard=True):
+                   small_param=0.0001, val_fract=0.2, test_fract=0.15, standard=True, L2_reg=0.0, dropout_reg=0.0):
     # number of subjects:
     num_subjects = subject_nums.shape[0]
     # dictionaries for training and validation accuracies for subjects:
@@ -95,7 +101,7 @@ def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sampl
 
         # build CNN model:
         input_shape = (X_train.shape[1], X_train.shape[2], X_train.shape[3])
-        CNN.build_model(input_shape)
+        CNN.build_model(input_shape, L2_reg=L2_reg, dropout_reg=dropout_reg)
         # display model architecture:
         print("\n")
         CNN.model.summary()
