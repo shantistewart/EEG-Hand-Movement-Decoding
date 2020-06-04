@@ -4,7 +4,7 @@
 import numpy as np
 import matplotlib.pyplot as plotter
 import tensorflow as tf
-from tensorflow.keras import layers, models
+from tensorflow.keras import models, layers, regularizers
 from models.neural_nets import example_generation
 from models.feature_calculation import feature_algorithms
 
@@ -42,8 +42,14 @@ class ConvNet:
     # Function description: builds CNN architecture.
     # Inputs:
     #   input_shape = dimensions of input features
+    #   L2_reg = L2 regularization parameter
+    #       if L2_reg == 0: L2 regularization is not used
+    #       else: L2 regularization is used
+    #   dropout_reg = dropout regularization parameter
+    #       if dropout_reg == 0: L2 regularization is not used
+    #       else: dropout regularization is used
     # Outputs: None
-    def build_model(self, input_shape):
+    def build_model(self, input_shape, L2_reg=0.0, dropout_reg=0.0):
         self.model = models.Sequential()
 
         # convolutional and max pooling layers:
@@ -54,9 +60,10 @@ class ConvNet:
 
         # fully connected layers:
         self.model.add(layers.Flatten())
-        self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu'))
+        self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu',
+                                    kernel_regularizer=regularizers.l2(L2_reg)))
         # output layer:
-        self.model.add(layers.Dense(1, activation='sigmoid'))
+        self.model.add(layers.Dense(1, activation='sigmoid'), kernel_regularizer=regularizers.l2(L2_reg))
 
     # Function description: compiles and trains CNN.
     # Inputs:

@@ -15,7 +15,7 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 sample_freq = 250
 
 # subject number:
-subject_num = 4
+subject_num = 1
 
 # HYPERPARAMETERS:
 # for data set creation:
@@ -40,6 +40,8 @@ num_kernels = 3
 kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 200
+L2_reg = 0.01
+dropout_reg = 0.01
 # for training CNN:
 num_epochs = 100
 batch_size = 64
@@ -69,7 +71,7 @@ print(X_test.shape)
 
 # build CNN model:
 input_shape = (X_train.shape[1], X_train.shape[2], X_train.shape[3])
-CNN.build_model(input_shape)
+CNN.build_model(input_shape, L2_reg=L2_reg, dropout_reg=dropout_reg)
 # display model architecture:
 print("\n")
 CNN.model.summary()
