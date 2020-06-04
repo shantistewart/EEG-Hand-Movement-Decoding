@@ -13,12 +13,12 @@ print("\n")
 sample_freq = 250
 
 # subjects to evaluate:
-subject_nums = np.array([1, 4, 8])
+subject_nums = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 # HYPERPARAMETERS:
 # for data set creation:
 window_size_example = 2.5
-stride_size_example = 0.1
+stride_size_example = 0.25
 val_fract = 0.15
 test_fract = 0.15
 standard = True
@@ -34,12 +34,14 @@ small_param = 0.0001
 # for CNN architecture:
 num_conv_layers = 2
 num_dense_layers = 1
-num_kernels = 10
+num_kernels = 3
 kernel_size = 3
 pool_size = 2
-num_hidden_nodes = 300
+num_hidden_nodes = 200
+L2_reg = 0.01
+dropout_reg = 0.0
 # for training CNN:
-num_epochs = 25
+num_epochs = 100
 batch_size = 64
 
 # evaluate selected subjects:
@@ -53,7 +55,8 @@ avg_train_acc, avg_val_acc, train_acc, val_acc = evaluate_CNN.train_eval_CNN(sub
                                                                              matrix_type=matrix_type,
                                                                              small_param=small_param,
                                                                              val_fract=val_fract, test_fract=test_fract,
-                                                                             standard=standard)
+                                                                             standard=standard, L2_reg=L2_reg,
+                                                                             dropout_reg=dropout_reg)
 
 # display training and validation accuracies for subjects:
 print("\n\n\nTraining accuracies for subjects:")
