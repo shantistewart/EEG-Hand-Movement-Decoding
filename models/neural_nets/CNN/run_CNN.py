@@ -15,12 +15,12 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 sample_freq = 250
 
 # subject number:
-subject_num = 1
+subject_num = 4
 
 # HYPERPARAMETERS:
 # for data set creation:
 window_size_example = 2.5
-stride_size_example = 0.1
+stride_size_example = 0.25
 val_fract = 0.15
 test_fract = 0.15
 standard = True
@@ -36,10 +36,10 @@ small_param = 0.0001
 # for CNN architecture:
 num_conv_layers = 2
 num_dense_layers = 1
-num_kernels = 10
+num_kernels = 3
 kernel_size = 3
 pool_size = 2
-num_hidden_nodes = 300
+num_hidden_nodes = 200
 # for training CNN:
 num_epochs = 100
 batch_size = 64
