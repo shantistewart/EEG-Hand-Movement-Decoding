@@ -130,21 +130,10 @@ def project_onto_pcs(PSD, eig_vects, num_pcs):
     # reorder dimensions of PSD so that PSD[n, p, f] = PSD of channel n, example p, frequency f:
     #   size of reordered PSD = (num_channels, num_examples, num_freq)
     PSD = np.transpose(PSD, axes=(1, 0, 2))
-    """
-    print("Transposed test input array:\nSize: ", end="")
-    print(PSD.shape)
-    print(PSD)
-    print("")
-    """
 
     # calculate projection weights of PSD values onto num_pcs principal components for all channels:
     project_weights = np.matmul(PSD, eig_vects[:, :, :num_pcs])
-    """
-    print("Non-transposed projection weights:\nSize: ", end="")
-    print(project_weights.shape)
-    print(project_weights)
-    print("")
-    """
+
     # reorder dimensions of project_weights so that project_weights[p, n, f] = projection weight of example p,
     #   channel, onto principal component f
     project_weights = np.transpose(project_weights, axes=(1, 0, 2))

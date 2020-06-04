@@ -1,4 +1,4 @@
-# This file contains a class to build and train a convolutional neural network.
+# This file contains a class to build, train, and evaluate a convolutional neural network.
 
 
 import numpy as np
@@ -39,8 +39,6 @@ class ConvNet:
         self.pool_size = pool_size
         self.num_hidden_nodes = num_hidden_nodes
 
-    # Methods:
-
     # Function description: builds CNN architecture.
     # Inputs:
     #   input_shape = dimensions of input features
@@ -64,18 +62,19 @@ class ConvNet:
     # Inputs:
     #   X_train = training set features
     #   Y_train = training set class labels
+    #   X_val = validation set features
+    #   Y_val = validation set class labels
     #   num_epochs = number of epochs to train for
     #   batch_size = mini-batch size for training
-    #   validation_fract = fraction of training set to use as validation set
     # Outputs: none
-    def train_model(self, X_train, Y_train, num_epochs, batch_size, validation_fract):
+    def train_model(self, X_train, Y_train, X_val, Y_val, num_epochs, batch_size):
         # compile model:
         self.model.compile(optimizer='Adam', loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
                            metrics=['binary_accuracy'])
 
         # train model:
-        self.history = self.model.fit(X_train, Y_train, batch_size=int(batch_size), epochs=int(num_epochs), verbose=2,
-                                      validation_split=validation_fract)
+        self.history = self.model.fit(x=X_train, y=Y_train, batch_size=int(batch_size), epochs=int(num_epochs),
+                                      verbose=2, validation_data=(X_val, Y_val))
 
     # Function description: evaluates CNN by computing accuracy on a test set.
     # Inputs:
@@ -107,13 +106,13 @@ class ConvNet:
         axes.plot(val_acc, label='validation accuracy')
         axes.set_xlabel('Epochs')
         axes.set_ylabel('Accuracy')
-        axes.legend(loc='center right')
+        axes.legend(loc='upper right')
 
     # Function description: generates training and test set features for CNN.
     # Inputs:
-    #   X = 3D array of raw signal values for multiple channels for multiple examples
-    #       size: (num_examples, num_channels, num_samples)
-    #   Y = class labels
+    #   X = windowed raw data, with shuffled trials
+    #       size: (num_examples, num_channels, window_size)
+    #   Y = class labels, with shuffled trials
     #       size: (num_examples, )
     #   window_size = size of sliding window to calculate PSD, in seconds
     #   stride_size = size of "stride" of sliding window to calculate PSD, in seconds
@@ -130,21 +129,26 @@ class ConvNet:
     #       if matrix type == 2: autocovariance matrices are calculated
     #       else: Pearson autocovariance matrices are calculated
     #   small_param = a small number to ensure that log(0) does not occur for log-normalization
+    #   val_fract = fraction of data to use as validation set
     #   test_fract = fraction of data to use as test set
     #   standard = parameter to select whether to standardize features
     #       if standard == True: features are standardized
     #       else: features are not standardized
     # Outputs:
     #   X_train = (shuffled) training set features
-    #       size: ((1-test_fract) * num_examples, num_windows, num_bins, num_channels)
+    #       size: ( (1-val_fract-test_fract) * num_examples,...)
     #   Y_train = (shuffled) training set class labels
-    #       size: ((1-test_fract) * num_examples, )
+    #       size: ( (1-val_fract-test_fract) * num_examples, )
+    #   X_val = (shuffled) validation set features
+    #       size: (val_fract * num_examples,...)
+    #   Y_val = (shuffled) validation set class labels
+    #       size: (val_fract * num_examples, )
     #   X_test = (shuffled) test set features
-    #       size: (test_fract * num_examples, num_windows, num_bins, num_channels)
+    #       size: (test_fract * num_examples,...)
     #   Y_test = (shuffled) test set class labels
     #       size: (test_fract * num_examples, )
     def generate_features(self, X, Y, window_size, stride_size, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None,
-                          matrix_type=0, small_param=0.0001, test_fract=0.2, standard=True):
+                          matrix_type=2, small_param=0.0001, val_fract=0.2, test_fract=0.15, standard=True):
         # generate spectrogram features:
         X_spectro = feature_algorithms.spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq,
                                                              num_bins, PCA=PCA, num_pcs=num_pcs,
@@ -152,12 +156,13 @@ class ConvNet:
         # move channels axis to last (for compatibility with CNN architecture):
         X_spectro = np.transpose(X_spectro, axes=(0, 2, 3, 1))
 
-        # split features and class labels into training (+ validation) and test sets:
-        X_train, Y_train, X_test, Y_test = example_generation.split_train_test(X_spectro, Y, test_fract=test_fract)
+        # split features and class labels into training, validation, and test sets:
+        X_train, Y_train, X_val, Y_val, X_test, Y_test = example_generation.split_data(X_spectro, Y, val_fract,
+                                                                                       test_fract)
 
         # standardize features if selected:
         if standard:
-            X_train, X_test = example_generation.standardize_data(X_train, X_test)
+            X_train, X_val, X_test = example_generation.standardize_data(X_train, X_val, X_test)
 
-        return X_train, Y_train, X_test, Y_test
+        return X_train, Y_train, X_val, Y_val, X_test, Y_test
 

@@ -46,7 +46,7 @@ def average_PSD_algorithm(X, bins, sample_freq):
 # Outputs:
 #   project_weights = 3D array of projection weights onto principal components (eigenvectors)
 #       size: (num_examples, num_channels, num_pcs)
-def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matrix_type=0, small_param=0.0001):
+def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matrix_type=2, small_param=0.0001):
     # construct frequency bins for PSD average calculation:
     bin_width = max_freq / num_bins
     bins = np.zeros((num_bins, 2))
@@ -103,7 +103,7 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
 #   spectrograms = PSD spectrograms
 #       size: (num_examples, num_channels, num_windows, num_bins)
 def spectrogram_algorithm(X, window_size, stride_size, sample_freq, max_freq, num_bins, PCA=0, num_pcs=None,
-                          matrix_type=0, small_param=0.0001):
+                          matrix_type=2, small_param=0.0001):
     # convert window and stride sizes from seconds to samples:
     window_size = int(np.floor(sample_freq * window_size))
     stride_size = int(np.floor(sample_freq * stride_size))

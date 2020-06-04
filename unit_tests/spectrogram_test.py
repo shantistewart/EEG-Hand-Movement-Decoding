@@ -2,6 +2,7 @@
 
 
 import numpy as np
+from models.neural_nets import example_generation
 from models.feature_calculation import spectrogram
 
 
@@ -28,7 +29,7 @@ stride_size = 2
 print("Window size and stride sizes: ({0}, {1})\n".format(window_size, stride_size))
 
 # call function:
-X_window = spectrogram.window_data(X, window_size, stride_size)
+X_window = example_generation.window_data(X, window_size, stride_size)
 
 # display windowed array:
 print("Windowed array:\nSize: ", end="")
