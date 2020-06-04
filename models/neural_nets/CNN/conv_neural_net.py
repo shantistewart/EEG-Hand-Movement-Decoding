@@ -63,7 +63,7 @@ class ConvNet:
         self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu',
                                     kernel_regularizer=regularizers.l2(L2_reg)))
         # output layer:
-        self.model.add(layers.Dense(1, activation='sigmoid'), kernel_regularizer=regularizers.l2(L2_reg))
+        self.model.add(layers.Dense(1, activation='sigmoid', kernel_regularizer=regularizers.l2(L2_reg)))
 
     # Function description: compiles and trains CNN.
     # Inputs:
