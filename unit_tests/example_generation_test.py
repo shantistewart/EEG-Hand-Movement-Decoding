@@ -6,6 +6,7 @@ import sklearn
 from models.data_gathering import data4_reader
 from models.neural_nets import example_generation as example
 
+
 print("\n")
 
 # NOT TO BE MODIFIED:
@@ -20,22 +21,10 @@ RIGHT_HAND_LABEL = 1
 # subject number:
 subject_num = 1
 
-# dimensions of test array:
+# dimensions of test arrays:
 num_examples = 3
-number_channels = 1
-num_samples = 5
-"""
-# test array:
-x = np.zeros((num_examples, number_channels, num_samples))
-for i in range(num_examples):
-    for j in range(number_channels):
-        for k in range(num_samples):
-            x[i, j, k] = (i + 1) * (k + 1) * (2 * np.mod(j + 1, 2) - 1)
-print("Test input array:\nSize: ", end="")
-print(x.shape)
-print(x)
-print("")
-"""
+number_channels = 2
+num_samples = 2
 # test window and stride sizes:
 window_size_ = 3
 stride_size_ = 2
@@ -47,12 +36,12 @@ print("Window and stride sizes in seconds: ({0}, {1})\n".format(window_size_, st
 print("\n----------TESTING ReadComp4() FUNCTION----------\n")
 
 # get raw data:
-leftX, rightX = data4_reader.ReadComp4(subject_num, path_to_file)
+left_X, right_X = data4_reader.ReadComp4(subject_num, path_to_file)
 # display shape of leftX and rightX:
 print("leftX size: ", end="")
-print(leftX.shape)
+print(left_X.shape)
 print("rightX size: ", end="")
-print(rightX.shape)
+print(right_X.shape)
 print("\n")
 """
 
@@ -60,6 +49,17 @@ print("\n")
 """
 # --------------------TESTING window_data() FUNCTION--------------------
 print("\n----------TESTING window_data() FUNCTION----------\n")
+
+# test array:
+x = np.zeros((num_examples, number_channels, num_samples))
+for i in range(num_examples):
+    for j in range(number_channels):
+        for k in range(num_samples):
+            x[i, j, k] = (i + 1) * (k + 1) * (2 * np.mod(j + 1, 2) - 1)
+print("Test input array:\nSize: ", end="")
+print(x.shape)
+print(x)
+print("")
 
 # call function:
 x_window = example.window_data(x, window_size_, stride_size_)
@@ -72,6 +72,7 @@ print("\n")
 """
 
 
+# """
 # --------------------TESTING generate_examples() FUNCTION--------------------
 print("\n----------TESTING generate_examples() FUNCTION----------\n")
 
@@ -180,8 +181,10 @@ print("Generated example class labels:\nSize: ", end="")
 print(y_window.shape)
 print(y_window)
 print("\n")
+# """
 
 
+# """
 # --------------------TESTING split_data() FUNCTION--------------------
 print("\n----------TESTING split_data() FUNCTION----------\n")
 
@@ -192,7 +195,7 @@ test_fract = 0.15
 # call function:
 X_train, Y_train, X_val, Y_val, X_test, Y_test = example.split_data(x_window, y_window, val_fract, test_fract)
 
-# display training/validation/test features and class labels:
+# display training/validation/test sets features and class labels:
 print("X_train:\nSize: ", end="")
 print(X_train.shape)
 print(X_train)
@@ -211,4 +214,53 @@ print(X_test)
 print("\nY_test:\nSize: ", end="")
 print(Y_test.shape)
 print(Y_test)
+print("\n")
+# """
+
+
+# --------------------TESTING standardize_data() FUNCTION--------------------
+print("\n----------TESTING standardize_data() FUNCTION----------\n")
+
+# test arrays:
+X_train = np.zeros((num_examples, number_channels, num_samples))
+for i in range(num_examples):
+    for j in range(number_channels):
+        for k in range(num_samples):
+            X_train[i, j, k] = (i + 1) * (j * num_samples + 1)
+print("X_train:\nSize: ", end="")
+print(X_train.shape)
+print(X_train)
+print("")
+X_val = np.zeros((num_examples, number_channels, num_samples))
+for i in range(num_examples):
+    for j in range(number_channels):
+        for k in range(num_samples):
+            X_val[i, j, k] = (i + 1) * (j * num_samples + k + 1)
+print("X_val:\nSize: ", end="")
+print(X_val.shape)
+print(X_val)
+print("")
+X_test = np.zeros((num_examples, number_channels, num_samples))
+for i in range(num_examples):
+    for j in range(number_channels):
+        for k in range(num_samples):
+            X_test[i, j, k] = 0.5 * (i + 1) * (j * num_samples + k + 1)
+print("X_test:\nSize: ", end="")
+print(X_test.shape)
+print(X_test)
+print("")
+
+# call function:
+X_train, X_val, X_test = example.standardize_data(X_train, X_val, X_test)
+
+# display training/validation/test sets:
+print("Standardized X_train:\nSize: ", end="")
+print(X_train.shape)
+print(X_train)
+print("\nStandardized X_val:\nSize: ", end="")
+print(X_val.shape)
+print(X_val)
+print("\nStandardized X_test:\nSize: ", end="")
+print(X_test.shape)
+print(X_test)
 print("\n")
