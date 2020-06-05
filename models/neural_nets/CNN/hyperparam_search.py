@@ -35,7 +35,7 @@ stride_size_PSD_range = [0.05, 0.05]
 max_freq_range = [15.0, 50.0]
 num_bins_range = [50, 50]
 # for CNN architecture:
-num_conv_layers_range = [1, 4]
+num_conv_layers_range = [1, 3]
 num_dense_layers_range = [1, 3]
 num_kernels_range = [3, 20]
 kernel_size = 3
