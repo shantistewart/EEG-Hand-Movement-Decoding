@@ -27,13 +27,13 @@ batch_size = 64
 
 # HYPERPARAMETERS RANGES:
 # for data set creation:
-window_size_example_range = [2.0, 3.0]
-stride_size_example_range = [0.1, 0.5]
+window_size_example_range = [2.5, 2.5]
+stride_size_example_range = [0.25, 0.25]
 # for spectrogram creation:
-window_size_PSD_min = 0.5
-stride_size_PSD_range = [0.05, 0.1]
+window_size_PSD = 0.8
+stride_size_PSD_range = [0.05, 0.05]
 max_freq_range = [15.0, 50.0]
-num_bins_range = [30, 50]
+num_bins_range = [50, 50]
 # for CNN architecture:
 num_conv_layers_range = [1, 4]
 num_dense_layers_range = [1, 3]
@@ -75,8 +75,8 @@ for i in range(num_iterations):
                           stride_size_example_range[0]
 
     # for spectrogram creation:
-    window_size_PSD = (0.5 * window_size_example_range[0] - window_size_PSD_min) * np.random.rand() + \
-                      window_size_PSD_min
+    # window_size_PSD = (0.5 * window_size_example_range[0] - window_size_PSD_min) * np.random.rand() + \
+                      # window_size_PSD_min
     stride_size_PSD = (stride_size_PSD_range[1] - stride_size_PSD_range[0]) * np.random.rand() + \
                       stride_size_PSD_range[0]
     max_freq = np.random.randint(max_freq_range[0], max_freq_range[1] + 1)
