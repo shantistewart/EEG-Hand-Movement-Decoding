@@ -27,7 +27,7 @@ batch_size = 64
 
 # HYPERPARAMETERS RANGES:
 # for data set creation:
-window_size_example_range = [2.0, 3.5]
+window_size_example_range = [2.0, 3.0]
 stride_size_example_range = [0.1, 0.5]
 # for spectrogram creation:
 window_size_PSD_min = 0.5
