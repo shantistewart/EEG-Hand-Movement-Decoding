@@ -42,14 +42,14 @@ class ConvNet:
     # Function description: builds CNN architecture.
     # Inputs:
     #   input_shape = dimensions of input features
+    #   reg_type = parameter to select type of regularization
+    #       if reg_type == 1: apply L2 regularization
+    #       else if reg_type == 2: apply dropout regularization
+    #       else: don't apply regularization
     #   L2_reg = L2 regularization parameter
-    #       if L2_reg == 0: L2 regularization is not used
-    #       else: L2 regularization is used with L2_reg as the regularization parameter
     #   dropout_reg = dropout regularization parameter
-    #       if dropout_reg == 0: L2 regularization is not used
-    #       else: dropout regularization is used with dropout_reg as the regularization parameter
     # Outputs: None
-    def build_model(self, input_shape, L2_reg=0.0, dropout_reg=0.0):
+    def build_model(self, input_shape, reg_type=1, L2_reg=0.0, dropout_reg=0.0):
         self.model = models.Sequential()
 
         # add convolutional and max pooling layers:
@@ -64,19 +64,19 @@ class ConvNet:
         # add fully connected layers:
         for _ in range(self.num_dense_layers):
             # include L2 regularization if selected:
-            if L2_reg != 0.0:
+            if reg_type == 1:
                 print("\nL2 regularization layer.")
                 self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu',
                                             kernel_regularizer=regularizers.l2(L2_reg)))
             else:
                 self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu'))
             # include dropout regularization if selected:
-            if dropout_reg != 0.0:
+            if reg_type == 2:
                 print("\nDropout regularization layer.")
                 self.model.add(layers.Dropout(dropout_reg))
 
         # output layer:
-        if L2_reg != 0.0:
+        if reg_type == 1:
             self.model.add(layers.Dense(1, activation='sigmoid', kernel_regularizer=regularizers.l2(L2_reg)))
         else:
             self.model.add(layers.Dense(1, activation='sigmoid'))
