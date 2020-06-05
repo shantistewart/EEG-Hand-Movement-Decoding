@@ -34,14 +34,14 @@ small_param = 0.0001
 # for CNN architecture:
 num_conv_layers = 2
 num_dense_layers = 1
-num_kernels = 3
+num_kernels = 5
 kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 200
-L2_reg = 0.0
-dropout_reg = 0.5
+L2_reg = 0.005
+dropout_reg = 0.0
 # for training CNN:
-num_epochs = 50
+num_epochs = 40
 batch_size = 64
 
 # evaluate selected subjects:
