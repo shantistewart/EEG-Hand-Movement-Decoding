@@ -44,10 +44,10 @@ class ConvNet:
     #   input_shape = dimensions of input features
     #   L2_reg = L2 regularization parameter
     #       if L2_reg == 0: L2 regularization is not used
-    #       else: L2 regularization is used
+    #       else: L2 regularization is used with L2_reg as the regularization parameter
     #   dropout_reg = dropout regularization parameter
     #       if dropout_reg == 0: L2 regularization is not used
-    #       else: dropout regularization is used
+    #       else: dropout regularization is used with dropout_reg as the regularization parameter
     # Outputs: None
     def build_model(self, input_shape, L2_reg=0.0, dropout_reg=0.0):
         self.model = models.Sequential()
