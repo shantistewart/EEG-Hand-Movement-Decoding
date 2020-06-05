@@ -38,15 +38,14 @@ stride_size_example = 0.1
 max_freq = 30
 num_bins = 10
 # for PCA on PSD features:
-PCA = 0
 num_pcs = num_bins
 matrix_type = 2
 small_param = 0.0001
-# for spectrogram creation:
+# for spectrogram generation:
 window_size_PSD = 1.0
 stride_size_PSD = 0.05
 max_freq_spectro = 30
-num_bins_spectro = 50
+num_bins_spectro = 40
 
 
 # get data and generate examples:
@@ -82,14 +81,45 @@ PSD_avg = feature_algorithms.average_PSD_algorithm(X, bins, sample_freq)
 # plot bar graph:
 average_PSD.plot_average_PSD(PSD_avg, bins, examples, channels, channel_names)
 
+# calculate average PSD values in frequency bins with PCA:
+PSD_avg_PCA = feature_algorithms.PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=num_bins,
+                                                      matrix_type=matrix_type, small_param=small_param)
+# plot bar graph:
+average_PSD.plot_average_PSD(PSD_avg_PCA, bins, examples, channels, channel_names)
 
-# generate spectrogram features:
+
+# generate spectrogram features without PCA:
+PCA = 0
 X_spectro = feature_algorithms.spectrogram_algorithm(X, window_size_PSD, stride_size_PSD, sample_freq, max_freq_spectro,
                                                      num_bins_spectro, PCA=PCA, num_pcs=num_pcs,
                                                      matrix_type=matrix_type, small_param=small_param)
 # display dimensions of spectrogram images:
-print("Size of spectrogram images (num_windows, num_bins): ", end="")
-print(X_spectro[examples[0], channels[0]].shape)
+print("Size of spectrogram images without PCA: ", end="")
+print(X_spectro.shape)
+# create and format subplot:
+fig, axes = plotter.subplots(nrows=num_plot_examples, ncols=num_plot_channels)
+# reshape axes to handle shape error if either dimension = 1
+axes = np.reshape(axes, (num_plot_examples, num_plot_channels))
+plotter.subplots_adjust(hspace=1)
+
+for i, axis in enumerate(axes.flat):
+    # get indices of example and channel:
+    example_ind = i // num_plot_channels
+    channel_ind = i % num_plot_channels
+    axis.imshow(np.transpose(X_spectro[examples[example_ind], channels[channel_ind]]), aspect='equal',
+                origin='lower')
+    axis.set_title('Spectrogram of Example {0}, {1}'.format(examples[example_ind] + 1,
+                                                            channel_names[channels[channel_ind]]))
+plotter.tight_layout(True)
+
+# generate spectrogram features with PCA:
+PCA = 1
+X_spectro = feature_algorithms.spectrogram_algorithm(X, window_size_PSD, stride_size_PSD, sample_freq, max_freq_spectro,
+                                                     num_bins_spectro, PCA=PCA, num_pcs=num_bins_spectro,
+                                                     matrix_type=matrix_type, small_param=small_param)
+# display dimensions of spectrogram images:
+print("Size of spectrogram images with PCA: ", end="")
+print(X_spectro.shape)
 # create and format subplot:
 fig, axes = plotter.subplots(nrows=num_plot_examples, ncols=num_plot_channels)
 # reshape axes to handle shape error if either dimension = 1
