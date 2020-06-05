@@ -62,11 +62,11 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
 
     # calculate selected statistical matrices of PSD values:
     if matrix_type == 1:
-        stat_matrices = PCA_on_PSD.calc_correlation_matrices(PSD_norm)
+        stat_matrices = PCA_on_PSD.calc_correlation_matrices(PSD_avg)
     elif matrix_type == 2:
-        stat_matrices = PCA_on_PSD.calc_covariance_matrices(PSD_norm)
+        stat_matrices = PCA_on_PSD.calc_covariance_matrices(PSD_avg)
     else:
-        stat_matrices = PCA_on_PSD.calc_pearson_covariance_matrices(PSD_norm)
+        stat_matrices = PCA_on_PSD.calc_pearson_covariance_matrices(PSD_avg)
 
     # calculate eigenvectors of PSD statistical matrices:
     eig_vects = PCA_on_PSD.calc_eig_vects(stat_matrices)
@@ -75,7 +75,7 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
     if num_pcs is None:
         num_pcs = num_bins
     # calculates projection weights of PSD values onto principal components (eigenvectors):
-    project_weights = PCA_on_PSD.project_onto_pcs(PSD_norm, eig_vects, num_pcs)
+    project_weights = PCA_on_PSD.project_onto_pcs(PSD_avg, eig_vects, num_pcs)
 
     return project_weights
 
