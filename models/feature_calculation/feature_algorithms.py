@@ -58,7 +58,7 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
     PSD_avg = average_PSD_algorithm(X, bins, sample_freq)
 
     # log-normalize frequency-bin-average PSD values across examples:
-    PSD_norm = PCA_on_PSD.log_normalize(PSD_avg, small_param)
+    # PSD_norm = PCA_on_PSD.log_normalize(PSD_avg, small_param)
 
     # calculate selected statistical matrices of PSD values:
     if matrix_type == 1:
