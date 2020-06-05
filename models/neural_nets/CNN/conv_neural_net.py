@@ -52,16 +52,20 @@ class ConvNet:
     def build_model(self, input_shape, L2_reg=0.0, dropout_reg=0.0):
         self.model = models.Sequential()
 
-        # convolutional and max pooling layers:
+        # add convolutional and max pooling layers:
         self.model.add(layers.Conv2D(self.num_kernels, self.kernel_size, activation='relu', input_shape=input_shape))
         self.model.add(layers.MaxPool2D(self.pool_size))
-        self.model.add(layers.Conv2D(self.num_kernels, self.kernel_size, activation='relu'))
-        self.model.add(layers.MaxPool2D(self.pool_size))
+        for _ in range(self.num_conv_layers - 1):
+            self.model.add(layers.Conv2D(self.num_kernels, self.kernel_size, activation='relu'))
+            self.model.add(layers.MaxPool2D(self.pool_size))
 
-        # fully connected layers:
         self.model.add(layers.Flatten())
-        self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu',
-                                    kernel_regularizer=regularizers.l2(L2_reg)))
+
+        # add fully connected layers:
+        for _ in range(self.num_dense_layers):
+            self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu',
+                                        kernel_regularizer=regularizers.l2(L2_reg)))
+
         # output layer:
         self.model.add(layers.Dense(1, activation='sigmoid', kernel_regularizer=regularizers.l2(L2_reg)))
 
