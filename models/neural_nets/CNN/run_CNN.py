@@ -40,8 +40,8 @@ num_kernels = 3
 kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 200
-L2_reg = 0.01
-dropout_reg = 0.0
+L2_reg = 0.0
+dropout_reg = 0.3
 # for training CNN:
 num_epochs = 100
 batch_size = 64
