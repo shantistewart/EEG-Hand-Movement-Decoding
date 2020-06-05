@@ -40,6 +40,7 @@ num_kernels = 3
 kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 200
+reg_type = 1
 L2_reg = 0.005
 dropout_reg = 0.0
 # for training CNN:
@@ -71,7 +72,7 @@ print(X_test.shape)
 
 # build CNN model:
 input_shape = (X_train.shape[1], X_train.shape[2], X_train.shape[3])
-CNN.build_model(input_shape, L2_reg=L2_reg, dropout_reg=dropout_reg)
+CNN.build_model(input_shape, reg_type=reg_type, L2_reg=L2_reg, dropout_reg=dropout_reg)
 # display model architecture:
 print("\n")
 CNN.model.summary()
