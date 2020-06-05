@@ -65,18 +65,21 @@ class ConvNet:
         for _ in range(self.num_dense_layers):
             # include L2 regularization if selected:
             if L2_reg != 0.0:
-                print("L2 regularization layer.\n")
+                print("\nL2 regularization layer.")
                 self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu',
                                             kernel_regularizer=regularizers.l2(L2_reg)))
             else:
                 self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu'))
             # include dropout regularization if selected:
             if dropout_reg != 0.0:
-                print("Dropout regularization layer.\n")
+                print("\nDropout regularization layer.")
                 self.model.add(layers.Dropout(dropout_reg))
 
         # output layer:
-        self.model.add(layers.Dense(1, activation='sigmoid'))
+        if L2_reg != 0.0:
+            self.model.add(layers.Dense(1, activation='sigmoid', kernel_regularizer=regularizers.l2(L2_reg)))
+        else:
+            self.model.add(layers.Dense(1, activation='sigmoid'))
 
     # Function description: compiles and trains CNN.
     # Inputs:
