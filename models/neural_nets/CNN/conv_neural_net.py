@@ -65,14 +65,12 @@ class ConvNet:
         for _ in range(self.num_dense_layers):
             # include L2 regularization if selected:
             if reg_type == 1:
-                print("\nL2 regularization layer.")
                 self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu',
                                             kernel_regularizer=regularizers.l2(L2_reg)))
             else:
                 self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu'))
             # include dropout regularization if selected:
             if reg_type == 2:
-                print("\nDropout regularization layer.")
                 self.model.add(layers.Dropout(dropout_reg))
 
         # output layer:
