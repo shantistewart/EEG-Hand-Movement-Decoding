@@ -33,7 +33,7 @@ stride_size_example_range = [0.25, 0.25]
 window_size_PSD = 0.8
 stride_size_PSD_range = [0.05, 0.05]
 max_freq_range = [15.0, 50.0]
-num_bins_range = [50, 50]
+num_bins_range = [40, 50]
 # for CNN architecture:
 num_conv_layers_range = [1, 3]
 num_dense_layers_range = [1, 3]
@@ -47,7 +47,10 @@ dropout_reg_range = [0.2, 0.5]
 
 
 # initialize rolling best hyperparameter combination (max average validation accuracy across subjects):
+best_avg_train_acc = 0.0
 best_avg_val_acc = 0.0
+best_train_acc = None
+best_val_acc = None
 best_window_size_example = None
 best_stride_size_example = None
 best_window_size_PSD = None
@@ -105,7 +108,7 @@ for i in range(num_iterations):
     print("num_hidden_nodes: {0}".format(num_hidden_nodes))
     print("reg_type: {0}".format(reg_type))
     print("L2_reg: {0}".format(L2_reg))
-    print("dropout_reg: {0}\n".format(dropout_reg))
+    print("dropout_reg: {0}".format(dropout_reg))
 
     # train and evaluate CNN:
     avg_train_acc, avg_val_acc, train_acc, val_acc = evaluate_CNN.train_eval_CNN(subject_nums, window_size_example,
@@ -122,7 +125,10 @@ for i in range(num_iterations):
 
     # update rolling best hyperparameter combination:
     if avg_val_acc > best_avg_val_acc:
+        best_avg_train_acc = avg_train_acc
         best_avg_val_acc = avg_val_acc
+        best_train_acc = train_acc
+        best_val_acc = val_acc
         best_window_size_example = window_size_example
         best_stride_size_example = stride_size_example
         best_window_size_PSD = window_size_PSD
@@ -137,7 +143,8 @@ for i in range(num_iterations):
         best_L2_reg = L2_reg
         best_dropout_reg = dropout_reg
     # display rolling best hyperparameter combination:
-    print("ROLLING BEST HYPERPARAMETERS:\n")
+    print("\n\nROLLING BEST HYPERPARAMETERS:\n")
+    print("Average training accuracy: {0}".format(best_avg_train_acc))
     print("Average validation accuracy: {0}".format(best_avg_val_acc))
     print("window_size_example: {0}".format(best_window_size_example))
     print("stride_size_example: {0}".format(best_stride_size_example))
@@ -155,15 +162,15 @@ for i in range(num_iterations):
 
 
 # display training and validation accuracies for subjects for best hyperparameter combination:
-print("\n\n\nTraining accuracies for subjects:")
-print(train_acc)
-print("Average training accuracy: {0}\n".format(avg_train_acc))
-print("Validation accuracies for subjects:")
-print(val_acc)
-print("Average validation accuracy: {0}\n".format(avg_val_acc))
+print("\n\n\nBest training accuracies for subjects:")
+print(best_train_acc)
+print("Best average training accuracy: {0}\n".format(best_avg_train_acc))
+print("Best validation accuracies for subjects:")
+print(best_val_acc)
+print("Best average validation accuracy: {0}\n".format(best_avg_val_acc))
 
 # plot a bar graph of accuracies:
-evaluate_CNN.plot_accuracies(train_acc, val_acc)
+evaluate_CNN.plot_accuracies(best_train_acc, best_val_acc)
 
 # display all plots:
 plotter.show()
