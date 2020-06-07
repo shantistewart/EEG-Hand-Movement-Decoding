@@ -13,7 +13,7 @@ print("\n")
 sample_freq = 250
 
 # subjects to evaluate:
-subject_nums = np.array([1, 4, 5, 6, 7, 8, 9])
+subject_nums = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 # number of hyperparameter search iterations:
 num_iterations = 50
 
@@ -32,17 +32,17 @@ stride_size_example_range = [0.25, 0.25]
 # for spectrogram creation:
 window_size_PSD = 0.8
 stride_size_PSD_range = [0.05, 0.05]
-max_freq_range = [15.0, 50.0]
+max_freq_range = [30.0, 50.0]
 num_bins_range = [40, 50]
 # for CNN architecture:
-num_conv_layers_range = [1, 3]
-num_dense_layers_range = [1, 3]
-num_kernels_range = [3, 20]
+num_conv_layers_range = [1, 2]
+num_dense_layers_range = [1, 2]
+num_kernels_range = [10, 20]
 kernel_size = 3
 pool_size = 2
-num_hidden_nodes_range = [50, 250]
-reg_type_range = [1, 2]
-L2_reg_range = [0.001, 0.1]
+num_hidden_nodes_range = [100, 200]
+reg_type_range = [1, 1]
+L2_reg_range = [0.01, 0.05]
 dropout_reg_range = [0.2, 0.5]
 
 
