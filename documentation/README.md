@@ -1,1 +1,1 @@
-This folder containts documentation for feature calculation algorithms and neural network architectures.
+This folder contains documentation for feature calculation algorithms and neural network architectures.
