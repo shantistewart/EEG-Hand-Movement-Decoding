@@ -13,7 +13,7 @@ print("\n")
 sample_freq = 250
 
 # subjects to evaluate:
-subject_nums = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+subject_nums = np.array([1, 4, 5, 6, 7, 8, 9])
 # number of hyperparameter search iterations:
 num_iterations = 50
 
