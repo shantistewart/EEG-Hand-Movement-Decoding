@@ -27,24 +27,24 @@ standard = True
 # for spectrogram creation:
 window_size_PSD = 0.8
 stride_size_PSD = 0.05
-max_freq = 25.0
+max_freq = 45.0
 num_bins = 50
 PCA = 0
 num_pcs = num_bins
 matrix_type = 2
 small_param = 0.0001
 # for CNN architecture:
-num_conv_layers = 2
-num_dense_layers = 1
-num_kernels = 3
+num_conv_layers = 1
+num_dense_layers = 2
+num_kernels = 10
 kernel_size = 3
 pool_size = 2
-num_hidden_nodes = 200
-reg_type = 1
-L2_reg = 0.005
-dropout_reg = 0.0
+num_hidden_nodes = 140
+reg_type = 2
+L2_reg = 0.0368
+dropout_reg = 0.4
 # for training CNN:
-num_epochs = 100
+num_epochs = 50
 batch_size = 64
 
 # get data and generate examples:

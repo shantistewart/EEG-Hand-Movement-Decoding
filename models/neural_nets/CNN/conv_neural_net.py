@@ -28,7 +28,6 @@ from models.feature_calculation import feature_algorithms
 class ConvNet:
     """Class for a convolutional neural network for binary classification."""
 
-    # Constructor:
     def __init__(self, num_conv_layers, num_dense_layers, num_kernels, kernel_size, pool_size, num_hidden_nodes):
         self.model = None
         self.history = None
