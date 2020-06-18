@@ -38,14 +38,6 @@ def estimate_psd(X, sample_freq):
         # calculate normalized vector inner product (over all samples) for each example for each channel:
         Rxx_pos[:, :, k] = np.sum(np.multiply(X_n, X_shift), axis=2) / num_samples
 
-    # different normalization:
-    """
-    # estimate unnormalized 2nd-order moments (over all samples) for each example for each channel:
-    second_moment = np.sum(np.multiply(X, X), axis=2, keepdims=True)
-    # normalize autocorrelation functions:
-    Rxx_pos = np.divide(Rxx_pos, second_moment)
-    """
-
     # calculate power spectral density =  Fourier transform of autocorrelation function (for each example for each
     #   channel), using Hermitian FFT (since autocorrelation function is symmetric):
     PSD = np.fft.hfft(Rxx_pos, axis=2) / num_samples
