@@ -166,7 +166,6 @@ def plot_accuracies(train_acc, val_acc):
 
     # create and format subplot:
     fig, ax = plotter.subplots()
-    # plotter.subplots_adjust(hspace=1)
     # locations of labels:
     bin_loc = np.arange(num_subjects)
     # width of bars:
