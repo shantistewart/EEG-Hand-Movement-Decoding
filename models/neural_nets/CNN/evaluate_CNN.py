@@ -141,20 +141,27 @@ def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sampl
     return avg_train_acc, avg_val_acc, avg_test_acc, train_acc, val_acc, test_acc
 
 
-# Function description: plots a bar graph of training and validation accuracies for selected subjects.
+# Function description: plots a bar graph of training/validation/test accuracies for selected subjects.
 # Inputs:
 #   train_acc = dictionary of training accuracies for subjects
 #   val_acc = dictionary of validation accuracies for subjects
+#   test_acc = dictionary of validation accuracies for subjects
 # Outputs: none
-def plot_accuracies(train_acc, val_acc):
+def plot_accuracies(train_acc, val_acc, test_acc=None):
     # convert dictionaries to arrays:
     train_acc = np.array(list(train_acc.items()))
     val_acc = np.array(list(val_acc.items()))
+    if test_acc is not None:
+        test_acc = np.array(list(test_acc.items()))
+
     # extract subject numbers (keys):
     subject_nums = train_acc[:, 0]
+
     # extract accuracies (values):
     train_acc = train_acc[:, 1]
     val_acc = val_acc[:, 1]
+    if test_acc is not None:
+        test_acc = test_acc[:, 1]
 
     # number of subjects:
     num_subjects = subject_nums.shape[0]
@@ -169,12 +176,21 @@ def plot_accuracies(train_acc, val_acc):
     # locations of labels:
     bin_loc = np.arange(num_subjects)
     # width of bars:
-    width = 0.25
+    if test_acc is None:
+        width = 0.25
+    else:
+        width = 0.15
 
-    # plot bar graph of training and validation accuracies as percentages:
-    ax.bar(bin_loc - width/2, 100 * train_acc, width, label='training accuracy')
-    ax.bar(bin_loc + width/2, 100 * val_acc, width, label='validation accuracy')
-    ax.set_title('Training and Validation Accuracies Across Subjects')
+    # plot bar graph of training/validation accuracies as percentages:
+    if test_acc is None:
+        ax.bar(bin_loc - width/2, 100 * train_acc, width, label='training accuracy')
+        ax.bar(bin_loc + width/2, 100 * val_acc, width, label='validation accuracy')
+        ax.set_title('Training/Validation Accuracies Across Subjects')
+    else:
+        ax.bar(bin_loc - width, 100 * train_acc, width, label='training accuracy')
+        ax.bar(bin_loc, 100 * val_acc, width, label='validation accuracy')
+        ax.bar(bin_loc + width, 100 * test_acc, width, label='test accuracy')
+        ax.set_title('Training/Validation/Test Accuracies Across Subjects')
     ax.set_ylabel('Accuracy (Percentage)')
     ax.set_xticks(bin_loc)
     ax.set_xticklabels(subject_labels)
