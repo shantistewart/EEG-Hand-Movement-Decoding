@@ -27,21 +27,18 @@ standard = True
 # for spectrogram creation:
 window_size_PSD = 0.8
 stride_size_PSD = 0.05
-max_freq = 45.0
-num_bins = 50
+max_freq = 46.0
+num_bins = 47
 PCA = 0
-num_pcs = num_bins
-matrix_type = 2
-small_param = 0.0001
 # for CNN architecture:
 num_conv_layers = 1
 num_dense_layers = 2
-num_kernels = 10
+num_kernels = 12
 kernel_size = 3
 pool_size = 2
-num_hidden_nodes = 140
-reg_type = 2
-L2_reg = 0.035
+num_hidden_nodes = 130
+reg_type = 1
+L2_reg = 0.0319
 dropout_reg = 0.4
 # for training CNN:
 num_epochs = 50
@@ -60,9 +57,8 @@ CNN = conv_neural_net.ConvNet(num_conv_layers, num_dense_layers, num_kernels, ke
 # generate training and test features:
 X_train, Y_train, X_val, Y_val, X_test, Y_test = CNN.generate_features(X, Y, window_size_PSD, stride_size_PSD,
                                                                        sample_freq, max_freq, num_bins, PCA=PCA,
-                                                                       num_pcs=num_pcs, matrix_type=matrix_type,
-                                                                       small_param=small_param, val_fract=val_fract,
-                                                                       test_fract=test_fract, standard=standard)
+                                                                       val_fract=val_fract, test_fract=test_fract,
+                                                                       standard=standard)
 print("Size of training set: ", end="")
 print(X_train.shape)
 print("Size of validation set: ", end="")

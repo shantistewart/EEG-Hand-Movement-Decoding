@@ -14,7 +14,7 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 
 # Function description: trains and evaluates a CNN for selected subjects (separate instance for each subject).
 # Inputs:
-#   subject_nums = array subject numbers to evaluate
+#   subject_nums = array of subject numbers to evaluate
 #       size: (num_subjects, )
 #   window_size_example = size of sliding window to create more examples, in seconds
 #   stride_size_example = size of "stride" of sliding window to create more examples, in seconds
@@ -53,28 +53,35 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 #       else: don't apply regularization
 #   L2_reg = L2 regularization parameter
 #   dropout_reg = dropout regularization parameter
+#   test = parameter to select whether to evaluate CNN on test set
+#       if test == True: CNN is evaluated on test set
+#       else: CNN is evaluated on test set
 # Outputs:
 #   avg_train_acc = average training accuracy across subjects
 #   avg_val_acc = average validation accuracy across subjects
+#   avg_test_acc = average test accuracy across subjects
 #   train_acc = dictionary of training accuracies for subjects
 #   val_acc = dictionary of validation accuracies for subjects
+#   test_acc = dictionary of test accuracies for subjects
 def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sample_freq, num_conv_layers,
                    num_dense_layers, num_kernels, kernel_size, pool_size, num_hidden_nodes, num_epochs, batch_size,
                    window_size_PSD, stride_size_PSD, max_freq, num_bins, PCA=0, num_pcs=None, matrix_type=2,
                    small_param=0.0001, val_fract=0.2, test_fract=0.15, standard=True, reg_type=1, L2_reg=0.0,
-                   dropout_reg=0.0):
+                   dropout_reg=0.0, test=False):
     # number of subjects:
     num_subjects = subject_nums.shape[0]
-    # dictionaries for training and validation accuracies for subjects:
+    # dictionaries for training/validation/test accuracies for subjects:
     train_acc = {}
     val_acc = {}
-    # average training and validation accuracies:
+    test_acc = {}
+    # average training/validation/test accuracies across subjects:
     avg_train_acc = 0
     avg_val_acc = 0
+    avg_test_acc = 0
 
-    # train a different CNN instance for each subject and record training/validation accuracies:
+    # train a different CNN instance for each subject and record training/validation/test accuracies:
     for subject in subject_nums:
-        print("\n\n\n--------------------SUBJECT {0}--------------------\n\n".format(subject))
+        print("\n\n--------------------SUBJECT {0}--------------------\n\n".format(subject))
 
         # get data and generate examples:
         X, Y = example_generation.generate_examples(subject, path_to_data_file, window_size_example,
@@ -86,7 +93,7 @@ def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sampl
         # create ConvNet object:
         CNN = conv_neural_net.ConvNet(num_conv_layers, num_dense_layers, num_kernels, kernel_size, pool_size,
                                       num_hidden_nodes)
-        # generate training and test features:
+        # generate training/validation/test features:
         X_train, Y_train, X_val, Y_val, X_test, Y_test = CNN.generate_features(X, Y, window_size_PSD, stride_size_PSD,
                                                                                sample_freq, max_freq, num_bins, PCA=PCA,
                                                                                num_pcs=num_pcs, matrix_type=matrix_type,
@@ -121,11 +128,17 @@ def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sampl
         avg_train_acc += train_acc[subject]
         avg_val_acc += val_acc[subject]
 
+        # evaluate CNN on test set and record accuracy if selected:
+        if test:
+            test_acc[subject] = CNN.test_model(X_test, Y_test)
+            avg_test_acc += test_acc[subject]
+
     # normalize averages:
     avg_train_acc = avg_train_acc / num_subjects
     avg_val_acc = avg_val_acc / num_subjects
+    avg_test_acc = avg_test_acc / num_subjects
 
-    return avg_train_acc, avg_val_acc, train_acc, val_acc
+    return avg_train_acc, avg_val_acc, avg_test_acc, train_acc, val_acc, test_acc
 
 
 # Function description: plots a bar graph of training and validation accuracies for selected subjects.
