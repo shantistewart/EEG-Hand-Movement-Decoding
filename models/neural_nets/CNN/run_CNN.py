@@ -1,21 +1,19 @@
 # This file contains code to run a convolutional neural network for binary classification.
 
 
+import numpy as np
 import matplotlib.pyplot as plotter
-from models.neural_nets import example_generation
-from models.neural_nets.CNN import conv_neural_net
+from models.neural_nets.CNN import evaluate_CNN
 
 
 print("\n")
 
 # NOT TO BE MODIFIED:
-# path to data files:
-path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 # sampling frequency:
 sample_freq = 250
 
-# subject number:
-subject_num = 1
+# subjects to evaluate:
+subject_nums = np.array([5, 8])
 
 # HYPERPARAMETERS:
 # for data set creation:
@@ -41,44 +39,36 @@ reg_type = 1
 L2_reg = 0.0319
 dropout_reg = 0.4
 # for training CNN:
-num_epochs = 50
+num_epochs = 40
 batch_size = 64
+plot_learn_curve = True
 
-# get data and generate examples:
-X, Y = example_generation.generate_examples(subject_num, path_to_data_file, window_size_example, stride_size_example,
-                                            sample_freq)
-# display dimensions of raw data:
-print("Size of raw data set: ", end="")
-print(X.shape)
+# train and evaluate CNN:
+avg_train, avg_val, avg_test, train, val, test = evaluate_CNN.train_eval_CNN(subject_nums, window_size_example,
+                                                                             stride_size_example, sample_freq,
+                                                                             num_conv_layers, num_dense_layers,
+                                                                             num_kernels, kernel_size, pool_size,
+                                                                             num_hidden_nodes, num_epochs, batch_size,
+                                                                             window_size_PSD, stride_size_PSD, max_freq,
+                                                                             num_bins, val_fract=val_fract,
+                                                                             test_fract=test_fract, standard=standard,
+                                                                             reg_type=reg_type, L2_reg=L2_reg,
+                                                                             dropout_reg=dropout_reg, test=True,
+                                                                             plot_learn_curve=plot_learn_curve)
 
-# create ConvNet object:
-CNN = conv_neural_net.ConvNet(num_conv_layers, num_dense_layers, num_kernels, kernel_size, pool_size, num_hidden_nodes)
+# display training/validation/test accuracies:
+print("\n\n\nTraining accuracies for subjects:")
+print(train)
+print("Average training accuracy: {0}\n".format(avg_train))
+print("Validation accuracies for subjects:")
+print(val)
+print("Average validation accuracy: {0}\n".format(avg_val))
+print("Test accuracies for subjects:")
+print(test)
+print("Average test accuracy: {0}\n".format(avg_test))
 
-# generate training and test features:
-X_train, Y_train, X_val, Y_val, X_test, Y_test = CNN.generate_features(X, Y, window_size_PSD, stride_size_PSD,
-                                                                       sample_freq, max_freq, num_bins, PCA=PCA,
-                                                                       val_fract=val_fract, test_fract=test_fract,
-                                                                       standard=standard)
-print("Size of training set: ", end="")
-print(X_train.shape)
-print("Size of validation set: ", end="")
-print(X_val.shape)
-print("Size of test set: ", end="")
-print(X_test.shape)
+# plot a bar graph of accuracies:
+evaluate_CNN.plot_accuracies(train, val, test)
 
-# build CNN model:
-input_shape = (X_train.shape[1], X_train.shape[2], X_train.shape[3])
-CNN.build_model(input_shape, reg_type=reg_type, L2_reg=L2_reg, dropout_reg=dropout_reg)
-# display model architecture:
-print("\n")
-CNN.model.summary()
-
-# train model:
-CNN.train_model(X_train, Y_train, X_val, Y_val, num_epochs, batch_size)
-
-# evaluate model:
-test_acc = CNN.test_model(X_test, Y_test)
-
-# plot learning curve:
-CNN.plot_learn_curve(subject_num)
+# display all plots:
 plotter.show()

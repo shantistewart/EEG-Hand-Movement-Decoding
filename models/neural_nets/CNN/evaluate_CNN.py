@@ -56,6 +56,9 @@ path_to_data_file = "../../../MATLAB/biosig/Data_txt/"
 #   test = parameter to select whether to evaluate CNN on test set
 #       if test == True: CNN is evaluated on test set
 #       else: CNN is evaluated on test set
+#   plot_learn_curve = parameter to select whether to plot learning curve
+#       if plot_learn_curve == True: learning curve is plotted
+#       else: learning curve is not plotted
 # Outputs:
 #   avg_train_acc = average training accuracy across subjects
 #   avg_val_acc = average validation accuracy across subjects
@@ -67,7 +70,7 @@ def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sampl
                    num_dense_layers, num_kernels, kernel_size, pool_size, num_hidden_nodes, num_epochs, batch_size,
                    window_size_PSD, stride_size_PSD, max_freq, num_bins, PCA=0, num_pcs=None, matrix_type=2,
                    small_param=0.0001, val_fract=0.2, test_fract=0.15, standard=True, reg_type=1, L2_reg=0.0,
-                   dropout_reg=0.0, test=False):
+                   dropout_reg=0.0, test=False, plot_learn_curve=False):
     # number of subjects:
     num_subjects = subject_nums.shape[0]
     # dictionaries for training/validation/test accuracies for subjects:
@@ -116,8 +119,9 @@ def train_eval_CNN(subject_nums, window_size_example, stride_size_example, sampl
 
         # train model:
         CNN.train_model(X_train, Y_train, X_val, Y_val, num_epochs, batch_size)
-        # plot learning curve:
-        # CNN.plot_learn_curve(subject)
+        # plot learning curve if selected:
+        if plot_learn_curve:
+            CNN.plot_learn_curve(subject)
 
         # extract training and validation accuracies and record final values:
         training_acc = CNN.history.history['binary_accuracy']
