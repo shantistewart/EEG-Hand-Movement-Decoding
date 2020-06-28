@@ -1,10 +1,10 @@
-# This file contains unit tests for example_generation.py (in neural_nets folder):
+# This file contains unit tests for example_generation.py (in classifiers folder):
 
 
 import numpy as np
 import sklearn
 from models.data_gathering import data4_reader
-from models.neural_nets import example_generation as example
+from models.classifiers import example_generation as example
 
 
 print("\n")

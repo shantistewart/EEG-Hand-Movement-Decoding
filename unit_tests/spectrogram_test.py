@@ -2,7 +2,7 @@
 
 
 import numpy as np
-from models.neural_nets import example_generation
+from models.classifiers import example_generation
 from models.feature_calculation import spectrogram
 
 

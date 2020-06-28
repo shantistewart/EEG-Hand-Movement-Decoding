@@ -3,8 +3,8 @@
 
 import numpy as np
 import matplotlib.pyplot as plotter
-from models.neural_nets import example_generation
-from models.neural_nets.CNN import conv_neural_net
+from models.classifiers import example_generation
+from models.classifiers.CNN import conv_neural_net
 
 
 # NOT TO BE MODIFIED:

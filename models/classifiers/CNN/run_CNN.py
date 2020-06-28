@@ -3,7 +3,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plotter
-from models.neural_nets.CNN import evaluate_CNN
+from models.classifiers.CNN import evaluate_CNN
 
 
 print("\n")

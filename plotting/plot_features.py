@@ -3,7 +3,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plotter
-from models.neural_nets import example_generation
+from models.classifiers import example_generation
 from models.feature_calculation import power_spectral_density as power
 from models.feature_calculation import feature_algorithms
 from models.feature_calculation import average_PSD

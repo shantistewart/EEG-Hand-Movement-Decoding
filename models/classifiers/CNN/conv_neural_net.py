@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plotter
 import tensorflow as tf
 from tensorflow.keras import models, layers, regularizers
-from models.neural_nets import example_generation
+from models.classifiers import example_generation
 from models.feature_calculation import feature_algorithms
 
 

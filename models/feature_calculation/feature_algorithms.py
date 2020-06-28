@@ -6,7 +6,7 @@
 
 import numpy as np
 from models.feature_calculation import power_spectral_density as power, average_PSD, PCA_on_PSD, spectrogram
-from models.neural_nets import example_generation
+from models.classifiers import example_generation
 
 
 # Function description: calculate average power spectral density values in selected frequency bins.
