@@ -41,7 +41,7 @@ num_kernels_range = [10, 20]
 kernel_size = 3
 pool_size = 2
 num_hidden_nodes_range = [100, 200]
-reg_type_range = [1, 1]
+reg_type_range = [1, 2]
 L2_reg_range = [0.01, 0.05]
 dropout_reg_range = [0.2, 0.5]
 
@@ -78,8 +78,6 @@ for i in range(num_iterations):
                           stride_size_example_range[0]
 
     # for spectrogram creation:
-    # window_size_PSD = (0.5 * window_size_example_range[0] - window_size_PSD_min) * np.random.rand() + \
-                      # window_size_PSD_min
     stride_size_PSD = (stride_size_PSD_range[1] - stride_size_PSD_range[0]) * np.random.rand() + \
                       stride_size_PSD_range[0]
     max_freq = np.random.randint(max_freq_range[0], max_freq_range[1] + 1)
@@ -108,10 +106,10 @@ for i in range(num_iterations):
     print("num_hidden_nodes: {0}".format(num_hidden_nodes))
     print("reg_type: {0}".format(reg_type))
     print("L2_reg: {0}".format(L2_reg))
-    print("dropout_reg: {0}".format(dropout_reg))
+    print("dropout_reg: {0}\n".format(dropout_reg))
 
     # train and evaluate CNN:
-    avg_train_acc, avg_val_acc, train_acc, val_acc = evaluate_CNN.train_eval_CNN(subject_nums, window_size_example,
+    avg_train, avg_val, avg_test, train, val, test = evaluate_CNN.train_eval_CNN(subject_nums, window_size_example,
                                                                                  stride_size_example, sample_freq,
                                                                                  num_conv_layers, num_dense_layers,
                                                                                  num_kernels, kernel_size, pool_size,
@@ -124,11 +122,11 @@ for i in range(num_iterations):
                                                                                  L2_reg=L2_reg, dropout_reg=dropout_reg)
 
     # update rolling best hyperparameter combination:
-    if avg_val_acc > best_avg_val_acc:
-        best_avg_train_acc = avg_train_acc
-        best_avg_val_acc = avg_val_acc
-        best_train_acc = train_acc
-        best_val_acc = val_acc
+    if avg_val > best_avg_val_acc:
+        best_avg_train_acc = avg_train
+        best_avg_val_acc = avg_val
+        best_train_acc = train
+        best_val_acc = val
         best_window_size_example = window_size_example
         best_stride_size_example = stride_size_example
         best_window_size_PSD = window_size_PSD
@@ -162,7 +160,7 @@ for i in range(num_iterations):
 
 
 # display training and validation accuracies for subjects for best hyperparameter combination:
-print("\n\n\nBest training accuracies for subjects:")
+print("\n\nBest training accuracies for subjects:")
 print(best_train_acc)
 print("Best average training accuracy: {0}\n".format(best_avg_train_acc))
 print("Best validation accuracies for subjects:")
@@ -172,5 +170,5 @@ print("Best average validation accuracy: {0}\n".format(best_avg_val_acc))
 # plot a bar graph of accuracies:
 evaluate_CNN.plot_accuracies(best_train_acc, best_val_acc)
 
-# display all plots:
+# display plots:
 plotter.show()
