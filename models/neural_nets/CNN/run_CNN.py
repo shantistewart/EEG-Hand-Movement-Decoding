@@ -13,7 +13,7 @@ print("\n")
 sample_freq = 250
 
 # subjects to evaluate:
-subject_nums = np.array([5, 8])
+subject_nums = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 # HYPERPARAMETERS:
 # for data set creation:
@@ -25,7 +25,7 @@ standard = True
 # for spectrogram creation:
 window_size_PSD = 0.8
 stride_size_PSD = 0.05
-max_freq = 46.0
+max_freq = 45.0
 num_bins = 47
 PCA = 0
 # for CNN architecture:
@@ -36,7 +36,7 @@ kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 130
 reg_type = 1
-L2_reg = 0.0319
+L2_reg = 0.032
 dropout_reg = 0.4
 # for training CNN:
 num_epochs = 40
