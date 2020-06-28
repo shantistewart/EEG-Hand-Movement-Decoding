@@ -183,7 +183,7 @@ def plot_accuracies(train_acc, val_acc, test_acc=None):
     if test_acc is None:
         width = 0.25
     else:
-        width = 0.15
+        width = 0.20
 
     # plot bar graph of training/validation accuracies as percentages:
     if test_acc is None:
