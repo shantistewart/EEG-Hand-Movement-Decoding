@@ -39,7 +39,7 @@ reg_type = 1
 L2_reg = 0.03186
 dropout_reg = 0.4
 # for training CNN:
-num_epochs = 50
+num_epochs = 100
 batch_size = 64
 plot_learn_curve = False
 
