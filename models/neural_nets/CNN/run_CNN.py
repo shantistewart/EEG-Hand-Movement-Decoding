@@ -36,10 +36,10 @@ kernel_size = 3
 pool_size = 2
 num_hidden_nodes = 130
 reg_type = 1
-L2_reg = 0.03186
+L2_reg = 0.032
 dropout_reg = 0.4
 # for training CNN:
-num_epochs = 100
+num_epochs = 75
 batch_size = 64
 plot_learn_curve = False
 
