@@ -11,7 +11,7 @@ print("\n")
 
 # NOT TO BE MODIFIED:
 # path to data files:
-path_to_file = "../MATLAB/biosig/Data_txt/"
+path_to_file = "../../MATLAB/biosig/Data_txt/"
 # sampling frequency:
 sample_frequency = 250
 # class labels:
@@ -36,7 +36,7 @@ print("Window and stride sizes in seconds: ({0}, {1})\n".format(window_size_, st
 print("\n----------TESTING ReadComp4() FUNCTION----------\n")
 
 # get raw data:
-left_X, right_X = data4_reader.ReadComp4(subject_num, path_to_file)
+left_X, right_X = data_reader.ReadComp4(subject_num, path_to_file)
 # display shape of leftX and rightX:
 print("leftX size: ", end="")
 print(left_X.shape)

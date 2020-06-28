@@ -7,14 +7,13 @@ from models.classifiers import example_generation
 from models.feature_calculation import power_spectral_density as power
 from models.feature_calculation import feature_algorithms
 from models.feature_calculation import average_PSD
-from plotting import RawPSD_class
-
+from auxiliary.plotting import RawPSD_class
 
 print("\n")
 
 # NOT TO BE MODIFIED:
 # path to data files:
-path_to_data_file = "../MATLAB/biosig/Data_txt/"
+path_to_data_file = "../../MATLAB/biosig/Data_txt/"
 # sampling frequency:
 sample_freq = 250
 

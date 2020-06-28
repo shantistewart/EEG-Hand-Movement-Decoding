@@ -4,7 +4,7 @@
 import numpy as np
 import matplotlib.pyplot as plotter
 # import function modules:
-from plotting import RawPSD_class
+from auxiliary.plotting import RawPSD_class
 from models.feature_calculation import average_PSD, power_spectral_density as power
 
 
