@@ -3,7 +3,7 @@
 
 import numpy as np
 import sklearn
-from models.data_gathering import data4_reader
+from models.data_reading import data4_reader
 from models.classifiers import example_generation as example
 
 
