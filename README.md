@@ -69,5 +69,7 @@ EEG signals (power spectral density) and use these features to train a convoluti
 ## Authors
 
 * **Shanti Stewart** -- B.S. student in Electrical and Computer Engineering at Oregon State University.
+   * [LinkedIn](https://www.linkedin.com/in/shanti-stewart-27aaaa183/)
 * **Patrick McGrath** -- B.S. student in Electrical and Computer Engineering at Oregon State University.
+   * [LinkedIn](https://www.linkedin.com/in/mcgrath-patrick)
 
