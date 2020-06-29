@@ -10,7 +10,7 @@ EEG signals (power spectral density) and use these features to train a convoluti
 ## File Hierarchy
 
 * **MATLAB:** _MATLAB code to read data files._
-* **auxiliary:**
+* **auxiliary:** _auxiliary functionality._
    * **plotting:** _visualization of raw signals and features._
       * plot_features.py
       * RawPSD_class.py
@@ -24,8 +24,8 @@ EEG signals (power spectral density) and use these features to train a convoluti
 * **documentation:** _documentation of algorithms implemented._
    * Feature Calculation Algorithms.pdf
    * Research Report.pdf
-* **models:**
-   * **classifiers:**
+* **models:** _end-to-end models for feature extraction and classification._
+   * **classifiers:** _classification models._
       * **CNN:** _convolutional neural network implementation._
          * conv_neural_net.py
          * evaluate_CNN.py
@@ -40,3 +40,4 @@ EEG signals (power spectral density) and use these features to train a convoluti
       * PCA_on_PSD.py
       * power_spectral_density.py
       * spectrogram.py
+
