@@ -7,6 +7,7 @@ machine learning and signal processing algorithms. The general idea used was to 
 EEG signals (power spectral density) and use these features to train a convolutional neural network (CNN) for classification.
 
 
+
 ## Repository Structure
 
 * **MATLAB:** _MATLAB code to read data files._
@@ -41,6 +42,7 @@ EEG signals (power spectral density) and use these features to train a convoluti
       * power_spectral_density.py
       * spectrogram.py
 
+
 ## Scripts (files that can be run)
 
 * **run_CNN.py:** _trains and evaluates a CNN model for multiple subjects._
@@ -62,4 +64,10 @@ EEG signals (power spectral density) and use these features to train a convoluti
       * file path: auxiliary/unit_tests/example_generation_test.py
    * **RawPSD_class_test.py:** _unit tests for functions in RawPSD_class.py._
       * file path: auxiliary/unit_tests/RawPSD_class_test.py
+
+
+## Authors
+
+* **Shanti Stewart** -- B.S. student in Electrical and Computer Engineering at Oregon State University.
+* **Patrick McGrath** -- B.S. student in Electrical and Computer Engineering at Oregon State University.
 
