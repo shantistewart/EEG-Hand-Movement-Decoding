@@ -8,6 +8,14 @@ EEG signals (power spectral density) and use these features to train a convoluti
 
 
 
+## Required Python Libraries
+
+* TensorFlow
+* NumPy
+* Scikit-learn
+* Matplotlib
+
+
 ## Repository Structure
 
 * **MATLAB:** _MATLAB code to read data files._
