@@ -7,7 +7,7 @@ machine learning and signal processing algorithms. The general idea used was to 
 EEG signals (power spectral density) and use these features to train a convolutional neural network (CNN) for classification.
 
 
-## File Hierarchy
+## Repository Structure
 
 * **MATLAB:** _MATLAB code to read data files._
 * **auxiliary:** _auxiliary functionality._
