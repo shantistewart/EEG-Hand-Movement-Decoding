@@ -8,3 +8,10 @@ EEG signals (power spectral density) and use these features to train a convoluti
 
 
 ## File Hierarchy
+
+* MATLAB: _MATLAB code to read the data files._
+* auxiliary:
+   * plotting: _functions to visualize raw signals and features._
+   * unit_tests: _unit test functions._
+* documentation: _documentation of algorithms implemented._
+* models:
