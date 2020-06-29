@@ -1,4 +1,4 @@
-# This file contains code to plot raw signal values and various features.
+# This file contains code to plot raw EEG signals and several calculated features.
 
 
 import numpy as np
