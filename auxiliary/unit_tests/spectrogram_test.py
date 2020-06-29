@@ -1,4 +1,4 @@
-# This file contains unit tests for spectrograms.py (in feature_calculation folder):
+# This file contains unit tests for functions in spectrogram.py (models/feature_calculation/spectrogram.py).
 
 
 import numpy as np

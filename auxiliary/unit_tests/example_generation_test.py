@@ -1,4 +1,4 @@
-# This file contains unit tests for example_generation.py (in classifiers folder):
+# This file contains unit tests for functions in example_generation.py (models/classifiers/example_generation.py).
 
 
 import numpy as np

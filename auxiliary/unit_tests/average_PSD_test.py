@@ -1,4 +1,4 @@
-# This file contains unit tests for average_PSD.py (in feature_calculation folder):
+# This file contains unit tests for functions in average_PSD.py (models/feature_calculation/average_PSD.py).
 
 
 import numpy as np

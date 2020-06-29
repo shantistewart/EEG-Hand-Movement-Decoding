@@ -48,3 +48,16 @@ EEG signals (power spectral density) and use these features to train a convoluti
 * **hyperparam_search.py:** _tunes hyperparameters of a CNN model across multiple subjects._
 * **plot_features.py:** _plots raw EEG signals and several calculated features._
    * file path: auxiliary/plotting/plot_features.py
+* unit tests:
+   * **power_spectral_density_test.py:** _unit tests for functions in power_spectral_density.py._
+      * file path: auxiliary/unit_tests/power_spectral_density_test.py
+   * **average_PSD_test.py:** _unit tests for functions in average_PSD.py._
+      * file path: auxiliary/unit_tests/average_PSD_test.py
+   * **PCA_on_PSD_test.py:** _unit tests for functions in PCA_on_PSD.py._
+      * file path: auxiliary/unit_tests/PCA_on_PSD_test.py
+   * **spectrogram_test.py:** _unit tests for functions in spectrogram.py._
+      * file path: auxiliary/unit_tests/spectrogram_test.py
+   * **example_generation_test.py:** _unit tests for functions in example_generation.py._
+      * file path: auxiliary/unit_tests/example_generation_test.py
+   * **RawPSD_class_test.py:** _unit tests for functions in RawPSD_class.py._
+      * file path: auxiliary/unit_tests/RawPSD_class_test.py

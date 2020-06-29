@@ -1,4 +1,4 @@
-# This file contains unit tests for the RawPSD class in RawPSD_class.py (in plotting folder):
+# This file contains unit tests for functions in RawPSD_class.py (auxiliary/plotting/RawPSD_class.py).
 
 
 import numpy as np

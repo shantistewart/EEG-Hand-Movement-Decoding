@@ -1,4 +1,4 @@
-# This file contains unit tests for PCA_on_PSD.py (in feature_calculation folder):
+# This file contains unit tests for functions in PCA_on_PSD.py (models/feature_calculation/PCA_on_PSD.py).
 
 
 import numpy as np
