@@ -25,3 +25,7 @@ EEG signals (power spectral density) and use these features to train a convoluti
    * Feature Calculation Algorithms.pdf
    * Research Report.pdf
 * **models:**
+   * **classifiers:**
+      * **CNN:**
+   * **data_reading:**
+   * **feature_calculation:**
