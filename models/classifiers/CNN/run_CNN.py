@@ -1,4 +1,4 @@
-# This file contains code to run a convolutional neural network for binary classification.
+# This file contains code to train and evaluate a convolutional neural network for multiple subjects.
 
 
 import numpy as np

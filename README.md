@@ -41,3 +41,9 @@ EEG signals (power spectral density) and use these features to train a convoluti
       * power_spectral_density.py
       * spectrogram.py
 
+## Scripts (files that can be run)
+
+* run_CNN.py: _trains and evaluates a CNN model for multiple subjects._
+   * file path: models/classifiers/CNN/run_CNN.py
+* hyperparam_search.py: _tunes hyperparameters of a CNN model across multiple subjects._
+   * file path: models/classifiers/CNN/hyperparam_search.py
