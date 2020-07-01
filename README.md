@@ -19,7 +19,7 @@ classification.
 
 ## Repository Structure
 
-* **MATLAB:** _MATLAB code to read data files._
+* **MATLAB:** _MATLAB code to generate data files and data files._
 * **auxiliary:** _auxiliary functionality._
    * **plotting:** _visualization of raw signals and calculated features._
       * plot_features.py
@@ -42,7 +42,7 @@ classification.
          * hyperparam_search.py
          * run_CNN.py
       * example_generation.py
-   * **data_reading:** _Python code (calls MATLAB code) to read data files._
+   * **data_reading:** _Python code to read data files._
       * data_reader.py
    * **feature_calculation:** _feature calculation algorithms._
       * average_PSD.py
