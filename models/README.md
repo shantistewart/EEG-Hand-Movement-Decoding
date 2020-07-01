@@ -19,7 +19,7 @@ This folder contains files for end-to-end models for feature extraction and clas
 * **feature_calculation:** _feature calculation algorithms._
   * average_PSD.py: _functions to calculate average power spectral density values in frequency bins and plot values._
   * feature_algorithms.py: _3 feature calculation algorithms -- frequency bin-average PSD, PCA on PSD, PSD spectrograms._
-  * PCA_on_PSD.py:
-  * power_spectral_density.py:
-  * spectrogram.py:
+  * PCA_on_PSD.py: _functions to implement principal component analysis on power spectral density values._
+  * power_spectral_density.py: _function to estimates power spectral density._
+  * spectrogram.py: _function to generate power spectral density spectrograms._
 
