@@ -2,7 +2,7 @@
 
 ## classifiers
 
-This folder contains files to implement classification models.
+This folder contains files to implement complete classification models.
 
 
 ### Folder Structure
