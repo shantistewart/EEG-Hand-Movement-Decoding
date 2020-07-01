@@ -17,8 +17,8 @@ This folder contains files for end-to-end models for feature extraction and clas
 * **data_reading:** _Python code to read data files._
   * data_reader.py: _function to gather data from data files._
 * **feature_calculation:** _feature calculation algorithms._
-  * average_PSD.py:
-  * feature_algorithms.py:
+  * average_PSD.py: _functions to calculate average power spectral density values in frequency bins and plot values._
+  * feature_algorithms.py: _3 feature calculation algorithms -- frequency bin-average PSD, PCA on PSD, PSD spectrograms._
   * PCA_on_PSD.py:
   * power_spectral_density.py:
   * spectrogram.py:
