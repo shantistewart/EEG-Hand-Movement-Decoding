@@ -1,7 +1,7 @@
 # This file contains 3 functions:
-#   1) Feature calculation algorithm 1: average PSD values in selected frequency bins.
-#   2) Feature calculation algorithm 2: Principal Component Analysis on PSD values.
-#   3) Feature calculation algorithm 3: spectrogram creation.
+#   1) Feature calculation algorithm 1: frequency bin-average PSD.
+#   2) Feature calculation algorithm 2: PCA on PSD.
+#   3) Feature calculation algorithm 3: PSD spectrograms.
 
 
 import numpy as np
