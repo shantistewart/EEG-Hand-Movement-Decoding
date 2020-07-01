@@ -1,4 +1,5 @@
-# This file contains a function to train/evaluate a convolutional neural network across subjects.
+# This file contains a function to train/evaluate a convolutional neural network across subjects and a function to plot
+#   a bar graph of training/validation/test accuracies of subjects.
 
 
 import numpy as np
