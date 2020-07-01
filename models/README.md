@@ -9,10 +9,10 @@ This folder contains files for end-to-end models for feature extraction and clas
 
 * **classifiers:** _classification models._
   * **CNN:** _convolutional neural network implementation._
-     * conv_neural_net.py: class to build, train, and evaluate a convolutional neural network.
-     * evaluate_CNN.py:
-     * hyperparam_search.py:
-     * run_CNN.py:
+     * conv_neural_net.py: _class to build, train, and evaluate a convolutional neural network._
+     * evaluate_CNN.py: _functions to train/evaluate a CNN across subjects and plot training/validation/test accuracies._
+     * hyperparam_search.py: _tunes the hyperparameters of a CNN across subjects._
+     * run_CNN.py: _trains and evaluates a CNN for multiple subjects._
   * example_generation.py
 * **data_reading:** _Python code (calls MATLAB code) to read data files._
   * data_reader.py:
