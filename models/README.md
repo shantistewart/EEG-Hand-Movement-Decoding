@@ -2,7 +2,7 @@
 
 ## models
 
-This folder contains files to implement end-to-end models for feature extraction and classification..
+This folder contains files to implement end-to-end models for feature extraction and classification.
 
 
 ### Folder Structure
