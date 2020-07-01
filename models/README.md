@@ -14,8 +14,8 @@ This folder contains files for end-to-end models for feature extraction and clas
      * hyperparam_search.py: _tunes the hyperparameters of a CNN across subjects._
      * run_CNN.py: _trains and evaluates a CNN for multiple subjects._
   * example_generation.py: _functions to generate training/validation/test examples for training and evaluation._
-* **data_reading:** _Python code (calls MATLAB code) to read data files._
-  * data_reader.py:
+* **data_reading:** _Python code to read data files._
+  * data_reader.py: _function to gather data from data files._
 * **feature_calculation:** _feature calculation algorithms._
   * average_PSD.py:
   * feature_algorithms.py:
