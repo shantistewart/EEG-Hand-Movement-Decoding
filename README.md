@@ -4,7 +4,8 @@
 
 The main goal of this research project was to classify hand movements from raw EEG (electroencephalogram) signals, using
 machine learning and signal processing algorithms. The general idea used was to extract spectral features from the raw
-EEG signals (power spectral density) and use these features to train a convolutional neural network (CNN) for classification.
+EEG signals (power spectral density) and use these features to train a convolutional neural network (CNN) for
+classification.
 
 
 
@@ -20,7 +21,7 @@ EEG signals (power spectral density) and use these features to train a convoluti
 
 * **MATLAB:** _MATLAB code to read data files._
 * **auxiliary:** _auxiliary functionality._
-   * **plotting:** _visualization of raw signals and features._
+   * **plotting:** _visualization of raw signals and calculated features._
       * plot_features.py
       * RawPSD_class.py
    * **unit_tests**: _unit tests._
