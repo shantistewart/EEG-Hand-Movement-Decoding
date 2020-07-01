@@ -9,7 +9,7 @@ This folder contains files for end-to-end models for feature extraction and clas
 
 * **classifiers:** _classification models._
   * **CNN:** _convolutional neural network implementation._
-     * conv_neural_net.py:
+     * conv_neural_net.py: class to build, train, and evaluate a convolutional neural network.
      * evaluate_CNN.py:
      * hyperparam_search.py:
      * run_CNN.py:
