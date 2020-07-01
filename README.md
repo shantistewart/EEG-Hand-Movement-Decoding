@@ -45,9 +45,9 @@ classification.
    * **data_reading:** _Python code to read data files._
       * data_reader.py
    * **feature_calculation:** _feature calculation algorithms._
+      * PCA_on_PSD.py
       * average_PSD.py
       * feature_algorithms.py
-      * PCA_on_PSD.py
       * power_spectral_density.py
       * spectrogram.py
 
