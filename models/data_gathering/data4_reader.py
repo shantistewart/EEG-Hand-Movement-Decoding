@@ -14,9 +14,11 @@ def ReadComp4(patient_num, path_to_file):
 
     left_file_form = path_to_file + "Data_Left_" + str(patient_num) + "_"
     right_file_form = path_to_file + "Data_Right_" + str(patient_num) + "_"
+    unlabeled_file_form = path_to_file + "Data_Unlabeled_" + str(patient_num) + "_"
 
     left_array = []
     right_array = []
+    unlabeled_array = []
     for i in range(1, 6):
         for j in range(1, 81):
             left_file = left_file_form + str(i) + "_" + str(j) + ".txt"
@@ -29,12 +31,18 @@ def ReadComp4(patient_num, path_to_file):
                 right_array += [np.loadtxt(right_file)]
             #else:
             #    print("Right file is not available %d %d %d" %(patient_num, i, j))
+        for l in range(1, 161):
+            unlabeled_file = unlabeled_file_form + str(i) + "_" + str(l) + ".txt"
+            if path.exists(unlabeled_file):
+                unlabeled_array += [np.loadtxt(unlabeled_file)]
     left_array = np.array(left_array)
     right_array = np.array(right_array)
+    unlabeled_array = np.array(unlabeled_array)
     left_array = np.transpose(left_array, (0, 2, 1))
     right_array = np.transpose(right_array, (0, 2, 1))
+    unlabeled_array = np.transpose(unlabeled_array, (0, 2, 1))
 
-    return left_array, right_array
+    return left_array, right_array, unlabeled_array
 
 # Stride and window are in seconds! Note that
 # stride is the start time for a particular window.
