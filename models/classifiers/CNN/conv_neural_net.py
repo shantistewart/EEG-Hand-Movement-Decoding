@@ -4,8 +4,8 @@
 import numpy as np
 import matplotlib.pyplot as plotter
 import tensorflow as tf
-from tensorflow.keras import layers, models
-from models.neural_nets import example_generation
+from tensorflow.keras import models, layers, regularizers
+from models.classifiers import example_generation
 from models.feature_calculation import feature_algorithms
 
 
@@ -28,7 +28,6 @@ from models.feature_calculation import feature_algorithms
 class ConvNet:
     """Class for a convolutional neural network for binary classification."""
 
-    # Constructor:
     def __init__(self, num_conv_layers, num_dense_layers, num_kernels, kernel_size, pool_size, num_hidden_nodes):
         self.model = None
         self.history = None
@@ -42,21 +41,42 @@ class ConvNet:
     # Function description: builds CNN architecture.
     # Inputs:
     #   input_shape = dimensions of input features
+    #   reg_type = parameter to select type of regularization
+    #       if reg_type == 1: apply L2 regularization
+    #       else if reg_type == 2: apply dropout regularization
+    #       else: don't apply regularization
+    #   L2_reg = L2 regularization parameter
+    #   dropout_reg = dropout regularization parameter
     # Outputs: None
-    def build_model(self, input_shape):
+    def build_model(self, input_shape, reg_type=1, L2_reg=0.0, dropout_reg=0.0):
         self.model = models.Sequential()
 
-        # convolutional and max pooling layers:
+        # add convolutional and max pooling layers:
         self.model.add(layers.Conv2D(self.num_kernels, self.kernel_size, activation='relu', input_shape=input_shape))
         self.model.add(layers.MaxPool2D(self.pool_size))
-        self.model.add(layers.Conv2D(self.num_kernels, self.kernel_size, activation='relu'))
-        self.model.add(layers.MaxPool2D(self.pool_size))
+        for _ in range(self.num_conv_layers - 1):
+            self.model.add(layers.Conv2D(self.num_kernels, self.kernel_size, activation='relu'))
+            self.model.add(layers.MaxPool2D(self.pool_size))
 
-        # fully connected layers:
         self.model.add(layers.Flatten())
-        self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu'))
+
+        # add fully connected layers:
+        for _ in range(self.num_dense_layers):
+            # include L2 regularization if selected:
+            if reg_type == 1:
+                self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu',
+                                            kernel_regularizer=regularizers.l2(L2_reg)))
+            else:
+                self.model.add(layers.Dense(self.num_hidden_nodes, activation='relu'))
+            # include dropout regularization if selected:
+            if reg_type == 2:
+                self.model.add(layers.Dropout(dropout_reg))
+
         # output layer:
-        self.model.add(layers.Dense(1, activation='sigmoid'))
+        if reg_type == 1:
+            self.model.add(layers.Dense(1, activation='sigmoid', kernel_regularizer=regularizers.l2(L2_reg)))
+        else:
+            self.model.add(layers.Dense(1, activation='sigmoid'))
 
     # Function description: compiles and trains CNN.
     # Inputs:

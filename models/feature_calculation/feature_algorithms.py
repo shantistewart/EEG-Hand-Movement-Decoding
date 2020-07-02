@@ -1,12 +1,12 @@
 # This file contains 3 functions:
-#   1) Feature calculation algorithm 1: average PSD values in selected frequency bins.
-#   2) Feature calculation algorithm 2: Principal Component Analysis on PSD values.
-#   3) Feature calculation algorithm 3: spectrogram creation.
+#   1) Feature calculation algorithm 1: frequency bin-average PSD.
+#   2) Feature calculation algorithm 2: PCA on PSD.
+#   3) Feature calculation algorithm 3: PSD spectrograms.
 
 
 import numpy as np
 from models.feature_calculation import power_spectral_density as power, average_PSD, PCA_on_PSD, spectrogram
-from models.neural_nets import example_generation
+from models.classifiers import example_generation
 
 
 # Function description: calculate average power spectral density values in selected frequency bins.
@@ -58,15 +58,15 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
     PSD_avg = average_PSD_algorithm(X, bins, sample_freq)
 
     # log-normalize frequency-bin-average PSD values across examples:
-    PSD_norm = PCA_on_PSD.log_normalize(PSD_avg, small_param)
+    # PSD_avg = PCA_on_PSD.log_normalize(PSD_avg, small_param)
 
     # calculate selected statistical matrices of PSD values:
     if matrix_type == 1:
-        stat_matrices = PCA_on_PSD.calc_correlation_matrices(PSD_norm)
+        stat_matrices = PCA_on_PSD.calc_correlation_matrices(PSD_avg)
     elif matrix_type == 2:
-        stat_matrices = PCA_on_PSD.calc_covariance_matrices(PSD_norm)
+        stat_matrices = PCA_on_PSD.calc_covariance_matrices(PSD_avg)
     else:
-        stat_matrices = PCA_on_PSD.calc_pearson_covariance_matrices(PSD_norm)
+        stat_matrices = PCA_on_PSD.calc_pearson_covariance_matrices(PSD_avg)
 
     # calculate eigenvectors of PSD statistical matrices:
     eig_vects = PCA_on_PSD.calc_eig_vects(stat_matrices)
@@ -75,7 +75,7 @@ def PCA_on_PSD_algorithm(X, sample_freq, max_freq, num_bins, num_pcs=None, matri
     if num_pcs is None:
         num_pcs = num_bins
     # calculates projection weights of PSD values onto principal components (eigenvectors):
-    project_weights = PCA_on_PSD.project_onto_pcs(PSD_norm, eig_vects, num_pcs)
+    project_weights = PCA_on_PSD.project_onto_pcs(PSD_avg, eig_vects, num_pcs)
 
     return project_weights
 

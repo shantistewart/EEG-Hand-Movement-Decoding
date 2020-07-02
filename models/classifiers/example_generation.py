@@ -1,9 +1,9 @@
-# This file contains functions to generate training/test examples for neural networks.
+# This file contains functions to generate training/validation/test examples for training and evaluation.
 
 
 import numpy as np
 import sklearn
-from models.data_gathering import data4_reader
+from models.data_reading import data_reader
 
 
 # class labels (do not modify!):
@@ -63,7 +63,7 @@ def generate_examples(subject_num, path_to_file, window_size, stride_size, sampl
 
     # get raw data:
     #   size of leftX, rightX: (0.5*num_trials, num_channels, num_samples)
-    leftX, rightX = data4_reader.ReadComp4(subject_num, path_to_file)
+    leftX, rightX = data_reader.ReadComp4(subject_num, path_to_file)
     num_channels = leftX.shape[1]
     # generate corresponding class labels:
     leftY = LEFT_HAND_LABEL * np.ones(leftX.shape[0], dtype=int)

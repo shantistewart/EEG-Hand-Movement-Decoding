@@ -1,8 +1,8 @@
-# This file contains unit tests for spectrograms.py (in feature_calculation folder):
+# This file contains unit tests for functions in spectrogram.py (models/feature_calculation/spectrogram.py).
 
 
 import numpy as np
-from models.neural_nets import example_generation
+from models.classifiers import example_generation
 from models.feature_calculation import spectrogram
 
 

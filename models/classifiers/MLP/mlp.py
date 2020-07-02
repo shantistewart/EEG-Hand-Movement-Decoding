@@ -1,5 +1,5 @@
 from models.feature_calculation import feature_algorithms as feature
-from models.data_gathering import data4_reader as feature_gen
+from models.data_reading import data_reader as feature_gen
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plotter

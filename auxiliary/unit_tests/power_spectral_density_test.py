@@ -1,4 +1,5 @@
-# This file contains unit tests for power_spectral_density.py (in feature_calculation folder):
+# This file contains unit tests for functions in power_spectral_density.py
+#   (models/feature_calculation/power_spectral_density.py).
 
 
 import numpy as np

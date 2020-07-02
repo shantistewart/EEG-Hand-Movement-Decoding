@@ -1,4 +1,4 @@
-# This file contains several functions to implement principal component analysis on power spectral density features.
+# This file contains several functions to implement principal component analysis on power spectral density values.
 
 
 import numpy as np
