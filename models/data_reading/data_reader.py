@@ -38,26 +38,3 @@ def ReadComp4(patient_num, path_to_file):
     right_array = np.transpose(right_array, (0, 2, 1))
 
     return left_array, right_array
-
-
-# Stride and window are in seconds! Note that stride is the start time for a particular window.
-# The window_len is the length of the window.
-# Output:
-#   A 3D array of dimension: (strides, channels, window_len)
-def stride_window(eeg_trial, stride, window_len, frequency):
-    if window_len > eeg_trial.shape[1]:
-        sys.exit("Window length longer than trial length")
-
-    stride_examples = int(stride * frequency)
-    window_examples = int(window_len * frequency)
-    num_strides = eeg_trial.shape[1] // stride_examples
-    # if window size is too long, need to cut back on number of stride"
-    while (num_strides * stride_examples) + window_examples > eeg_trial.shape[1]:
-        num_strides = num_strides - 1
-
-    grouped_features = []
-    for i in range(num_strides + 1):
-        window_start = i * stride_examples
-        window_end = window_start + window_examples
-        grouped_features += [eeg_trial[:, window_start:window_end]]
-    return np.array(grouped_features)
