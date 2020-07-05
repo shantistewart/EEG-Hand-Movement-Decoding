@@ -1,4 +1,4 @@
-# This file contains functions to generate training/test examples for neural networks.
+# This file contains functions to generate training/validation/test examples for training and evaluation.
 
 
 import numpy as np

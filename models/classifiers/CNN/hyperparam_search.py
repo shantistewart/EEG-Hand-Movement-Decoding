@@ -1,4 +1,4 @@
-# This file contains code to tune the hyperparameters of a convolutional neural network.
+# This file contains code to tune the hyperparameters of a convolutional neural network across multiple subjects.
 
 
 import numpy as np
