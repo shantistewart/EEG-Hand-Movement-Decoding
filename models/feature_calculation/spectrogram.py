@@ -1,4 +1,4 @@
-# This file contains a function to generate power spectral density spectrograms.
+# This file contains functions to create power spectral density spectrograms.
 
 
 import numpy as np

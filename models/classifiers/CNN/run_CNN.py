@@ -1,4 +1,4 @@
-# This file contains code to train and evaluate a convolutional neural network for multiple subjects.
+# This file contains code to run a convolutional neural network for binary classification.
 
 
 import numpy as np
@@ -50,7 +50,7 @@ avg_train, avg_val, avg_test, train, val, test = evaluate_CNN.train_eval_CNN(sub
                                                                              num_kernels, kernel_size, pool_size,
                                                                              num_hidden_nodes, num_epochs, batch_size,
                                                                              window_size_PSD, stride_size_PSD, max_freq,
-                                                                             num_bins, PCA=PCA, val_fract=val_fract,
+                                                                             num_bins, val_fract=val_fract,
                                                                              test_fract=test_fract, standard=standard,
                                                                              reg_type=reg_type, L2_reg=L2_reg,
                                                                              dropout_reg=dropout_reg, test=True,

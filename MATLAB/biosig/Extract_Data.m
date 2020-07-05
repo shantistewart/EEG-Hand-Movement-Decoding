@@ -8,7 +8,7 @@ right_event = hex2dec('302');
 for i=1:length(hdr.EVENT.TYP);
     if hdr.EVENT.TYP(i) == left_event;
         left_start = hdr.EVENT.POS(i) + hdr.EVENT.DUR(i);
-        % Gather 2.5 seconds of data (just like other EEG papers)
+        % Gather 3.5 seconds of data (just like other EEG papers)
         left_end = left_start + 875;
         if (i ~= length(hdr.EVENT.TYP)) && (left_end >= hdr.EVENT.POS(i+1));
             "error"
