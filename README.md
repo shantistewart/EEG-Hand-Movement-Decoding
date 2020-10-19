@@ -78,7 +78,7 @@ classification.
 ## Authors
 
 * **Shanti Stewart** -- B.S. student in Electrical and Computer Engineering at Oregon State University.
-   * [LinkedIn](https://www.linkedin.com/in/shanti-stewart-27aaaa183/)
+   * [LinkedIn](https://www.linkedin.com/in/shanti-stewart/)
    * [GitHub](https://github.com/shantistewart)
 * **Patrick McGrath** -- B.S. student in Electrical and Computer Engineering at Oregon State University.
    * [LinkedIn](https://www.linkedin.com/in/mcgrath-patrick)
